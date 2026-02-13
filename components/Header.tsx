@@ -1,10 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import { ShoppingCart, Menu, X, Sparkles } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Menu, X, Sparkles } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Cart } from './Cart';
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -94,21 +94,7 @@ export function Header() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3 }}
             >
-              <Button
-                variant="ghost"
-                size="icon"
-                className="relative hover:bg-terracotta/10 hover:text-terracotta"
-              >
-                <ShoppingCart className="h-5 w-5" />
-                <motion.span
-                  className="absolute -top-1 -right-1 bg-terracotta text-cream text-xs h-5 w-5 rounded-full flex items-center justify-center font-bold"
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ type: 'spring', delay: 0.5 }}
-                >
-                  0
-                </motion.span>
-              </Button>
+              <Cart />
             </motion.div>
 
             {/* Mobile menu button */}
@@ -118,11 +104,10 @@ export function Header() {
               transition={{ delay: 0.4 }}
               className="md:hidden"
             >
-              <Button
-                variant="ghost"
-                size="icon"
-                className="hover:bg-terracotta/10"
+              <button
+                className="p-2 hover:bg-terracotta/10 rounded-lg transition-colors"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                aria-label={mobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
               >
                 <AnimatePresence mode="wait">
                   {mobileMenuOpen ? (
@@ -147,7 +132,7 @@ export function Header() {
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </Button>
+              </button>
             </motion.div>
           </div>
         </div>

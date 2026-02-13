@@ -38,7 +38,7 @@ const values = [
 const timeline = [
   { year: '2018', title: 'El Sueño Comienza', description: 'Ana Isabel deja su carrera corporativa para seguir su pasión por lo artesanal.' },
   { year: '2019', title: 'Primer Taller', description: 'Se instala el primer taller en Bogotá con métodos tradicionales de saponificación.' },
-  { year: '2021', title: 'Expansión Natural', description: 'Incorporamos velas y cerámica al catálogo, siempre con ingredientes naturales.' },
+  { year: '2021', title: 'Expansión Natural', description: 'Incorporamos vélas y cerámica al catálogo, siempre con ingredientes naturales.' },
   { year: '2024', title: 'SoapArtesana Nace', description: 'Lanzamiento de nuestra plataforma online para compartir nuestra pasión con el mundo.' },
 ];
 

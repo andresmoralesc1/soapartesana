@@ -4,6 +4,10 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { PageTransition } from "@/components/PageTransition";
+import { ScrollProgress } from "@/components/ScrollProgress";
+import { ToastProvider } from "@/components/Toast";
+import { CartProvider } from "@/components/CartContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -44,12 +48,17 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} antialiased font-sans`}
       >
-        <Header />
-        <main className="min-h-screen">
-          {children}
-        </main>
-        <WhatsAppButton />
-        <Footer />
+        <ScrollProgress />
+        <CartProvider>
+          <ToastProvider>
+            <Header />
+            <PageTransition>
+              {children}
+            </PageTransition>
+            <WhatsAppButton />
+            <Footer />
+          </ToastProvider>
+        </CartProvider>
       </body>
     </html>
   );

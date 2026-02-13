@@ -274,7 +274,7 @@ export default function ContactoPage() {
                     disabled={isSubmitting}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full bg-forest hover:bg-forest/90 text-cream font-semibold py-4 rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-terracotta hover:bg-terracotta/90 text-cream font-semibold py-4 rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {isSubmitting ? (
                       <>
@@ -308,7 +308,7 @@ export default function ContactoPage() {
                   ¿Por Qué SoapArtesana?
                 </h2>
                 <p className="text-muted-foreground mb-6">
-                  No solo vendemos productos, creamos experiencias. Cada jabón, vela y pieza de cerámica tiene una historia y está hecho con dedicación.
+                  No solo vendemos productos, creamos experiencias. Cada jabón, véla y pieza de cerámica tiene una historia y está hecho con dedicación.
                 </p>
                 <ul className="space-y-3">
                   {[
