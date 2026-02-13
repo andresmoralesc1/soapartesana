@@ -191,7 +191,7 @@ function Button({
 
       {/* Contenido original con opacity basado en estado */}
       <span className={cn(loading && "opacity-0", success && "opacity-0")}>
-        <Slot />
+        <Slot>{props.children}</Slot>
       </span>
 
       {/* Press effect visual feedback */}
