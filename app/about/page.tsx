@@ -9,8 +9,8 @@ const values = [
     icon: Globe,
     title: 'Orígenes Colombianos',
     description: 'Nuestras raíces están en la rica biodiversidad de Colombia, donde aprendimos a valorar cada ingrediente natural.',
-    color: 'text-terracotta',
-    bg: 'bg-terracotta/10',
+    color: 'text-forest',
+    bg: 'bg-forest/10',
   },
   {
     icon: Leaf,
@@ -30,8 +30,8 @@ const values = [
     icon: Award,
     title: 'Calidad Artesanal',
     description: 'Métodos tradicionales combinados con estándares de calidad modernos para productos excepcionales.',
-    color: 'text-terracotta',
-    bg: 'bg-terracotta/10',
+    color: 'text-forest',
+    bg: 'bg-forest/10',
   },
 ];
 
@@ -124,7 +124,7 @@ export default function AboutPage() {
                     className="rounded-2xl shadow-xl"
                   />
                   <motion.div
-                    className="absolute -bottom-6 -right-6 bg-terracotta text-cream p-6 rounded-xl shadow-xl"
+                    className="absolute -bottom-6 -right-6 bg-forest text-cream p-6 rounded-xl shadow-xl"
                     initial={{ scale: 0 }}
                     whileInView={{ scale: 1 }}
                     viewport={{ once: true }}
@@ -142,7 +142,7 @@ export default function AboutPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
               >
-                <h2 className="font-serif text-3xl md:text-4xl font-bold text-terracotta mb-6">
+                <h2 className="font-serif text-3xl md:text-4xl font-bold text-forest mb-6">
                   Ana Isabel Morales
                 </h2>
                 <p className="text-foreground/80 text-lg mb-4">
@@ -163,8 +163,8 @@ export default function AboutPage() {
                   className="flex items-center gap-3 mt-6 p-4 bg-muted/50 rounded-xl"
                   whileHover={{ scale: 1.02 }}
                 >
-                  <div className="bg-terracotta/20 p-3 rounded-full">
-                    <Sparkles className="h-6 w-6 text-terracotta" />
+                  <div className="bg-forest/20 p-3 rounded-full">
+                    <Sparkles className="h-6 w-6 text-forest" />
                   </div>
                   <p className="font-medium">
                     +2,000 clientes satisfechos en toda España
@@ -240,7 +240,7 @@ export default function AboutPage() {
           <div className="max-w-4xl mx-auto">
             <div className="relative">
               {/* Timeline line */}
-              <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-1 bg-terracotta/20 transform md:-translate-x-1/2" />
+              <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-1 bg-forest/20 transform md:-translate-x-1/2" />
 
               <div className="space-y-12">
                 {timeline.map((item, index) => (
@@ -257,7 +257,7 @@ export default function AboutPage() {
                     }`}>
                       <div className="ml-16 md:ml-0 md:w-1/2">
                         <div className="bg-card p-6 rounded-xl shadow-lg border border-border/50 hover:shadow-xl transition-shadow">
-                          <span className="text-terracotta font-bold text-sm">
+                          <span className="text-forest font-bold text-sm">
                             {item.year}
                           </span>
                           <h3 className="font-serif text-xl font-bold mt-2 mb-2">
@@ -268,7 +268,7 @@ export default function AboutPage() {
                           </p>
                         </div>
                       </div>
-                      <div className="absolute left-6 md:left-1/2 w-5 h-5 bg-terracotta rounded-full border-4 border-cream transform md:-translate-x-1/2 z-10" />
+                      <div className="absolute left-6 md:left-1/2 w-5 h-5 bg-forest rounded-full border-4 border-cream transform md:-translate-x-1/2 z-10" />
                       <div className="hidden md:block md:w-1/2" />
                     </div>
                   </motion.div>
@@ -280,7 +280,7 @@ export default function AboutPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 md:py-24 bg-terracotta text-cream">
+      <section className="py-16 md:py-24 bg-forest text-cream">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
@@ -298,7 +298,7 @@ export default function AboutPage() {
               href="/productos"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-block bg-cream text-terracotta px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-shadow"
+              className="inline-block bg-cream text-forest px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-shadow"
             >
               Ver Productos
             </motion.a>

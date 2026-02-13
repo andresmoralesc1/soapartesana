@@ -19,8 +19,8 @@ const contactMethods = [
     title: 'Email',
     value: 'hola@soapartesana.com',
     description: 'Respuesta en 24h',
-    color: 'text-terracotta',
-    bg: 'bg-terracotta/10',
+    color: 'text-forest',
+    bg: 'bg-forest/10',
     link: 'mailto:hola@soapartesana.com',
   },
   {
@@ -36,8 +36,8 @@ const contactMethods = [
     title: 'Horario',
     value: 'Lun - Vie: 9:00 - 18:00',
     description: 'Atención personalizada',
-    color: 'text-lavender',
-    bg: 'bg-lavender/10',
+    color: 'text-moss',
+    bg: 'bg-moss/10',
   },
 ];
 
@@ -89,7 +89,7 @@ export default function ContactoPage() {
       <section className="relative bg-gradient-to-br from-cream via-terracotta/5 to-sage/10 py-20 md:py-32 overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <motion.div
-            className="absolute top-10 right-20 w-64 h-64 bg-terracotta/10 rounded-full blur-3xl"
+            className="absolute top-10 right-20 w-64 h-64 bg-forest/10 rounded-full blur-3xl"
             animate={{ scale: [1, 1.3, 1], y: [0, -30, 0] }}
             transition={{ duration: 6, repeat: Infinity }}
           />
@@ -129,13 +129,16 @@ export default function ContactoPage() {
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -8 }}
+                whileHover={{ y: -10, scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 className={`${!method.link ? 'pointer-events-none' : ''}`}
               >
                 <div className="bg-card p-6 rounded-xl shadow-lg hover:shadow-xl transition-all border border-border/50 h-full group">
-                  <div className={`${method.bg} ${method.color} p-4 rounded-xl w-fit mb-4 group-hover:scale-110 transition-transform`}>
+                  <motion.div
+                    className={`${method.bg} ${method.color} p-4 rounded-xl w-fit mb-4 group-hover:scale-110 group-hover:rotate-6 transition-all`}
+                  >
                     <method.icon className="h-6 w-6" />
-                  </div>
+                  </motion.div>
                   <h3 className="font-semibold text-lg mb-1">
                     {method.title}
                   </h3>
@@ -182,7 +185,7 @@ export default function ContactoPage() {
                         required
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:border-terracotta focus:ring-2 focus:ring-terracotta/20 transition-all outline-none"
+                        className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:border-forest focus:ring-2 focus:ring-forest/20 transition-all outline-none"
                         placeholder="Tu nombre"
                       />
                     </motion.div>
@@ -200,7 +203,7 @@ export default function ContactoPage() {
                         required
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:border-terracotta focus:ring-2 focus:ring-terracotta/20 transition-all outline-none"
+                        className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:border-forest focus:ring-2 focus:ring-forest/20 transition-all outline-none"
                         placeholder="tu@email.com"
                       />
                     </motion.div>
@@ -219,7 +222,7 @@ export default function ContactoPage() {
                       type="tel"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:border-terracotta focus:ring-2 focus:ring-terracotta/20 transition-all outline-none"
+                      className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:border-forest focus:ring-2 focus:ring-terracotta/20 transition-all outline-none"
                       placeholder="+34 600 000 000"
                     />
                   </motion.div>
@@ -237,7 +240,7 @@ export default function ContactoPage() {
                       required
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                      className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:border-terracotta focus:ring-2 focus:ring-terracotta/20 transition-all outline-none"
+                      className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:border-forest focus:ring-2 focus:ring-terracotta/20 transition-all outline-none"
                     >
                       <option value="">Selecciona un asunto</option>
                       <option value="pedido">Información sobre pedidos</option>
@@ -261,7 +264,7 @@ export default function ContactoPage() {
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       rows={5}
-                      className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:border-terracotta focus:ring-2 focus:ring-terracotta/20 transition-all outline-none resize-none"
+                      className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:border-forest focus:ring-2 focus:ring-terracotta/20 transition-all outline-none resize-none"
                       placeholder="¿En qué podemos ayudarte?"
                     />
                   </motion.div>
@@ -271,7 +274,7 @@ export default function ContactoPage() {
                     disabled={isSubmitting}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full bg-terracotta hover:bg-terracotta/90 text-cream font-semibold py-4 rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-forest hover:bg-forest/90 text-cream font-semibold py-4 rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {isSubmitting ? (
                       <>
@@ -323,15 +326,15 @@ export default function ContactoPage() {
                       transition={{ delay: index * 0.1 }}
                       className="flex items-center gap-3 p-3 bg-muted/50 rounded-lg"
                     >
-                      <span className="text-terracotta">{item.split(' ')[0]}</span>
+                      <span className="text-forest">{item.split(' ')[0]}</span>
                       <span className="text-sm">{item.split(' ').slice(1).join(' ')}</span>
                     </motion.li>
                   ))}
                 </ul>
               </div>
 
-              <div className="bg-terracotta/5 p-6 rounded-xl border border-terracotta/20">
-                <h3 className="font-semibold text-lg mb-4 text-terracotta">
+              <div className="bg-forest/5 p-6 rounded-xl border border-forest/20">
+                <h3 className="font-semibold text-lg mb-4 text-forest">
                   Síguenos en Redes
                 </h3>
                 <div className="flex gap-4">
@@ -351,7 +354,7 @@ export default function ContactoPage() {
                   ))}
                 </div>
                 <p className="text-sm text-muted-foreground mt-4">
-                  Comparte tus experiencias con nuestros productos usando el hashtag <span className="text-terracotta font-medium">#SoapArtesana</span>
+                  Comparte tus experiencias con nuestros productos usando el hashtag <span className="text-forest font-medium">#SoapArtesana</span>
                 </p>
               </div>
 
@@ -368,7 +371,7 @@ export default function ContactoPage() {
                 </p>
                 <a
                   href="tel:+34612345678"
-                  className="text-terracotta font-bold hover:underline"
+                  className="text-forest font-bold hover:underline"
                 >
                   +34 612 345 678
                 </a>

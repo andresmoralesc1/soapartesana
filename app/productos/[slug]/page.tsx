@@ -73,14 +73,14 @@ export default function ProductPage({ params }: ProductPageProps) {
             <div>
               <Link
                 href={`/productos?categoria=${product.category}`}
-                className="text-sm text-muted-foreground hover:text-terracotta transition-colors"
+                className="text-sm text-muted-foreground hover:text-forest transition-colors"
               >
                 {categoryInfo[product.category].name}
               </Link>
               <h1 className="font-serif text-3xl md:text-4xl font-bold mt-2 mb-4">
                 {product.name}
               </h1>
-              <p className="text-3xl font-bold text-terracotta">
+              <p className="text-3xl font-bold text-forest">
                 {product.price.toFixed(2)}€
               </p>
             </div>
@@ -96,7 +96,7 @@ export default function ProductPage({ params }: ProductPageProps) {
                 </span>
               )}
               {product.inStock ? (
-                <span className="bg-green-100 text-green-800 px-4 py-1.5 rounded-full text-sm font-medium">
+                <span className="bg-sage/20 text-forest px-4 py-1.5 rounded-full text-sm font-medium">
                   En stock
                 </span>
               ) : (
@@ -155,19 +155,19 @@ export default function ProductPage({ params }: ProductPageProps) {
             <div className="grid grid-cols-3 gap-4 pt-4">
               <div className="text-center">
                 <div className="bg-muted/50 p-3 rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-2">
-                  <Heart className="h-5 w-5 text-terracotta" />
+                  <Heart className="h-5 w-5 text-forest" />
                 </div>
                 <p className="text-xs text-muted-foreground">Hecho con amor</p>
               </div>
               <div className="text-center">
                 <div className="bg-muted/50 p-3 rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-2">
-                  <Truck className="h-5 w-5 text-terracotta" />
+                  <Truck className="h-5 w-5 text-forest" />
                 </div>
                 <p className="text-xs text-muted-foreground">Envío rápido</p>
               </div>
               <div className="text-center">
                 <div className="bg-muted/50 p-3 rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-2">
-                  <RefreshCw className="h-5 w-5 text-terracotta" />
+                  <RefreshCw className="h-5 w-5 text-forest" />
                 </div>
                 <p className="text-xs text-muted-foreground">100% natural</p>
               </div>
@@ -195,10 +195,10 @@ export default function ProductPage({ params }: ProductPageProps) {
                       />
                     </div>
                     <CardContent className="p-4">
-                      <h3 className="font-medium group-hover:text-terracotta transition-colors">
+                      <h3 className="font-medium group-hover:text-forest transition-colors">
                         {p.name}
                       </h3>
-                      <p className="text-terracotta font-bold mt-1">
+                      <p className="text-forest font-bold mt-1">
                         {p.price.toFixed(2)}€
                       </p>
                     </CardContent>

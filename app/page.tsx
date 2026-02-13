@@ -262,7 +262,7 @@ export default function HomePage() {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="hover:border-terracotta hover:text-terracotta text-lg px-8 ease-natural"
+                  className="hover:border-forest hover:text-terracotta text-lg px-8 ease-natural"
                 >
                   Nuestra Historia
                 </Button>
@@ -287,22 +287,22 @@ export default function HomePage() {
                 icon: Heart,
                 title: 'Hecho a Mano',
                 desc: 'Cada pieza es única',
-                color: 'text-sage',
-                bg: 'bg-sage/20',
+                color: 'text-forest',
+                bg: 'bg-forest/15',
               },
               {
                 icon: Leaf,
                 title: '100% Natural',
                 desc: 'Ingredientes puros',
-                color: 'text-terracotta',
-                bg: 'bg-terracotta/20',
+                color: 'text-sage',
+                bg: 'bg-sage/15',
               },
               {
                 icon: Sparkles,
-                title: 'Sin Plásticos',
-                desc: 'Envases eco',
-                color: 'text-lavender',
-                bg: 'bg-lavender/20',
+                title: 'Eco-Friendly',
+                desc: 'Envases sostenibles',
+                color: 'text-moss',
+                bg: 'bg-moss/15',
               },
               {
                 icon: Truck,
@@ -372,7 +372,7 @@ export default function HomePage() {
               <Button
                 size="lg"
                 variant="outline"
-                className="hover:border-terracotta hover:text-terracotta group"
+                className="hover:border-forest hover:text-terracotta group"
               >
                 Ver Todos los Productos
                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
@@ -428,7 +428,7 @@ export default function HomePage() {
                   >
                     {category.icon}
                   </motion.span>
-                  <h3 className="font-semibold text-lg mb-2 group-hover:text-terracotta transition-colors">
+                  <h3 className="font-semibold text-lg mb-2 group-hover:text-forest transition-colors">
                     {category.name}
                   </h3>
                   <p className="text-sm text-muted-foreground">
@@ -463,7 +463,7 @@ export default function HomePage() {
               <Button
                 size="lg"
                 variant="outline"
-                className="hover:border-terracotta hover:text-terracotta group"
+                className="hover:border-forest hover:text-terracotta group"
               >
                 Conocer Más
                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
@@ -474,7 +474,7 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 md:py-24 bg-terracotta text-cream relative overflow-hidden">
+      <section className="py-16 md:py-24 bg-forest text-cream relative overflow-hidden">
         {/* Background pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{
