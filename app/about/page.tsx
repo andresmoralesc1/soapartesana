@@ -167,7 +167,7 @@ export default function AboutPage() {
                     <Sparkles className="h-6 w-6 text-forest" />
                   </div>
                   <p className="font-medium">
-                    +2,000 clientes satisfechos en toda España
+                    +2,000 clientes satisfechos en toda Argentina
                   </p>
                 </motion.div>
               </motion.div>

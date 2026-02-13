@@ -52,7 +52,7 @@ export function Footer() {
               </a>
             </div>
             <p className="text-cream/60 text-sm">
-              Envíos a toda España
+              Envíos a toda Argentina
             </p>
           </div>
         </div>

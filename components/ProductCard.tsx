@@ -62,7 +62,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
               )}
             </div>
 
-            {/* Botón de like */}
+            {/* Button de like */}
             <motion.button
               className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 bg-white/90 backdrop-blur-sm p-2.5 rounded-full shadow-lg hover:bg-white transition-colors"
               initial={{ x: 20, opacity: 0 }}

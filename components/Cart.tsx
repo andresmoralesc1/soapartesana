@@ -74,6 +74,7 @@ export function Cart() {
                   className="p-2 hover:bg-terracotta/10 rounded-lg transition-colors"
                   aria-label="Cerrar carrito"
                 >
+                  <span className="text-sm">Cerrar</span>
                   <X className="h-5 w-5" />
                 </motion.button>
               </div>
@@ -202,7 +203,7 @@ export function Cart() {
                     Finalizar Pedido por WhatsApp
                   </a>
                   <p className="text-xs text-center text-muted-foreground">
-                    Envíos a toda España • Pago contra entrega
+                    Envíos a toda Argentina • Pago contra entrega
                   </p>
                 </div>
               )}
