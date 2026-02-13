@@ -26,7 +26,7 @@ const contactMethods = [
   {
     icon: MapPin,
     title: 'Ubicación',
-    value: 'México D.C, Argentina',
+    value: 'Argentina D.C, Argentina',
     description: 'Envíos a toda la península',
     color: 'text-sage',
     bg: 'bg-sage/10',
@@ -315,7 +315,7 @@ export default function ContactoPage() {
                     '🌿 Ingredientes 100% naturales y orgánicos',
                     '🧼 Métodos artesanales tradicionales',
                     '♻️ Envases eco-friendly y reciclables',
-                    '🚚 Envío rápido a toda Argentina',
+                    '🚚 Envío rápido toda Argentina',
                     '💬 Atención personalizada',
                   ].map((item, index) => (
                     <motion.li
