@@ -3,9 +3,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import * as React from 'react';
-import { X, Plus, Minus, ShoppingBag } from 'lucide-react';
+import { X, Plus, Minus, ShoppingBag, MessageCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from './CartContext';
+import { Button } from '@/components/ui/button';
 
 export function Cart() {
   const { items, removeItem, updateQuantity, getTotalItems, getTotalPrice, isOpen, setIsOpen } = useCart();
@@ -121,10 +122,11 @@ export function Cart() {
                     <Link
                       href="/productos"
                       onClick={() => setIsOpen(false)}
-                      className="bg-terracotta hover:bg-terracotta/90 text-white px-6 py-3 rounded-lg font-semibold transition-colors inline-flex items-center gap-2"
                     >
-                      <ShoppingBag className="h-4 w-4" />
-                      Ver Productos
+                      <Button className="gap-2">
+                        <ShoppingBag className="h-4 w-4" />
+                        Ver Productos
+                      </Button>
                     </Link>
                   </div>
                 ) : (
@@ -236,14 +238,12 @@ export function Cart() {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setIsOpen(false)}
-                    className="block w-full bg-[#25D366] hover:bg-[#20BA5A] text-white py-4 rounded-xl font-semibold text-center transition-colors"
+                    className="block"
                   >
-                    <span className="flex items-center justify-center gap-2">
-                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52.075-.149.669-1.612.916-2.207.242-.599.448-1.136.632-1.536.198-.422.236-.626.348-1.075.198-.448.198-1.224.246-1.224.246-.823.149-1.224.149-1.224.149-.075.001-.148.025-.223.074-.074.05-.149.124-.223.223-.074.099-.149.223-.223.371-.074.149-.149.273-.223.422-.074.149-.149.273-.223.422-.074.149-.149.298-.223.496-.074.199-.149.422-.223.645-.074.223-.149.447-.223.67-.074.223-.149.447-.223.67-.074.223-.149.447-.223.67z" />
-                      </svg>
+                    <Button variant="whatsapp" size="lg" className="w-full gap-2">
+                      <MessageCircle className="h-5 w-5" />
                       Finalizar por WhatsApp
-                    </span>
+                    </Button>
                   </a>
 
                   <div className="flex items-center justify-center gap-4 text-xs text-muted-foreground">

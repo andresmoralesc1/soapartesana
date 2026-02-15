@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { Product } from '@/lib/products';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ShoppingBag, Heart } from 'lucide-react';
@@ -87,9 +88,9 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
               </motion.span>
             )}
 
-            {/* Button de like */}
+            {/* Button de like - visible siempre en móvil y desktop */}
             <motion.button
-              className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 bg-white/90 backdrop-blur-sm p-2.5 rounded-full shadow-lg hover:bg-white transition-colors"
+              className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm p-2.5 rounded-full shadow-lg hover:bg-white transition-colors"
               initial={{ x: 20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: 0.3 + index * 0.05 }}
@@ -99,6 +100,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
                 e.preventDefault();
                 setIsLiked(!isLiked);
               }}
+              aria-label={isLiked ? 'Quitar de favoritos' : 'Agregar a favoritos'}
             >
               <Heart
                 className={`h-4 w-4 ${isLiked ? 'fill-rose-500 text-rose-500' : 'text-gray-700'}`}
@@ -149,17 +151,17 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
 
         <CardFooter className="p-5 pt-0 gap-3">
           <Link href={`/productos/${product.slug}`} className="flex-1">
-            <button
-              className="w-full bg-[oklch(0.62_0.16_45)] hover:bg-[oklch(0.57_0.16_45)] text-white shadow-md hover:shadow-lg transition-all font-semibold py-3 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+            <Button
+              variant="default"
+              className="w-full"
               disabled={!product.inStock}
             >
               Ver detalles
-            </button>
+            </Button>
           </Link>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-gray-100 hover:bg-[oklch(0.68_0.10_165)] text-gray-700 p-3 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          <Button
+            variant="secondary"
+            size="icon"
             disabled={!product.inStock}
             onClick={handleAddToCart}
             aria-label={`Agregar ${product.name} al carrito`}
@@ -180,7 +182,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
                 <ShoppingBag className="h-4 w-4" />
               )}
             </AnimatePresence>
-          </motion.button>
+          </Button>
         </CardFooter>
       </Card>
     </motion.div>

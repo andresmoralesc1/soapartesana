@@ -35,7 +35,7 @@ export function WhatsAppButton({ phoneNumber = WHATSAPP_NUMBER, message, product
       aria-label="Contactar por WhatsApp"
     >
       <MessageCircle className="h-6 w-6" />
-      <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 bg-foreground text-cream px-3 py-1 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+      <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 bg-slate-800 dark:bg-white text-white dark:text-slate-900 px-3 py-1 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
         Pedir por WhatsApp
       </span>
     </a>

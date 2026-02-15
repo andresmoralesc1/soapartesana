@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Instagram, Facebook, Mail, PawPrint } from 'lucide-react';
+import { Instagram, Facebook, Mail, PawPrint, MessageCircle } from 'lucide-react';
 
 export function Footer() {
   return (
@@ -69,7 +69,7 @@ export function Footer() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 mt-4 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors"
             >
-              <Mail className="h-4 w-4" />
+              <MessageCircle className="h-4 w-4" />
               WhatsApp Directo
             </a>
           </div>
