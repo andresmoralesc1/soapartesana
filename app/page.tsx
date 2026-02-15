@@ -6,6 +6,9 @@ import { ProductCard } from '@/components/ProductCard';
 import { getProductsByCategory, categoryInfo } from '@/lib/products';
 import { PawPrint, Sparkles, Leaf, Shield, Droplet, ChevronRight, Instagram, MessageCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { ComparisonSection } from '@/components/ComparisonSection';
+import { TestimonialsSection } from '@/components/TestimonialsSection';
+import { FAQSection } from '@/components/FAQSection';
 
 export default function HomePage() {
   const petProducts = getProductsByCategory('pet-care');
@@ -237,6 +240,9 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ==================== COMPARISON SECTION ==================== */}
+      <ComparisonSection />
+
       {/* ==================== HUMAN CARE RITUAL SECTION ==================== */}
       <section className="py-20 md:py-28 bg-gradient-to-b from-white to-green-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -351,6 +357,9 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ==================== TESTIMONIALS SECTION ==================== */}
+      <TestimonialsSection />
+
       {/* ==================== HONEST INGREDIENTS SECTION ==================== */}
       <section className="py-20 md:py-28 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -396,6 +405,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ==================== FAQ SECTION ==================== */}
+      <FAQSection />
 
       {/* ==================== CTA SECTION ==================== */}
       <section className="py-20 md:py-28 bg-gradient-to-br from-forest to-sage text-white relative overflow-hidden">
