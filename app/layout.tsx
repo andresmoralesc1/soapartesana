@@ -26,13 +26,13 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "SoapArtesana | Productos Artesanales Hechos a Mano",
-  description: "Descubre jabones, velas, cerámica y tejidos artesanales. Cada pieza única, elaborada con amor y ingredientes naturales.",
-  keywords: ["jabones artesanales", "velas aromáticas", "cerámica artesanal", "tejidos naturales", "productos handmade"],
-  authors: [{ name: "SoapArtesana" }],
+  title: "Artes_Ana | Jabones Medicinales para Ti y tu Mascota",
+  description: "Jabones medicinales 100% artesanales. Línea Pet Care segura para mascotas y productos faciales/terapéuticos humanos. Ingredientes orgánicos, 0% químicos tóxicos.",
+  keywords: ["jabones artesanales", "jabones para mascotas", "pet care", "jabones medicinales", "jabon avena manzanilla", "jabon carbon activado", "productos naturales", "dermatitis perros"],
+  authors: [{ name: "Artes_Ana" }],
   openGraph: {
-    title: "SoapArtesana | Productos Artesanales",
-    description: "Jabones, velas, cerámica y tejidos hechos a mano con ingredientes naturales.",
+    title: "Artes_Ana | Jabones Medicinales Artesanales",
+    description: "Jabones medicinales para humanos y mascotas. Cuidado botánico con ingredientes orgánicos.",
     type: "website",
     locale: "es_ES",
   },

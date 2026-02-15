@@ -1,4 +1,4 @@
-export type ProductCategory = 'jabones' | 'velas' | 'ceramica' | 'tejidos';
+export type ProductCategory = 'jabones' | 'pet-care' | 'facial' | 'terapeutico' | 'energetico';
 
 export interface Product {
   id: string;
@@ -14,193 +14,170 @@ export interface Product {
   inStock: boolean;
   handmade: boolean;
   ingredients?: string[];
+  benefits?: string[];
   dimensions?: string;
   weight?: string;
+  badge?: string;
 }
 
 export const products: Product[] = [
-  // Jabones
+  // ==================== PET CARE LÍNEA (PRIORIDAD) ====================
   {
-    id: 'jabon-lavanda',
-    slug: 'jabon-artesanal-lavanda',
-    name: 'Jabón de Lavanda',
-    category: 'jabones',
-    price: 8.50,
-    description: 'Jabón artesanal con aceite esencial puro de lavanda, ideal para relajar y suavizar la piel.',
-    fullDescription: 'Este jabón está elaborado con el método saponificación en frío, conservando todas las propiedades de los aceites vegetales. La lavanda calma la irritación y promueve la relajación.',
-    image: '/products/jabon-lavanda.jpg',
-    images: ['/products/jabon-lavanda.jpg', '/products/jabon-miel-avena.jpg'],
+    id: 'pet-avena-manzanilla',
+    slug: 'jabon-mascotas-avena-manzanilla',
+    name: 'Jabón Mascotas Avena & Manzanilla',
+    category: 'pet-care',
+    price: 12.50,
+    description: 'Fórmula suave para la piel sensible de tu mascota. Sin químicos tóxicos.',
+    fullDescription: 'Desarrollado específicamente para piel canina y felina. La avena calma el picor mientras la manzanilla reduce la inflamación. 100% seguro si se lame.',
+    image: '/products/pet-avena-manzanilla.jpg',
     featured: true,
     inStock: true,
     handmade: true,
-    ingredients: ['Aceite de oliva', 'Aceite de coco', 'Lavanda', 'Arcilla rosa'],
-    weight: '100g'
+    badge: 'BESTSELLER',
+    ingredients: ['Avena coloidal', 'Manzanilla orgánica', 'Aceite de oliva virgen', 'Aloe Vera'],
+    benefits: ['Seguro si se lame', 'Alivia la dermatitis', 'pH balanceado 7.0', 'Eco-consciente'],
+    weight: '120g'
   },
   {
-    id: 'jabon-miel-avena',
-    slug: 'jabon-miel-avena',
-    name: 'Jabón de Miel y Avena',
-    category: 'jabones',
-    price: 9.00,
-    description: 'Exfoliante suave con miel cruda y avena coloidal, perfecto para pieles sensibles.',
-    fullDescription: 'La miel aporta hidratación natural mientras la avena elimina suavemente las células muertas. Ideal para pieles con tendencias atópicas.',
+    id: 'pet-neem-tree',
+    slug: 'jabon-mascotas-neem',
+    name: 'Jabón Neem & Árbol de Té',
+    category: 'pet-care',
+    price: 13.00,
+    description: 'Repelente natural contra pulgas y garrapatas. Antibacterial.',
+    fullDescription: 'El neem es un repelente natural sin químicos agresivos. Combinado con árbol de té, crea una barrera protectora contra parásitos.',
+    image: '/products/pet-neem.jpg',
+    featured: true,
+    inStock: true,
+    handmade: true,
+    badge: 'PROTECCIÓN',
+    ingredients: ['Aceite de neem', 'Árbol de té', 'Lavanda', 'Aceite de coco'],
+    benefits: ['Repelente natural', 'Antibacterial', 'Hidratante', 'Sin pesticidas'],
+    weight: '120g'
+  },
+
+  // ==================== LÍNEA FACIAL HUMANA ====================
+  {
+    id: 'facial-carbon',
+    slug: 'jabon-facial-carbon-activado',
+    name: 'Jabón Facial Carbón Activado',
+    category: 'facial',
+    price: 11.00,
+    description: 'Limpieza profunda para piel grasa y con acné. Poros minimizados.',
+    fullDescription: 'El carbón activado absorbe toxinas y exceso de sebo. Ideal para limpieza facial diaria en pieles grasas o mixtas.',
+    image: '/products/jabon-carbon.jpg',
+    featured: true,
+    inStock: true,
+    handmade: true,
+    badge: 'ACNÉ',
+    ingredients: ['Carbón activado', 'Menta piperita', 'Aceite de jojoba', 'Arcilla verde'],
+    benefits: ['Absorbe impurezas', 'Minimiza poros', 'Efecto refrescante', 'Anti-inflamatorio'],
+    weight: '90g'
+  },
+  {
+    id: 'facial-arroz-leche',
+    slug: 'jabon-facial-arroz-leche',
+    name: 'Jabón Arroz & Leche de Cabra',
+    category: 'facial',
+    price: 12.00,
+    description: 'Aclarante natural para manchas y tono desigual. Piel luminosa.',
+    fullDescription: 'El arzo contiene ácido ferúlico que aclara. La leche de cabra aporta ácido láctico para exfoliación suave.',
+    image: '/products/facial-arroz.jpg',
+    featured: true,
+    inStock: true,
+    handmade: true,
+    badge: 'ACLARANTE',
+    ingredients: ['Leche de cabra', 'Harina de arroz', 'Vitamina E', 'Aceite de almendras'],
+    benefits: ['Aclara manchas', 'Unifica tono', 'Hidratación profunda', 'Exfoliación suave'],
+    weight: '90g'
+  },
+
+  // ==================== LÍNEA TERAPÉUTICA HUMANA ====================
+  {
+    id: 'tero-calendula-miel',
+    slug: 'jabon-terapeutico-calendula-miel',
+    name: 'Jabón Caléndula & Miel',
+    category: 'terapeutico',
+    price: 10.50,
+    description: 'Regenerador celular para pieles muy sensibles, con dermatitis o eczema.',
+    fullDescription: 'La caléndula estimula la producción de colágeno. La miel de abeja cruda aporta enzimas vivas que cicatrizan.',
     image: '/products/jabon-miel-avena.jpg',
     featured: true,
     inStock: true,
     handmade: true,
-    ingredients: ['Miel cruda', 'Avena coloidal', 'Manteca de karité', 'Aceite de almendras'],
-    weight: '110g'
+    badge: 'SENSIBLE',
+    ingredients: ['Caléndula', 'Miel cruda', 'Manteca de karité', 'Aceite de aguacate'],
+    benefits: ['Regenera piel dañada', 'Anti-inflamatorio', 'Cicatrizante', 'Sin fragancias'],
+    weight: '100g'
   },
   {
-    id: 'jabon-carbon',
-    slug: 'jabon-activado-carbon',
-    name: 'Jabón de Carbón Activado',
-    category: 'jabones',
-    price: 8.00,
-    description: 'Limpiador profundo con carbón activado y menta, ideal para piel grasa.',
-    fullDescription: 'El carbón activado absorbe impurezas y toxinas. La menta proporciona una sensación refrescante.',
-    image: '/products/jabon-carbon.jpg',
+    id: 'tero-aloe-vera',
+    slug: 'jabon-terapeutico-aloe-vera',
+    name: 'Jabón Aloe Vera Puro',
+    category: 'terapeutico',
+    price: 9.50,
+    description: 'Hidratación intensa para piel seca o irritada por el sol.',
+    fullDescription: 'Aloe vera fresco procesado en frío. Mantiene todas las propiedades hidratantes y regeneradoras.',
+    image: '/products/jabon-lavanda.jpg',
     featured: false,
     inStock: true,
     handmade: true,
-    ingredients: ['Carbón activado', 'Menta piperita', 'Aceite de jojoba'],
+    ingredients: ['Aloe vera fresco', 'Aceite de oliva', 'Pepino', 'Vitamina E'],
+    benefits: ['Hidratación 24h', 'Calma irritaciones', 'Efecto refrescante', 'Anti-edad'],
     weight: '100g'
   },
 
-  // Velas
+  // ==================== LÍNEA ENERGÉTICA HUMANA ====================
+  {
+    id: 'energ-sal-rosada-ruda',
+    slug: 'jabon-energetico-sal-rosada-ruda',
+    name: 'Jabón Sal Rosada & Ruda',
+    category: 'energetico',
+    price: 11.50,
+    description: 'Limpieza de cuerpo y espíritu. Elimina energías pesadas.',
+    fullDescription: 'La sal rosada desintoxica físicamente. La ruda se usa tradicionalmente para limpiar el aura y proteger.',
+    image: '/products/energ-sal-rosada.jpg',
+    featured: true,
+    inStock: true,
+    handmade: true,
+    badge: 'ENERGÍA',
+    ingredients: ['Sal rosada del Himalaya', 'Ruda fresca', 'Romero', 'Aceite esencial de limón'],
+    benefits: ['Desintoxica', 'Limpia aura', 'Protección energética', 'Circulación'],
+    weight: '110g'
+  },
+  {
+    id: 'energ-lavanda',
+    slug: 'jabon-relajante-lavanda',
+    name: 'Jabón Lavanda Francesa',
+    category: 'energetico',
+    price: 10.00,
+    description: 'Relajación profunda. Para el baño nocturno y meditación.',
+    fullDescription: 'Lavanda de Francia, cultivada sin pesticidas. Aceite esencial puro para aromaterapia.',
+    image: '/products/jabon-lavanda.jpg',
+    featured: true,
+    inStock: true,
+    handmade: true,
+    ingredients: ['Lavanda francesa', 'Aceite de oliva', 'Aceite de coco', 'Ylang-ylang'],
+    benefits: ['Relajante', 'Mejora sueño', 'Equilibra ansiedad', 'Suaviza piel'],
+    weight: '100g'
+  },
+
+  // ==================== PRODUCTOS CLÁSICOS (Mantenido para compatibilidad) ====================
   {
     id: 'vela-vainilla',
     slug: 'vela-aromatica-vainilla',
     name: 'Vela de Vainilla Bourbon',
-    category: 'velas',
+    category: 'facial',
     price: 14.00,
-    description: 'Vela de cera de soja con vainilla bourbon de Madagascar, aroma dulce y reconfortante.',
-    fullDescription: 'Hecha a mano con cera de soja 100% natural y mecha de algodón. La vainilla bourbon crea un ambiente cálido y acogedor.',
+    description: 'Vela de cera de soja con vainilla bourbon de Madagascar.',
     image: '/products/vela-vainilla.jpg',
-    featured: true,
+    featured: false,
     inStock: true,
     handmade: true,
     dimensions: '8cm x 6cm',
     weight: '180g'
   },
-  {
-    id: 'vela-salvia',
-    slug: 'vela-limpieza-salvia',
-    name: 'Vela de Salvia Blanca',
-    category: 'velas',
-    price: 15.00,
-    description: 'Vela ritual de salvia blanca para limpiar energías y purificar el ambiente.',
-    fullDescription: 'Combina las propiedades purificantes de la salvia con la caldez de una vela artesanal. Ideal para meditación.',
-    image: '/products/vela-salvia.jpg',
-    featured: false,
-    inStock: true,
-    handmade: true,
-    dimensions: '10cm x 7cm',
-    weight: '200g'
-  },
-  {
-    id: 'vela-amber',
-    slug: 'vela-amber-musc',
-    name: 'Vela de Ámbar y Musgo',
-    category: 'velas',
-    price: 16.00,
-    description: 'Fragancia terrosa y sofisticada con notas de ámbar y musgo de roble.',
-    fullDescription: 'Una combinación elegante que evoca bosques nórdicos. Perfecta para espacios modernos.',
-    image: '/products/vela-amber.jpg',
-    featured: true,
-    inStock: true,
-    handmade: true,
-    dimensions: '9cm x 7cm',
-    weight: '190g'
-  },
-
-  // Cerámica
-  {
-    id: 'cuenco-tierra',
-    slug: 'cuenco-ceramica-tierra',
-    name: 'Cuenco de Terracota',
-    category: 'ceramica',
-    price: 28.00,
-    description: 'Cuenco artesanal esmaltado en tonos terracota, perfecto para servir o decorar.',
-    fullDescription: 'Cada pieza es única, torneada a mano y esmaltada con minerales naturales. Seguro para alimentos.',
-    image: '/products/cuenco-tierra.jpg',
-    featured: true,
-    inStock: true,
-    handmade: true,
-    dimensions: '15cm diámetro x 7cm alto'
-  },
-  {
-    id: 'jardinera-salvia',
-    slug: 'jardinera-mini-salvia',
-    name: 'Jardinera Mini Salvia',
-    category: 'ceramica',
-    price: 18.00,
-    description: 'Pequeña jardinera en color salvia, ideal para hierbas aromáticas o suculentas.',
-    fullDescription: 'Incluye agujero de drenaje. El esmalte es verde salvia suave, muy tendencia.',
-    image: '/products/jardinera-salvia.jpg',
-    featured: false,
-    inStock: true,
-    handmade: true,
-    dimensions: '12cm x 10cm x 10cm'
-  },
-  {
-    id: 'tazas-lavanda',
-    slug: 'set-tazas-lavanda',
-    name: 'Set de 2 Tazas Lavanda',
-    category: 'ceramica',
-    price: 32.00,
-    description: 'Par de tazas artesanales en color lavanda con asa cómoda.',
-    fullDescription: 'Perfectas para café o té. El acabado mate es suave al tacto. Lavavajillas seguro.',
-    image: '/products/tazas-lavanda.jpg',
-    featured: false,
-    inStock: true,
-    handmade: true,
-    dimensions: '10cm alto x 8cm diámetro'
-  },
-
-  // Tejidos
-  {
-    id: 'manta-lino',
-    slug: 'manta-lino-crudo',
-    name: 'Manta de Lino Crudo',
-    category: 'tejidos',
-    price: 85.00,
-    description: 'Manta de lino 100% natural tejida a telar, suave y transpirable.',
-    fullDescription: 'Tejida en telar artesanal por cooperativas locales. El lino mejora con el uso.',
-    image: 'https://images.pexels.com/photos/16497539/pexels-photo-16497539.jpeg',
-    featured: true,
-    inStock: true,
-    handmade: true,
-    dimensions: '150cm x 200cm'
-  },
-  {
-    id: 'pano-macrame',
-    slug: 'pano-macrame-pared',
-    name: 'Paño Macramé Pared',
-    category: 'tejidos',
-    price: 45.00,
-    description: 'Paño decorativo de macramé con patrón de nudos tradicionales.',
-    fullDescription: 'Hecho a mano con hilo de algodón natural. Incluye madera de eucalipto recuperada.',
-    image: 'https://images.pexels.com/photos/13211211/pexels-photo-13211211.jpeg',
-    featured: false,
-    inStock: true,
-    handmade: true,
-    dimensions: '60cm x 90cm'
-  },
-  {
-    id: 'cojin-bordado',
-    slug: 'cojin-bordado-floral',
-    name: 'Cojín con Bordado Floral',
-    category: 'tejidos',
-    price: 35.00,
-    description: 'Funda de cojín con bordado floral a mano, incluye relleno de plumón.',
-    fullDescription: 'El bordado representa flores silvestres del campo. Tela de lino suave.',
-    image: 'https://images.pexels.com/photos/6806697/pexels-photo-6806697.jpeg',
-    featured: false,
-    inStock: true,
-    handmade: true,
-    dimensions: '45cm x 45cm'
-  }
 ];
 
 export function getProductBySlug(slug: string): Product | undefined {
@@ -216,24 +193,39 @@ export function getFeaturedProducts(): Product[] {
 }
 
 export const categoryInfo = {
+  'pet-care': {
+    name: 'Pet Care',
+    description: 'Jabones seguros y medicinales para tu mascota',
+    icon: '🐾',
+    color: 'from-amber-50 to-orange-50',
+    text: 'text-amber-900'
+  },
   jabones: {
     name: 'Jabones Artesanales',
     description: 'Elaborados con aceites vegetales y esencias naturales',
-    icon: '🧼'
+    icon: '🧼',
+    color: 'from-green-50 to-emerald-50',
+    text: 'text-green-900'
   },
-  velas: {
-    name: 'Velas Aromáticas',
-    description: 'Cera de soja y fragancias premium',
-    icon: '🕯️'
+  facial: {
+    name: 'Línea Facial',
+    description: 'Cuidado especial para tu rostro',
+    icon: '✨',
+    color: 'from-rose-50 to-pink-50',
+    text: 'text-rose-900'
   },
-  ceramica: {
-    name: 'Cerámica',
-    description: 'Piezas únicas torneadas a mano',
-    icon: '🏺'
+  terapeutico: {
+    name: 'Línea Terapéutica',
+    description: 'Para pieles sensibles y problemáticas',
+    icon: '🌿',
+    color: 'from-lime-50 to-green-50',
+    text: 'text-lime-900'
   },
-  tejidos: {
-    name: 'Tejidos Artesanales',
-    description: 'Lino, algodón y técnicas tradicionales',
-    icon: '🧶'
+  energetico: {
+    name: 'Línea Energética',
+    description: 'Limpieza de cuerpo y espíritu',
+    icon: '🌙',
+    color: 'from-purple-50 to-indigo-50',
+    text: 'text-purple-900'
   }
 };

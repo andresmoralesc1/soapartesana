@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Menu, X, Sparkles } from 'lucide-react';
+import { Menu, X, Sparkles, PawPrint } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Cart } from './Cart';
@@ -20,9 +20,9 @@ export function Header() {
 
   const navLinks = [
     { href: '/', label: 'Inicio' },
-    { href: '/productos', label: 'Productos' },
-    { href: '/about', label: 'Nosotros' },
-    { href: '/contacto', label: 'Contacto' },
+    { href: '/productos?categoria=pet-care', label: 'Pet Care' },
+    { href: '/productos?categoria=facial', label: 'Línea Facial' },
+    { href: '/productos', label: 'Todos los Productos' },
   ];
 
   return (
@@ -50,14 +50,14 @@ export function Header() {
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: 'spring', stiffness: 400 }}
               >
-                SoapArtesana
+                Artes_Ana
               </motion.span>
               <motion.div
                 className="relative"
                 animate={{ rotate: [0, 10, -10, 0] }}
                 transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
               >
-                <Sparkles className="h-4 w-4 text-lavender" />
+                <PawPrint className="h-4 w-4 text-amber-500" />
               </motion.div>
             </Link>
           </motion.div>
