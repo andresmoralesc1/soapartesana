@@ -41,7 +41,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
           >
             <Image
               src={product.image}
-              alt={product.name}
+              alt={`Jabón artesanal ${product.name}. ${product.description}`}
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-110"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

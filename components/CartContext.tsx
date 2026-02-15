@@ -3,6 +3,8 @@
 import * as React from 'react';
 import { Product } from '@/lib/products';
 
+const CART_STORAGE_KEY = 'artes_ana_cart';
+
 export interface CartItem extends Product {
   quantity: number;
 }
@@ -15,6 +17,8 @@ export interface CartContextValue {
   clearCart: () => void;
   getTotalItems: () => number;
   getTotalPrice: () => number;
+  isOpen: boolean;
+  setIsOpen: (open: boolean) => void;
 }
 
 const CartContext = React.createContext<CartContextValue | undefined>(undefined);
@@ -27,9 +31,54 @@ export function useCart() {
   return context;
 }
 
+// Safe localStorage operations (SSR compatible)
+const storage = {
+  get: (): CartItem[] => {
+    if (typeof window === 'undefined') return [];
+    try {
+      const item = localStorage.getItem(CART_STORAGE_KEY);
+      return item ? JSON.parse(item) : [];
+    } catch (error) {
+      console.error('Error reading cart from localStorage:', error);
+      return [];
+    }
+  },
+  set: (items: CartItem[]) => {
+    if (typeof window === 'undefined') return;
+    try {
+      localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
+    } catch (error) {
+      console.error('Error saving cart to localStorage:', error);
+    }
+  },
+  remove: () => {
+    if (typeof window === 'undefined') return;
+    try {
+      localStorage.removeItem(CART_STORAGE_KEY);
+    } catch (error) {
+      console.error('Error removing cart from localStorage:', error);
+    }
+  },
+};
+
 export function CartProvider({ children }: { children: React.ReactNode }) {
-  const [items, setItems] = React.useState<CartItem[]>([]);
+  // Initialize from localStorage
+  const [items, setItems] = React.useState<CartItem[]>(() => storage.get());
   const [isOpen, setIsOpen] = React.useState(false);
+  const [isInitialized, setIsInitialized] = React.useState(false);
+
+  // Initialize on mount (client-side only)
+  React.useEffect(() => {
+    setItems(storage.get());
+    setIsInitialized(true);
+  }, []);
+
+  // Persist to localStorage whenever items change
+  React.useEffect(() => {
+    if (isInitialized) {
+      storage.set(items);
+    }
+  }, [items, isInitialized]);
 
   const addItem = React.useCallback((product: Product) => {
     setItems((prev) => {
@@ -63,6 +112,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const clearCart = React.useCallback(() => {
     setItems([]);
+    storage.remove();
   }, []);
 
   const getTotalItems = React.useCallback(() => {
@@ -83,6 +133,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         clearCart,
         getTotalItems,
         getTotalPrice,
+        isOpen,
+        setIsOpen,
       }}
     >
       {children}

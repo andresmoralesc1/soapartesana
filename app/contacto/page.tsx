@@ -8,11 +8,11 @@ const contactMethods = [
   {
     icon: MessageCircle,
     title: 'WhatsApp',
-    value: '+34 612 345 678',
+    value: '+1 (305) 123-4567',
     description: 'Respuesta en minutos',
     color: 'text-green-600',
     bg: 'bg-green-100',
-    link: 'https://wa.me/34612345678',
+    link: 'https://wa.me/13051234567',
   },
   {
     icon: Mail,
@@ -26,7 +26,7 @@ const contactMethods = [
   {
     icon: MapPin,
     title: 'Ubicación',
-    value: 'Argentina D.C, Argentina',
+    value: 'Miami, FL, Estados Unidos',
     description: 'Envíos a toda la península',
     color: 'text-sage',
     bg: 'bg-sage/10',
@@ -223,7 +223,7 @@ export default function ContactoPage() {
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:border-forest focus:ring-2 focus:ring-terracotta/20 transition-all outline-none"
-                      placeholder="+34 600 000 000"
+                      placeholder="+1 (555) 000-0000"
                     />
                   </motion.div>
 
@@ -315,7 +315,7 @@ export default function ContactoPage() {
                     '🌿 Ingredientes 100% naturales y orgánicos',
                     '🧼 Métodos artesanales tradicionales',
                     '♻️ Envases eco-friendly y reciclables',
-                    '🚚 Envío rápido toda Argentina',
+                    '🚚 Envío rápido a toda Estados Unidos',
                     '💬 Atención personalizada',
                   ].map((item, index) => (
                     <motion.li
@@ -370,10 +370,10 @@ export default function ContactoPage() {
                   Lunes a Viernes, 9:00 - 18:00
                 </p>
                 <a
-                  href="tel:+34612345678"
+                  href="tel:+13051234567"
                   className="text-forest font-bold hover:underline"
                 >
-                  +34 612 345 678
+                  +1 (305) 123-4567
                 </a>
               </motion.div>
             </motion.div>

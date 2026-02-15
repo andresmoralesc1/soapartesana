@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { getProductBySlug, products, categoryInfo } from '@/lib/products';
 import { ArrowLeft, Heart, Truck, RefreshCw } from 'lucide-react';
+import { ProductStructuredData, BreadcrumbStructuredData } from '@/components/StructuredData';
 
 interface ProductPageProps {
   params: {
@@ -30,7 +31,19 @@ export default function ProductPage({ params }: ProductPageProps) {
     .slice(0, 4);
 
   return (
-    <div className="py-12 md:py-16">
+    <>
+      {/* Structured Data for SEO */}
+      <ProductStructuredData product={product} />
+      <BreadcrumbStructuredData
+        items={[
+          { name: 'Inicio', href: '/' },
+          { name: 'Productos', href: '/productos' },
+          { name: categoryInfo[product.category].name, href: `/productos?categoria=${product.category}` },
+          { name: product.name, href: `/productos/${product.slug}` },
+        ]}
+      />
+
+      <div className="py-12 md:py-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb */}
         <Link href="/productos" className="inline-flex items-center text-muted-foreground hover:text-foreground mb-8 transition-colors">
@@ -44,7 +57,7 @@ export default function ProductPage({ params }: ProductPageProps) {
             <div className="relative aspect-square bg-cream rounded-2xl overflow-hidden">
               <Image
                 src={product.image}
-                alt={product.name}
+                alt={`Fotografía del producto ${product.name}, jabón artesanal ${product.handmade ? 'hecho a mano' : ''} con ingredientes ${product.ingredients?.slice(0, 2).join(' y ') || 'naturales'}`}
                 fill
                 className="object-cover"
                 priority
@@ -57,7 +70,7 @@ export default function ProductPage({ params }: ProductPageProps) {
                   <div key={idx} className="relative aspect-square bg-cream rounded-lg overflow-hidden">
                     <Image
                       src={img}
-                      alt={`${product.name} - Imagen ${idx + 1}`}
+                      alt={`${product.name} - Vista adicional ${idx + 1}, mostrando detalles del jabón artesanal`}
                       fill
                       className="object-cover"
                       sizes="(max-width: 1024px) 25vw, 12vw"
@@ -136,8 +149,8 @@ export default function ProductPage({ params }: ProductPageProps) {
 
             {/* WhatsApp CTA */}
             <a
-              href={`https://wa.me/13524979992?text=${encodeURIComponent(
-                `Hola, me interesa el producto: ${product.name}. ¿Podrían darme más información?`
+              href={`https://wa.me/13051234567?text=${encodeURIComponent(
+                `Hola Artes_Ana! 🌿 Me interesa el producto: ${product.name}. ¿Podrían darme más información?`
               )}`}
               target="_blank"
               rel="noopener noreferrer"
@@ -188,7 +201,7 @@ export default function ProductPage({ params }: ProductPageProps) {
                     <div className="relative aspect-square bg-cream">
                       <Image
                         src={p.image}
-                        alt={p.name}
+                        alt={`${p.name} - ${p.description}`}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform"
                         sizes="(max-width: 1024px) 50vw, 25vw"
@@ -210,5 +223,6 @@ export default function ProductPage({ params }: ProductPageProps) {
         )}
       </div>
     </div>
+    </>
   );
 }

@@ -8,6 +8,7 @@ import { PageTransition } from "@/components/PageTransition";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { ToastProvider } from "@/components/Toast";
 import { CartProvider } from "@/components/CartContext";
+import { OrganizationStructuredData, WebSiteStructuredData } from "@/components/StructuredData";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -48,6 +49,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} antialiased font-sans`}
       >
+        <OrganizationStructuredData />
+        <WebSiteStructuredData />
         <ScrollProgress />
         <CartProvider>
           <ToastProvider>

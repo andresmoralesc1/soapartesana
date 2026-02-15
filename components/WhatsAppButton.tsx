@@ -9,7 +9,7 @@ interface WhatsAppButtonProps {
   productName?: string;
 }
 
-const WHATSAPP_NUMBER = '13524979992'; // Replace with actual number
+const WHATSAPP_NUMBER = '13051234567'; // +1 (305) 123-4567 - Miami, FL
 
 export function WhatsAppButton({ phoneNumber = WHATSAPP_NUMBER, message, productName }: WhatsAppButtonProps) {
   const [mounted, setMounted] = useState(false);
@@ -21,8 +21,8 @@ export function WhatsAppButton({ phoneNumber = WHATSAPP_NUMBER, message, product
   if (!mounted) return null;
 
   const defaultMessage = productName
-    ? `Hola, me interesa el producto: ${productName}. ¿Podrían darme más información?`
-    : 'Hola, me gustaría obtener más información sobre sus productos artesanales.';
+    ? `Hola Artes_Ana! 🌿 Me interesa el producto: ${productName}. ¿Podrían darme más información?`
+    : 'Hola Artes_Ana! 🌿 Me gustaría obtener más información sobre sus productos artesanales.';
 
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message || defaultMessage)}`;
 
