@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { ProductCard } from '@/components/ProductCard';
 import { getProductsByCategory, categoryInfo } from '@/lib/products';
@@ -26,7 +27,20 @@ export default function HomePage() {
   return (
     <>
       {/* ==================== HERO SECTION ==================== */}
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-amber-50 via-cream to-green-50">
+      <section className="relative min-h-[90vh] flex items-center overflow-hidden">
+        {/* Background image with overlay */}
+        <div className="absolute inset-0">
+          <Image
+            src="/hero/hero-soap-natural.jpg"
+            alt="Jabones artesanales naturales con ingredientes orgánicos"
+            fill
+            priority
+            className="object-cover"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/85 to-cream/70" />
+        </div>
+
         {/* Decorative elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-20 right-10 w-64 h-64 bg-amber-200/20 rounded-full blur-3xl" />
