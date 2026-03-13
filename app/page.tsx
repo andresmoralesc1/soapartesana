@@ -81,16 +81,6 @@ export default function HomePage() {
                     Ver Catálogo
                   </Button>
                 </Link>
-                <Link href="/productos?categoria=facial">
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="border-forest text-forest hover:bg-forest hover:text-white text-lg px-8 font-semibold"
-                  >
-                    Línea Facial
-                    <ChevronRight className="ml-2 h-5 w-5" />
-                  </Button>
-                </Link>
               </div>
 
               {/* Quick trust badges */}
@@ -319,14 +309,28 @@ export default function HomePage() {
           </div>
 
           {/* Human Products Preview */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={{
+              hidden: {},
+              visible: {
+                transition: {
+                  staggerChildren: 0.1,
+                },
+              },
+            }}
+          >
             {facialProducts.slice(0, 2).map((product, index) => (
               <motion.div
                 key={product.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+                transition={{ duration: 0.4 }}
               >
                 <ProductCard product={product} index={index} />
               </motion.div>
@@ -334,10 +338,11 @@ export default function HomePage() {
             {terapeuticoProducts.slice(0, 1).map((product, index) => (
               <motion.div
                 key={product.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: (index + 2) * 0.1 }}
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+                transition={{ duration: 0.4 }}
               >
                 <ProductCard product={product} index={index + 2} />
               </motion.div>
@@ -345,15 +350,16 @@ export default function HomePage() {
             {jabonesProducts.slice(0, 1).map((product, index) => (
               <motion.div
                 key={product.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: (index + 3) * 0.1 }}
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+                transition={{ duration: 0.4 }}
               >
                 <ProductCard product={product} index={index + 3} />
               </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           <div className="text-center mt-10">
             <Link href="/productos?categoria=facial">
@@ -457,19 +463,33 @@ export default function HomePage() {
           </motion.div>
 
           {/* Pet Products Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 gap-6"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={{
+              hidden: {},
+              visible: {
+                transition: {
+                  staggerChildren: 0.1,
+                },
+              },
+            }}
+          >
             {petProducts.map((product, index) => (
               <motion.div
                 key={product.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+                transition={{ duration: 0.4 }}
               >
                 <ProductCard product={product} index={index} />
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 

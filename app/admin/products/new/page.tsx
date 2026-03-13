@@ -136,10 +136,11 @@ export default function NewProductPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium mb-1">
+                <label htmlFor="product-name" className="block text-sm font-medium mb-1">
                   Nombre del Producto *
                 </label>
                 <input
+                  id="product-name"
                   type="text"
                   name="name"
                   value={formData.name}
@@ -151,10 +152,11 @@ export default function NewProductPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-1">
+                <label htmlFor="product-slug" className="block text-sm font-medium mb-1">
                   Slug (URL) *
                 </label>
                 <input
+                  id="product-slug"
                   type="text"
                   name="slug"
                   value={formData.slug}
@@ -168,10 +170,11 @@ export default function NewProductPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium mb-1">
+                <label htmlFor="product-category" className="block text-sm font-medium mb-1">
                   Categoría *
                 </label>
                 <select
+                  id="product-category"
                   name="category"
                   value={formData.category}
                   onChange={handleChange}
@@ -187,10 +190,11 @@ export default function NewProductPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-1">
+                <label htmlFor="product-price" className="block text-sm font-medium mb-1">
                   Precio *
                 </label>
                 <input
+                  id="product-price"
                   type="number"
                   name="price"
                   value={formData.price}
@@ -204,10 +208,11 @@ export default function NewProductPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-1">
+              <label htmlFor="product-description" className="block text-sm font-medium mb-1">
                 Descripción Corta *
               </label>
               <input
+                id="product-description"
                 type="text"
                 name="description"
                 value={formData.description}
@@ -219,10 +224,11 @@ export default function NewProductPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-1">
+              <label htmlFor="product-full-description" className="block text-sm font-medium mb-1">
                 Descripción Completa
               </label>
               <textarea
+                id="product-full-description"
                 name="fullDescription"
                 value={formData.fullDescription}
                 onChange={handleChange}
@@ -277,10 +283,11 @@ export default function NewProductPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-1">
+              <label htmlFor="product-image-url" className="block text-sm font-medium mb-1">
                 O URL de imagen (alternativa)
               </label>
               <input
+                id="product-image-url"
                 type="url"
                 value={formData.image}
                 onChange={(e) => setFormData((prev) => ({ ...prev, image: e.target.value }))}
@@ -296,10 +303,11 @@ export default function NewProductPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium mb-1">
+                <label htmlFor="product-weight" className="block text-sm font-medium mb-1">
                   Peso
                 </label>
                 <input
+                  id="product-weight"
                   type="text"
                   name="weight"
                   value={formData.weight}
@@ -310,10 +318,11 @@ export default function NewProductPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-1">
+                <label htmlFor="product-badge" className="block text-sm font-medium mb-1">
                   Badge (Etiqueta)
                 </label>
                 <input
+                  id="product-badge"
                   type="text"
                   name="badge"
                   value={formData.badge}
@@ -325,10 +334,11 @@ export default function NewProductPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-1">
+              <label htmlFor="product-ingredients" className="block text-sm font-medium mb-1">
                 Ingredientes (uno por línea)
               </label>
               <textarea
+                id="product-ingredients"
                 value={formData.ingredients.join('\n')}
                 onChange={(e) => handleListChange('ingredients', e.target.value)}
                 rows={4}
@@ -338,10 +348,11 @@ export default function NewProductPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-1">
+              <label htmlFor="product-benefits" className="block text-sm font-medium mb-1">
                 Beneficios (uno por línea)
               </label>
               <textarea
+                id="product-benefits"
                 value={formData.benefits.join('\n')}
                 onChange={(e) => handleListChange('benefits', e.target.value)}
                 rows={4}
@@ -353,6 +364,7 @@ export default function NewProductPage() {
             <div className="flex flex-wrap gap-4">
               <label className="flex items-center gap-2 cursor-pointer">
                 <input
+                  id="product-featured"
                   type="checkbox"
                   name="featured"
                   checked={formData.featured}
@@ -364,6 +376,7 @@ export default function NewProductPage() {
 
               <label className="flex items-center gap-2 cursor-pointer">
                 <input
+                  id="product-instock"
                   type="checkbox"
                   name="inStock"
                   checked={formData.inStock}
@@ -375,6 +388,7 @@ export default function NewProductPage() {
 
               <label className="flex items-center gap-2 cursor-pointer">
                 <input
+                  id="product-handmade"
                   type="checkbox"
                   name="handmade"
                   checked={formData.handmade}

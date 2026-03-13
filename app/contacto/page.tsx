@@ -218,13 +218,17 @@ export default function ContactoPage() {
                       viewport={{ once: true }}
                       transition={{ delay: 0.1 }}
                     >
-                      <label className="block text-sm font-medium mb-2">
+                      <label htmlFor="contact-name" className="block text-sm font-medium mb-2 text-foreground">
                         Nombre *
                       </label>
                       <input
+                        id="contact-name"
+                        name="name"
                         type="text"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        aria-invalid={errors.name ? 'true' : 'false'}
+                        aria-describedby={errors.name ? 'name-error' : undefined}
                         className={`w-full px-4 py-3 rounded-lg border bg-background focus:ring-2 transition-all outline-none ${
                           errors.name
                             ? 'border-rose-500 focus:border-rose-500 focus:ring-rose-500/20'
@@ -232,7 +236,7 @@ export default function ContactoPage() {
                         }`}
                         placeholder="Tu nombre"
                       />
-                      {errors.name && <p className="text-rose-500 text-sm mt-1">{errors.name}</p>}
+                      {errors.name && <p id="name-error" className="text-rose-500 text-sm mt-1">{errors.name}</p>}
                     </motion.div>
                     <motion.div
                       initial={{ x: -20, opacity: 0 }}
@@ -240,13 +244,18 @@ export default function ContactoPage() {
                       viewport={{ once: true }}
                       transition={{ delay: 0.2 }}
                     >
-                      <label className="block text-sm font-medium mb-2">
+                      <label htmlFor="contact-email" className="block text-sm font-medium mb-2 text-foreground">
                         Email *
                       </label>
                       <input
+                        id="contact-email"
+                        name="email"
                         type="email"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        aria-invalid={errors.email ? 'true' : 'false'}
+                        aria-describedby={errors.email ? 'email-error' : undefined}
+                        autoComplete="email"
                         className={`w-full px-4 py-3 rounded-lg border bg-background focus:ring-2 transition-all outline-none ${
                           errors.email
                             ? 'border-rose-500 focus:border-rose-500 focus:ring-rose-500/20'
@@ -254,7 +263,7 @@ export default function ContactoPage() {
                         }`}
                         placeholder="tu@email.com"
                       />
-                      {errors.email && <p className="text-rose-500 text-sm mt-1">{errors.email}</p>}
+                      {errors.email && <p id="email-error" className="text-rose-500 text-sm mt-1">{errors.email}</p>}
                     </motion.div>
                   </div>
 
@@ -264,13 +273,16 @@ export default function ContactoPage() {
                     viewport={{ once: true }}
                     transition={{ delay: 0.3 }}
                   >
-                    <label className="block text-sm font-medium mb-2">
+                    <label htmlFor="contact-phone" className="block text-sm font-medium mb-2 text-foreground">
                       Teléfono
                     </label>
                     <input
+                      id="contact-phone"
+                      name="phone"
                       type="tel"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      autoComplete="tel"
                       className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:border-forest focus:ring-2 focus:ring-terracotta/20 transition-all outline-none"
                       placeholder="+1 (555) 000-0000"
                     />
@@ -282,12 +294,16 @@ export default function ContactoPage() {
                     viewport={{ once: true }}
                     transition={{ delay: 0.4 }}
                   >
-                    <label className="block text-sm font-medium mb-2">
+                    <label htmlFor="contact-subject" className="block text-sm font-medium mb-2 text-foreground">
                       Asunto *
                     </label>
                     <select
+                      id="contact-subject"
+                      name="subject"
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                      aria-invalid={errors.subject ? 'true' : 'false'}
+                      aria-describedby={errors.subject ? 'subject-error' : undefined}
                       className={`w-full px-4 py-3 rounded-lg border bg-background focus:ring-2 transition-all outline-none ${
                         errors.subject
                           ? 'border-rose-500 focus:border-rose-500 focus:ring-rose-500/20'
@@ -300,7 +316,7 @@ export default function ContactoPage() {
                       <option value="wholesale">Ventas al por mayor</option>
                       <option value="otro">Otro</option>
                     </select>
-                    {errors.subject && <p className="text-rose-500 text-sm mt-1">{errors.subject}</p>}
+                    {errors.subject && <p id="subject-error" className="text-rose-500 text-sm mt-1">{errors.subject}</p>}
                   </motion.div>
 
                   <motion.div
@@ -309,13 +325,17 @@ export default function ContactoPage() {
                     viewport={{ once: true }}
                     transition={{ delay: 0.5 }}
                   >
-                    <label className="block text-sm font-medium mb-2">
+                    <label htmlFor="contact-message" className="block text-sm font-medium mb-2 text-foreground">
                       Mensaje *
                     </label>
                     <textarea
+                      id="contact-message"
+                      name="message"
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       rows={5}
+                      aria-invalid={errors.message ? 'true' : 'false'}
+                      aria-describedby={errors.message ? 'message-error' : undefined}
                       className={`w-full px-4 py-3 rounded-lg border bg-background focus:ring-2 transition-all outline-none resize-none ${
                         errors.message
                           ? 'border-rose-500 focus:border-rose-500 focus:ring-rose-500/20'
@@ -323,7 +343,7 @@ export default function ContactoPage() {
                       }`}
                       placeholder="¿En qué podemos ayudarte?"
                     />
-                    {errors.message && <p className="text-rose-500 text-sm mt-1">{errors.message}</p>}
+                    {errors.message && <p id="message-error" className="text-rose-500 text-sm mt-1">{errors.message}</p>}
                   </motion.div>
 
                   <motion.button

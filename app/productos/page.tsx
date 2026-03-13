@@ -1,7 +1,10 @@
 'use client';
 
 import { useState, useMemo } from 'react';
+import Link from 'next/link';
 import { ProductCard } from '@/components/ProductCard';
+import { Button } from '@/components/ui/button';
+import { EmptyState } from '@/components/EmptyState';
 import { products, categoryInfo, type ProductCategory } from '@/lib/products';
 
 export default function ProductsPage() {
@@ -65,11 +68,16 @@ export default function ProductsPage() {
             ))}
           </div>
         ) : (
-          <div className="text-center py-16">
-            <p className="text-muted-foreground">
-              No hay productos en esta categoría.
-            </p>
-          </div>
+          <EmptyState
+            type="products"
+            title="No hay productos en esta categoría"
+            description="No encontramos productos en la categoría seleccionada. Por favor intenta con otra categoría."
+            action={
+              <Button onClick={() => setSelectedCategory('todos')}>
+                Ver todos los productos
+              </Button>
+            }
+          />
         )}
 
         {/* Category Info */}
