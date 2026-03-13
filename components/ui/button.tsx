@@ -2,11 +2,11 @@
 
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
-import { motion, HTMLMotionProps } from "framer-motion";
+import { motion, HTMLMotionProps, AnimatePresence } from "framer-motion";
 import { Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const baseStyles = "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-all duration-200 disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-orange-300";
+const baseStyles = "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-all duration-200 disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta focus-visible:ring-2 focus-visible:ring-terracotta/30 relative overflow-hidden";
 
 const variantStyles = {
   default: `${baseStyles} bg-[oklch(0.62_0.16_45)] text-white hover:bg-[oklch(0.57_0.16_45)] shadow-md hover:shadow-lg`,
@@ -20,10 +20,10 @@ const variantStyles = {
 };
 
 const sizeStyles = {
-  default: "h-10 px-6 py-2.5 text-sm",
-  sm: "h-9 px-4 py-2 text-sm",
+  default: "h-11 px-6 py-2.5 text-sm min-h-[44px]",
+  sm: "h-10 px-4 py-2 text-sm min-h-[44px]",
   lg: "h-12 px-8 py-3 text-base",
-  icon: "h-10 w-10 p-0",
+  icon: "h-11 w-11 p-0 min-h-[44px] min-w-[44px]",
 };
 
 type ButtonProps = Omit<React.ComponentProps<"button">, 'onAnimationStart' | 'onAnimationEnd' | 'onAnimationIteration'> &
@@ -41,6 +41,19 @@ const motionPropNames = new Set([
   'onDragStart', 'onDrag', 'onDragEnd', 'layout', 'layoutId',
 ]);
 
+// Ripple effect component
+function RippleEffect() {
+  return (
+    <motion.span
+      className="absolute inset-0 rounded-lg"
+      initial={{ scale: 0, opacity: 0.3 }}
+      animate={{ scale: 4, opacity: 0 }}
+      transition={{ duration: 0.6, ease: 'easeOut' }}
+      style={{ backgroundColor: 'rgba(255, 255, 255, 0.5)' }}
+    />
+  );
+}
+
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({
     className,
@@ -50,8 +63,27 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     loading = false,
     children,
     disabled,
+    onClick,
     ...props
   }, ref) => {
+    const [ripples, setRipples] = React.useState<number[]>([]);
+
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+      // Add ripple effect
+      const newRipple = Date.now();
+      setRipples([...ripples, newRipple]);
+
+      // Remove ripple after animation
+      setTimeout(() => {
+        setRipples(prev => prev.filter(r => r !== newRipple));
+      }, 600);
+
+      // Call original onClick if provided
+      if (onClick) {
+        onClick(e);
+      }
+    };
+
     // Split props into motion props and regular props
     const motionProps: Record<string, any> = {};
     const restProps: Record<string, any> = {};
@@ -90,15 +122,23 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           variantStyles[variant],
           sizeStyles[size],
           disabled && "opacity-50 cursor-not-allowed",
-          "active:scale-95",
           className
         )}
         disabled={disabled || loading}
+        onClick={handleClick}
         whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
+        whileTap={{ scale: 0.96 }}
+        transition={{ type: 'spring', stiffness: 400, damping: 17 }}
         {...motionProps}
         {...restProps}
       >
+        {/* Ripple effects */}
+        <AnimatePresence>
+          {ripples.map(ripple => (
+            <RippleEffect key={ripple} />
+          ))}
+        </AnimatePresence>
+
         {loading && <Loader2 className="h-4 w-4 animate-spin" />}
         {!loading && children}
       </motion.button>
