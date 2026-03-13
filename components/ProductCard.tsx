@@ -9,6 +9,7 @@ import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-mo
 import { ShoppingBag, Heart, Sparkles } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useCart } from '@/components/CartContext';
+import { useFavorites } from '@/components/FavoritesContext';
 
 export { ProductCardSkeleton } from './ProductCardSkeleton';
 
@@ -31,11 +32,11 @@ const colors = {
 };
 
 export function ProductCard({ product, index = 0 }: ProductCardProps) {
-  const [isLiked, setIsLiked] = useState(false);
   const [showCartSuccess, setShowCartSuccess] = useState(false);
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [isTouch, setIsTouch] = useState(false);
   const { addItem } = useCart();
+  const { isFavorite, toggleFavorite } = useFavorites();
 
   // Detect touch device
   useEffect(() => {
@@ -72,7 +73,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
   const handleLike = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    setIsLiked(!isLiked);
+    toggleFavorite(product.id);
   };
 
   return (
@@ -190,10 +191,10 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
               whileHover={isTouch ? {} : { scale: 1.15, rotate: 5 }}
               whileTap={{ scale: 0.9 }}
               onClick={handleLike}
-              aria-label={isLiked ? 'Quitar de favoritos' : 'Agregar a favoritos'}
+              aria-label={isFavorite(product.id) ? 'Quitar de favoritos' : 'Agregar a favoritos'}
             >
               <AnimatePresence mode="wait">
-                {isLiked ? (
+                {isFavorite(product.id) ? (
                   <motion.div
                     key="liked"
                     initial={{ scale: 0 }}

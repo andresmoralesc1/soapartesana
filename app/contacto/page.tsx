@@ -3,16 +3,19 @@
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, MessageCircle, Send, Instagram, Facebook, Clock } from 'lucide-react';
 import { useState } from 'react';
+import { useToasts } from '@/components/Toast';
+
+const WHATSAPP_NUMBER = '13524979992'; // +1 (352) 497-9992
 
 const contactMethods = [
   {
     icon: MessageCircle,
     title: 'WhatsApp',
-    value: '+1 (305) 123-4567',
+    value: '+1 (352) 497-9992',
     description: 'Respuesta en minutos',
     color: 'text-green-600',
     bg: 'bg-green-100',
-    link: 'https://wa.me/13051234567',
+    link: `https://wa.me/${WHATSAPP_NUMBER}`,
   },
   {
     icon: Mail,
@@ -26,8 +29,8 @@ const contactMethods = [
   {
     icon: MapPin,
     title: 'Ubicación',
-    value: 'Miami, FL, Estados Unidos',
-    description: 'Envíos a toda la península',
+    value: 'Florida, Estados Unidos',
+    description: 'Envíos a todo Estados Unidos',
     color: 'text-sage',
     bg: 'bg-sage/10',
   },
@@ -59,6 +62,7 @@ const socialLinks = [
 ];
 
 export default function ContactoPage() {
+  const { success, error } = useToasts();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -111,12 +115,25 @@ export default function ContactoPage() {
     }
 
     setIsSubmitting(true);
-    // Simular envío
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    setIsSubmitting(false);
-    alert('¡Mensaje enviado! Te responderemos pronto.');
-    setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
-    setErrors({});
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        success('¡Mensaje enviado! Te responderemos pronto.');
+        setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+        setErrors({});
+      } else {
+        error('Hubo un error al enviar. Por favor intenta nuevamente.');
+      }
+    } catch (err) {
+      error('Hubo un error al enviar. Por favor intenta nuevamente.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -447,10 +464,10 @@ export default function ContactoPage() {
                   Lunes a Viernes, 9:00 - 18:00
                 </p>
                 <a
-                  href="tel:+13051234567"
+                  href={`tel:+13524979992`}
                   className="text-forest font-bold hover:underline"
                 >
-                  +1 (305) 123-4567
+                  +1 (352) 497-9992
                 </a>
               </motion.div>
             </motion.div>

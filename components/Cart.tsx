@@ -350,6 +350,12 @@ export function Cart() {
 
                   {/* Customer Info */}
                   <div className="space-y-3">
+                    <div className="bg-muted/30 rounded-lg p-3 mb-3">
+                      <p className="text-sm text-foreground">
+                        <span className="font-semibold">¿Por qué pedir tus datos?</span><br />
+                        <span className="text-muted-foreground">Necesitamos tu nombre y email para enviarte la confirmación y el seguimiento de tu pedido.</span>
+                      </p>
+                    </div>
                     <div>
                       <label htmlFor="cart-name" className="block text-sm font-medium mb-1.5 text-foreground">
                         Tu nombre *
@@ -387,6 +393,18 @@ export function Cart() {
                     </div>
                   )}
 
+                  {/* Payment options explanation */}
+                  <div className="space-y-3">
+                    <div className="bg-blue-50 text-blue-900 text-sm px-4 py-3 rounded-lg">
+                      <p className="font-semibold mb-1">💳 Opción 1: Pago Seguro con Tarjeta</p>
+                      <p className="text-blue-800">Pago procesado por Stripe. Rápido, seguro y recibirás confirmación por email.</p>
+                    </div>
+                    <div className="bg-green-50 text-green-900 text-sm px-4 py-3 rounded-lg">
+                      <p className="font-semibold mb-1">💬 Opción 2: Orden Personalizada por WhatsApp</p>
+                      <p className="text-green-800">Habla directamente con nosotros. Ideal para preguntas o pedidos personalizados.</p>
+                    </div>
+                  </div>
+
                   {/* Stripe Checkout Button */}
                   <motion.button
                     whileHover={{ scale: 1.02 }}
@@ -410,7 +428,7 @@ export function Cart() {
 
                   {/* WhatsApp Option */}
                   <a
-                    href={`https://wa.me/13051234567?text=${encodeURIComponent(
+                    href={`https://wa.me/13524979992?text=${encodeURIComponent(
                       `Hola Artes_Ana! 🌿 Me gustaría hacer un pedido:\n\n${items.map(item =>
                         `• ${item.name} (x${item.quantity}) - $${(getPriceNumber(item.price) * item.quantity).toFixed(2)}`
                       ).join('\n')}\n\n💰 Total: $${getPriceNumber(totalPrice).toFixed(2)}\n\n¿Me podrían confirmar disponibilidad y tiempo de entrega?`

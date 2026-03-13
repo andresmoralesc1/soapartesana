@@ -6,16 +6,32 @@ import { ProductCard } from '@/components/ProductCard';
 import { Button } from '@/components/ui/button';
 import { EmptyState } from '@/components/EmptyState';
 import { products, categoryInfo, type ProductCategory } from '@/lib/products';
+import { Search, X } from 'lucide-react';
 
 export default function ProductsPage() {
   const [selectedCategory, setSelectedCategory] = useState<ProductCategory | 'todos'>('todos');
+  const [searchQuery, setSearchQuery] = useState('');
 
   const filteredProducts = useMemo(() => {
-    if (selectedCategory === 'todos') {
-      return products;
+    let results = selectedCategory === 'todos'
+      ? products
+      : products.filter(p => p.category === selectedCategory);
+
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase();
+      results = results.filter(p =>
+        p.name.toLowerCase().includes(query) ||
+        p.description.toLowerCase().includes(query) ||
+        p.category.toLowerCase().includes(query) ||
+        p.benefits?.some(b => b.toLowerCase().includes(query)) ||
+        p.ingredients?.some(i => i.toLowerCase().includes(query))
+      );
     }
-    return products.filter(p => p.category === selectedCategory);
-  }, [selectedCategory]);
+
+    return results;
+  }, [selectedCategory, searchQuery]);
+
+  const clearSearch = () => setSearchQuery('');
 
   return (
     <div className="py-12 md:py-16">
@@ -29,6 +45,35 @@ export default function ProductsPage() {
             Explora nuestra colección completa de productos artesanales,
             cada pieza hecha con amor y dedicación.
           </p>
+        </div>
+
+        {/* Search Bar */}
+        <div className="max-w-2xl mx-auto mb-8">
+          <div className="relative">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Buscar por nombre, ingrediente o beneficio..."
+              className="w-full pl-12 pr-12 py-3 rounded-full border border-border bg-card focus:ring-2 focus:ring-terracotta/20 focus:border-terracotta outline-none transition-all"
+              aria-label="Buscar productos"
+            />
+            {searchQuery && (
+              <button
+                onClick={clearSearch}
+                className="absolute right-4 top-1/2 -translate-y-1/2 p-1 rounded-full hover:bg-muted transition-colors"
+                aria-label="Limpiar búsqueda"
+              >
+                <X className="h-4 w-4 text-muted-foreground" />
+              </button>
+            )}
+          </div>
+          {searchQuery && filteredProducts.length > 0 && (
+            <p className="text-sm text-muted-foreground mt-2 text-center">
+              {filteredProducts.length} {filteredProducts.length === 1 ? 'producto encontrado' : 'productos encontrados'}
+            </p>
+          )}
         </div>
 
         {/* Category Filter */}
@@ -70,12 +115,25 @@ export default function ProductsPage() {
         ) : (
           <EmptyState
             type="products"
-            title="No hay productos en esta categoría"
-            description="No encontramos productos en la categoría seleccionada. Por favor intenta con otra categoría."
+            title={searchQuery ? "No hay resultados de búsqueda" : "No hay productos en esta categoría"}
+            description={searchQuery
+              ? `No encontramos productos que coincidan con "${searchQuery}". Intenta con otros términos o explora todas las categorías.`
+              : "No encontramos productos en la categoría seleccionada. Por favor intenta con otra categoría."
+            }
             action={
-              <Button onClick={() => setSelectedCategory('todos')}>
-                Ver todos los productos
-              </Button>
+              <div className="flex gap-3 justify-center flex-wrap">
+                {searchQuery && (
+                  <Button onClick={clearSearch} variant="outline">
+                    Limpiar búsqueda
+                  </Button>
+                )}
+                <Button onClick={() => {
+                  setSelectedCategory('todos');
+                  setSearchQuery('');
+                }}>
+                  Ver todos los productos
+                </Button>
+              </div>
             }
           />
         )}

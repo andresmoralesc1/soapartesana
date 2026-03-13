@@ -64,7 +64,7 @@ export function Footer() {
               Envíos a toda Estados Unidos
             </p>
             <a
-              href="https://wa.me/13051234567"
+              href="https://wa.me/13524979992"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 mt-4 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors"

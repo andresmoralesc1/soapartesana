@@ -188,7 +188,7 @@ export function FAQSection() {
             ¿No encuentras la respuesta a tu pregunta?
           </p>
           <a
-            href="https://wa.me/13051234567"
+            href="https://wa.me/13524979992"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20BA5A] text-white px-6 py-3 rounded-lg font-semibold transition-colors"

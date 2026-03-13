@@ -149,7 +149,7 @@ export default function ProductPage({ params }: ProductPageProps) {
 
             {/* WhatsApp CTA */}
             <a
-              href={`https://wa.me/13051234567?text=${encodeURIComponent(
+              href={`https://wa.me/13524979992?text=${encodeURIComponent(
                 `Hola Artes_Ana! 🌿 Me interesa el producto: ${product.name}. ¿Podrían darme más información?`
               )}`}
               target="_blank"

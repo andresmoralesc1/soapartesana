@@ -9,7 +9,7 @@ interface WhatsAppButtonProps {
   productName?: string;
 }
 
-const WHATSAPP_NUMBER = '13051234567'; // +1 (305) 123-4567 - Miami, FL
+const WHATSAPP_NUMBER = '13524979992'; // +1 (352) 497-9992
 
 export function WhatsAppButton({ phoneNumber = WHATSAPP_NUMBER, message, productName }: WhatsAppButtonProps) {
   const [mounted, setMounted] = useState(false);

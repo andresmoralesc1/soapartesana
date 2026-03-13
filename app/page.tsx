@@ -587,7 +587,7 @@ export default function HomePage() {
                 </Button>
               </Link>
               <a
-                href="https://wa.me/13051234567?text=Hola!%20Quiero%20más%20información%20sobre%20los%20jabones%20artesanales."
+                href="https://wa.me/13524979992?text=Hola!%20Quiero%20más%20información%20sobre%20los%20jabones%20artesanales."
                 target="_blank"
                 rel="noopener noreferrer"
               >

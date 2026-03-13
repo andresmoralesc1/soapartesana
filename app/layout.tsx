@@ -8,6 +8,7 @@ import { PageTransition } from "@/components/PageTransition";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { ToastProvider } from "@/components/Toast";
 import { CartProvider } from "@/components/CartContext";
+import { FavoritesProvider } from "@/components/FavoritesContext";
 import { OrganizationStructuredData, WebSiteStructuredData } from "@/components/StructuredData";
 
 const geistSans = Geist({
@@ -33,6 +34,10 @@ export const metadata: Metadata = {
   description: "Jabones medicinales 100% artesanales. Línea Pet Care segura para mascotas y productos faciales/terapéuticos humanos. Ingredientes orgánicos, 0% químicos tóxicos.",
   keywords: ["jabones artesanales", "jabones para mascotas", "pet care", "jabones medicinales", "jabon avena manzanilla", "jabon carbon activado", "productos naturales", "dermatitis perros"],
   authors: [{ name: "Artes_Ana" }],
+  metadataBase: new URL('https://artes-ana.com'),
+  alternates: {
+    canonical: '/',
+  },
   viewport: {
     width: "device-width",
     initialScale: 1,
@@ -53,6 +58,7 @@ export const metadata: Metadata = {
     description: "Jabones medicinales para humanos y mascotas. Cuidado botánico con ingredientes orgánicos.",
     type: "website",
     locale: "es_ES",
+    siteName: "Artes_Ana",
   },
 };
 
@@ -76,18 +82,20 @@ export default function RootLayout({
         >
           Saltar al contenido principal
         </a>
-        <CartProvider>
-          <ToastProvider>
-            <Header />
-            <PageTransition>
-              <main id="main-content" tabIndex={-1}>
-                {children}
-              </main>
-            </PageTransition>
-            <WhatsAppButton />
-            <Footer />
-          </ToastProvider>
-        </CartProvider>
+        <FavoritesProvider>
+          <CartProvider>
+            <ToastProvider>
+              <Header />
+              <PageTransition>
+                <main id="main-content" tabIndex={-1}>
+                  {children}
+                </main>
+              </PageTransition>
+              <WhatsAppButton />
+              <Footer />
+            </ToastProvider>
+          </CartProvider>
+        </FavoritesProvider>
       </body>
     </html>
   );
