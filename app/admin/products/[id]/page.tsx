@@ -1,0 +1,442 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import { useRouter, useParams } from 'next/navigation';
+import { motion } from 'framer-motion';
+import { ArrowLeft, Save, Upload } from 'lucide-react';
+import Link from 'next/link';
+
+export default function EditProductPage() {
+  const router = useRouter();
+  const params = useParams();
+  const productId = params.id as string;
+
+  const [loading, setLoading] = useState(false);
+  const [fetching, setFetching] = useState(true);
+  const [uploading, setUploading] = useState(false);
+
+  const [formData, setFormData] = useState({
+    name: '',
+    slug: '',
+    category: 'pet-care',
+    price: '',
+    description: '',
+    fullDescription: '',
+    image: '',
+    images: [] as string[],
+    featured: false,
+    inStock: true,
+    handmade: true,
+    ingredients: [] as string[],
+    benefits: [] as string[],
+    weight: '',
+    badge: '',
+  });
+
+  const categories = [
+    { value: 'pet-care', label: 'Pet Care', icon: '🐾' },
+    { value: 'facial', label: 'Línea Facial', icon: '✨' },
+    { value: 'terapeutico', label: 'Línea Terapéutica', icon: '🌿' },
+    { value: 'energetico', label: 'Línea Energética', icon: '🌙' },
+  ];
+
+  useEffect(() => {
+    fetchProduct();
+  }, [productId]);
+
+  const fetchProduct = async () => {
+    try {
+      const response = await fetch('/api/admin/products');
+      if (response.ok) {
+        const products = await response.json();
+        const product = products.find((p: any) => p.id === parseInt(productId));
+        if (product) {
+          setFormData({
+            name: product.name || '',
+            slug: product.slug || '',
+            category: product.category || 'pet-care',
+            price: product.price || '',
+            description: product.description || '',
+            fullDescription: product.fullDescription || '',
+            image: product.image || '',
+            images: product.images || [],
+            featured: product.featured || false,
+            inStock: product.inStock ?? true,
+            handmade: product.handmade ?? true,
+            ingredients: product.ingredients || [],
+            benefits: product.benefits || [],
+            weight: product.weight || '',
+            badge: product.badge || '',
+          });
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching product:', error);
+    } finally {
+      setFetching(false);
+    }
+  };
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    const { name, value, type } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value,
+    }));
+  };
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploading(true);
+    try {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData((prev) => ({ ...prev, image: reader.result as string }));
+        setUploading(false);
+      };
+      reader.readAsDataURL(file);
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      setUploading(false);
+    }
+  };
+
+  const handleListChange = (field: 'ingredients' | 'benefits', value: string) => {
+    const items = value.split('\n').filter(Boolean);
+    setFormData((prev) => ({ ...prev, [field]: items }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const response = await fetch('/api/admin/products', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: parseInt(productId),
+          ...formData,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        router.push('/admin/dashboard');
+      } else {
+        alert(data.error || 'Error al actualizar producto');
+      }
+    } catch (error) {
+      console.error('Error updating product:', error);
+      alert('Error al actualizar producto');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (fetching) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-terracotta"></div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <header className="bg-white border-b">
+        <div className="container mx-auto px-4 py-4 flex items-center gap-4">
+          <Link
+            href="/admin/dashboard"
+            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+          >
+            <ArrowLeft className="h-5 w-5" />
+          </Link>
+          <div>
+            <h1 className="text-xl font-semibold">Editar Producto</h1>
+            <p className="text-sm text-muted-foreground">
+              Modifica la información del producto
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <main className="container mx-auto px-4 py-8 max-w-4xl">
+        <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Basic Info */}
+          <div className="bg-white p-6 rounded-xl shadow-sm space-y-4">
+            <h2 className="text-lg font-semibold">Información Básica</h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium mb-1">
+                  Nombre del Producto *
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-terracotta/20 focus:border-terracotta outline-none"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium mb-1">
+                  Slug (URL) *
+                </label>
+                <input
+                  type="text"
+                  name="slug"
+                  value={formData.slug}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-terracotta/20 focus:border-terracotta outline-none"
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium mb-1">
+                  Categoría *
+                </label>
+                <select
+                  name="category"
+                  value={formData.category}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-terracotta/20 focus:border-terracotta outline-none"
+                  required
+                >
+                  {categories.map((cat) => (
+                    <option key={cat.value} value={cat.value}>
+                      {cat.icon} {cat.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium mb-1">
+                  Precio *
+                </label>
+                <input
+                  type="number"
+                  name="price"
+                  value={formData.price}
+                  onChange={handleChange}
+                  step="0.01"
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-terracotta/20 focus:border-terracotta outline-none"
+                  required
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-1">
+                Descripción Corta *
+              </label>
+              <input
+                type="text"
+                name="description"
+                value={formData.description}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-terracotta/20 focus:border-terracotta outline-none"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-1">
+                Descripción Completa
+              </label>
+              <textarea
+                name="fullDescription"
+                value={formData.fullDescription}
+                onChange={handleChange}
+                rows={4}
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-terracotta/20 focus:border-terracotta outline-none"
+              />
+            </div>
+          </div>
+
+          {/* Image */}
+          <div className="bg-white p-6 rounded-xl shadow-sm space-y-4">
+            <h2 className="text-lg font-semibold">Imagen del Producto</h2>
+
+            <div className="border-2 border-dashed rounded-lg p-8 text-center">
+              {formData.image ? (
+                <div className="space-y-4">
+                  <img
+                    src={formData.image}
+                    alt="Preview"
+                    className="max-h-64 mx-auto rounded-lg"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setFormData((prev) => ({ ...prev, image: '' }))}
+                    className="text-red-600 hover:underline text-sm"
+                  >
+                    Eliminar imagen
+                  </button>
+                </div>
+              ) : (
+                <div>
+                  <Upload className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+                  <p className="text-muted-foreground mb-2">
+                    Arrastra una imagen o haz clic para seleccionar
+                  </p>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    className="hidden"
+                    id="image-upload"
+                  />
+                  <label
+                    htmlFor="image-upload"
+                    className="inline-block px-4 py-2 bg-terracotta text-white rounded-lg cursor-pointer hover:bg-terracotta/90 transition-colors"
+                  >
+                    {uploading ? 'Subiendo...' : 'Seleccionar Imagen'}
+                  </label>
+                </div>
+              )}
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-1">
+                O URL de imagen (alternativa)
+              </label>
+              <input
+                type="url"
+                value={formData.image}
+                onChange={(e) => setFormData((prev) => ({ ...prev, image: e.target.value }))}
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-terracotta/20 focus:border-terracotta outline-none"
+                placeholder="https://ejemplo.com/imagen.jpg"
+              />
+            </div>
+          </div>
+
+          {/* Details */}
+          <div className="bg-white p-6 rounded-xl shadow-sm space-y-4">
+            <h2 className="text-lg font-semibold">Detalles Adicionales</h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium mb-1">
+                  Peso
+                </label>
+                <input
+                  type="text"
+                  name="weight"
+                  value={formData.weight}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-terracotta/20 focus:border-terracotta outline-none"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium mb-1">
+                  Badge (Etiqueta)
+                </label>
+                <input
+                  type="text"
+                  name="badge"
+                  value={formData.badge}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-terracotta/20 focus:border-terracotta outline-none"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-1">
+                Ingredientes (uno por línea)
+              </label>
+              <textarea
+                value={formData.ingredients.join('\n')}
+                onChange={(e) => handleListChange('ingredients', e.target.value)}
+                rows={4}
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-terracotta/20 focus:border-terracotta outline-none"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-1">
+                Beneficios (uno por línea)
+              </label>
+              <textarea
+                value={formData.benefits.join('\n')}
+                onChange={(e) => handleListChange('benefits', e.target.value)}
+                rows={4}
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-terracotta/20 focus:border-terracotta outline-none"
+              />
+            </div>
+
+            <div className="flex flex-wrap gap-4">
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  name="featured"
+                  checked={formData.featured}
+                  onChange={handleChange}
+                  className="w-4 h-4 text-terracotta rounded focus:ring-terracotta"
+                />
+                <span className="text-sm">Producto destacado</span>
+              </label>
+
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  name="inStock"
+                  checked={formData.inStock}
+                  onChange={handleChange}
+                  className="w-4 h-4 text-terracotta rounded focus:ring-terracotta"
+                />
+                <span className="text-sm">En stock</span>
+              </label>
+
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  name="handmade"
+                  checked={formData.handmade}
+                  onChange={handleChange}
+                  className="w-4 h-4 text-terracotta rounded focus:ring-terracotta"
+                />
+                <span className="text-sm">Hecho a mano</span>
+              </label>
+            </div>
+          </div>
+
+          {/* Submit */}
+          <div className="flex justify-end gap-4">
+            <Link
+              href="/admin/dashboard"
+              className="px-6 py-3 border rounded-lg hover:bg-gray-50 transition-colors"
+            >
+              Cancelar
+            </Link>
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              type="submit"
+              disabled={loading}
+              className="px-6 py-3 bg-terracotta text-white rounded-lg font-semibold flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <Save className="h-4 w-4" />
+              {loading ? 'Guardando...' : 'Guardar Cambios'}
+            </motion.button>
+          </div>
+        </form>
+      </main>
+    </div>
+  );
+}

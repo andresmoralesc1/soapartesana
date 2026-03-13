@@ -1,4 +1,4 @@
-import { Product } from '@/lib/products';
+import { Product, getPriceNumber } from '@/lib/products';
 
 interface StructuredDataProps {
   product: Product;
@@ -19,8 +19,8 @@ export function ProductStructuredData({ product }: StructuredDataProps) {
     offers: {
       '@type': 'Offer',
       url: `https://soapartesana.vercel.app/productos/${product.slug}`,
-      priceCurrency: 'EUR',
-      price: product.price.toFixed(2),
+      priceCurrency: 'USD',
+      price: getPriceNumber(product.price).toFixed(2),
       priceValidUntil: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
       availability: product.inStock
         ? 'https://schema.org/InStock'

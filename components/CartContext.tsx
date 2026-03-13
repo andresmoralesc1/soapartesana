@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Product } from '@/lib/products';
+import { Product, getPriceNumber } from '@/lib/products';
 
 const CART_STORAGE_KEY = 'artes_ana_cart';
 
@@ -12,8 +12,8 @@ export interface CartItem extends Product {
 export interface CartContextValue {
   items: CartItem[];
   addItem: (product: Product) => void;
-  removeItem: (productId: string) => void;
-  updateQuantity: (productId: string, quantity: number) => void;
+  removeItem: (productId: string | number) => void;
+  updateQuantity: (productId: string | number, quantity: number) => void;
   clearCart: () => void;
   getTotalItems: () => number;
   getTotalPrice: () => number;
@@ -94,11 +94,11 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     });
   }, []);
 
-  const removeItem = React.useCallback((productId: string) => {
+  const removeItem = React.useCallback((productId: string | number) => {
     setItems((prev) => prev.filter((item) => item.id !== productId));
   }, []);
 
-  const updateQuantity = React.useCallback((productId: string, quantity: number) => {
+  const updateQuantity = React.useCallback((productId: string | number, quantity: number) => {
     if (quantity <= 0) {
       removeItem(productId);
       return;
@@ -120,7 +120,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }, [items]);
 
   const getTotalPrice = React.useCallback(() => {
-    return items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    return items.reduce((sum, item) => sum + getPriceNumber(item.price) * item.quantity, 0);
   }, [items]);
 
   return (

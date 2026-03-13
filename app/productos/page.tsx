@@ -1,17 +1,11 @@
 'use client';
 
-import { useState, useMemo, Suspense } from 'react';
+import { useState, useMemo } from 'react';
 import { ProductCard } from '@/components/ProductCard';
 import { products, categoryInfo, type ProductCategory } from '@/lib/products';
-import { useSearchParams } from 'next/navigation';
 
-function ProductsContent() {
-  const searchParams = useSearchParams();
-  const categoryParam = searchParams.get('categoria') as ProductCategory | null;
-
-  const [selectedCategory, setSelectedCategory] = useState<ProductCategory | 'todos'>(
-    categoryParam || 'todos'
-  );
+export default function ProductsPage() {
+  const [selectedCategory, setSelectedCategory] = useState<ProductCategory | 'todos'>('todos');
 
   const filteredProducts = useMemo(() => {
     if (selectedCategory === 'todos') {
@@ -43,6 +37,7 @@ function ProductsContent() {
                 ? 'bg-terracotta text-cream'
                 : 'bg-card border border-border hover:border-terracotta'
             }`}
+            aria-label="Ver todos los productos"
           >
             Todos
           </button>
@@ -55,6 +50,7 @@ function ProductsContent() {
                   ? 'bg-terracotta text-cream'
                   : 'bg-card border border-border hover:border-terracotta'
               }`}
+              aria-label={`Filtrar por ${category.name}`}
             >
               {category.icon} {category.name.split(' ')[0]}
             </button>
@@ -92,13 +88,5 @@ function ProductsContent() {
         )}
       </div>
     </div>
-  );
-}
-
-export default function ProductsPage() {
-  return (
-    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Cargando...</div>}>
-      <ProductsContent />
-    </Suspense>
   );
 }

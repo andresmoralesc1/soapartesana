@@ -3,16 +3,54 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import * as React from 'react';
-import { X, Plus, Minus, ShoppingBag, MessageCircle } from 'lucide-react';
+import { X, Plus, Minus, ShoppingBag, MessageCircle, CreditCard, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from './CartContext';
 import { Button } from '@/components/ui/button';
+import { getPriceNumber } from '@/lib/products';
 
 export function Cart() {
   const { items, removeItem, updateQuantity, getTotalItems, getTotalPrice, isOpen, setIsOpen } = useCart();
+  const [isProcessing, setIsProcessing] = React.useState(false);
+  const [customerEmail, setCustomerEmail] = React.useState('');
+  const [customerName, setCustomerName] = React.useState('');
 
   const totalItems = getTotalItems();
   const totalPrice = getTotalPrice();
+
+  const handleStripeCheckout = async () => {
+    if (!customerEmail || !customerName) {
+      alert('Por favor completa tu nombre y email');
+      return;
+    }
+
+    setIsProcessing(true);
+
+    try {
+      const response = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          items,
+          customerEmail,
+          customerName,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        window.location.href = data.url;
+      } else {
+        alert(data.error || 'Error al procesar el pago');
+      }
+    } catch (error) {
+      console.error('Checkout error:', error);
+      alert('Error al procesar el pago');
+    } finally {
+      setIsProcessing(false);
+    }
+  };
 
   // Close cart on escape key
   React.useEffect(() => {
@@ -164,7 +202,7 @@ export function Cart() {
                                   {item.name}
                                 </Link>
                                 <p className="text-sm text-muted-foreground">
-                                  {item.price.toFixed(2)}€{item.weight && ` • ${item.weight}`}
+                                  ${getPriceNumber(item.price).toFixed(2)}{item.weight && ` • ${item.weight}`}
                                 </p>
                               </div>
                               <button
@@ -201,7 +239,7 @@ export function Cart() {
                                 </motion.button>
                               </div>
                               <p className="font-semibold text-terracotta">
-                                {(item.price * item.quantity).toFixed(2)}€
+                                ${(getPriceNumber(item.price) * item.quantity).toFixed(2)}
                               </p>
                             </div>
                           </div>
@@ -218,8 +256,26 @@ export function Cart() {
                   <div className="flex justify-between items-center text-lg">
                     <span className="font-semibold">Total</span>
                     <span className="font-bold text-terracotta text-2xl">
-                      {totalPrice.toFixed(2)}€
+                      ${getPriceNumber(totalPrice).toFixed(2)} USD
                     </span>
+                  </div>
+
+                  {/* Customer Info */}
+                  <div className="space-y-2">
+                    <input
+                      type="text"
+                      placeholder="Tu nombre *"
+                      value={customerName}
+                      onChange={(e) => setCustomerName(e.target.value)}
+                      className="w-full px-3 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-terracotta/20 focus:border-terracotta outline-none"
+                    />
+                    <input
+                      type="email"
+                      placeholder="Tu email *"
+                      value={customerEmail}
+                      onChange={(e) => setCustomerEmail(e.target.value)}
+                      className="w-full px-3 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-terracotta/20 focus:border-terracotta outline-none"
+                    />
                   </div>
 
                   {/* Savings message */}
@@ -229,11 +285,33 @@ export function Cart() {
                     </div>
                   )}
 
+                  {/* Stripe Checkout Button */}
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={handleStripeCheckout}
+                    disabled={isProcessing}
+                    className="w-full bg-terracotta text-white py-3 rounded-lg font-semibold flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isProcessing ? (
+                      <>
+                        <Loader2 className="h-5 w-5 animate-spin" />
+                        Procesando...
+                      </>
+                    ) : (
+                      <>
+                        <CreditCard className="h-5 w-5" />
+                        Pagar con Tarjeta
+                      </>
+                    )}
+                  </motion.button>
+
+                  {/* WhatsApp Option */}
                   <a
                     href={`https://wa.me/13051234567?text=${encodeURIComponent(
                       `Hola Artes_Ana! 🌿 Me gustaría hacer un pedido:\n\n${items.map(item =>
-                        `• ${item.name} (x${item.quantity}) - ${(item.price * item.quantity).toFixed(2)}€`
-                      ).join('\n')}\n\n💰 Total: ${totalPrice.toFixed(2)}€\n\n¿Me podrían confirmar disponibilidad y tiempo de entrega?`
+                        `• ${item.name} (x${item.quantity}) - $${(getPriceNumber(item.price) * item.quantity).toFixed(2)}`
+                      ).join('\n')}\n\n💰 Total: $${getPriceNumber(totalPrice).toFixed(2)}\n\n¿Me podrían confirmar disponibilidad y tiempo de entrega?`
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -242,7 +320,7 @@ export function Cart() {
                   >
                     <Button variant="whatsapp" size="lg" className="w-full gap-2">
                       <MessageCircle className="h-5 w-5" />
-                      Finalizar por WhatsApp
+                      Ordenar por WhatsApp
                     </Button>
                   </a>
 
@@ -251,10 +329,8 @@ export function Cart() {
                       <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
-                      Envíos a toda Estados Unidos
+                      Pagos seguros con Stripe
                     </span>
-                    <span>•</span>
-                    <span>Pago contra entrega</span>
                   </div>
                 </div>
               )}

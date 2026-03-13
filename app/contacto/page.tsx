@@ -67,15 +67,56 @@ export default function ContactoPage() {
     message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {};
+
+    if (!formData.name.trim()) {
+      newErrors.name = 'El nombre es requerido';
+    } else if (formData.name.trim().length < 2) {
+      newErrors.name = 'El nombre debe tener al menos 2 caracteres';
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = 'El email es requerido';
+    } else if (!validateEmail(formData.email)) {
+      newErrors.email = 'Ingresa un email válido';
+    }
+
+    if (!formData.subject) {
+      newErrors.subject = 'Selecciona un asunto';
+    }
+
+    if (!formData.message.trim()) {
+      newErrors.message = 'El mensaje es requerido';
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = 'El mensaje debe tener al menos 10 caracteres';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
     setIsSubmitting(true);
     // Simular envío
     await new Promise(resolve => setTimeout(resolve, 1500));
     setIsSubmitting(false);
     alert('¡Mensaje enviado! Te responderemos pronto.');
     setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+    setErrors({});
   };
 
   return (
@@ -169,7 +210,7 @@ export default function ContactoPage() {
                 <h2 className="font-serif text-2xl md:text-3xl font-bold mb-6">
                   Envíanos un Mensaje
                 </h2>
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6" noValidate>
                   <div className="grid md:grid-cols-2 gap-4">
                     <motion.div
                       initial={{ x: -20, opacity: 0 }}
@@ -182,12 +223,16 @@ export default function ContactoPage() {
                       </label>
                       <input
                         type="text"
-                        required
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:border-forest focus:ring-2 focus:ring-forest/20 transition-all outline-none"
+                        className={`w-full px-4 py-3 rounded-lg border bg-background focus:ring-2 transition-all outline-none ${
+                          errors.name
+                            ? 'border-rose-500 focus:border-rose-500 focus:ring-rose-500/20'
+                            : 'border-border focus:border-forest focus:ring-forest/20'
+                        }`}
                         placeholder="Tu nombre"
                       />
+                      {errors.name && <p className="text-rose-500 text-sm mt-1">{errors.name}</p>}
                     </motion.div>
                     <motion.div
                       initial={{ x: -20, opacity: 0 }}
@@ -200,12 +245,16 @@ export default function ContactoPage() {
                       </label>
                       <input
                         type="email"
-                        required
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:border-forest focus:ring-2 focus:ring-forest/20 transition-all outline-none"
+                        className={`w-full px-4 py-3 rounded-lg border bg-background focus:ring-2 transition-all outline-none ${
+                          errors.email
+                            ? 'border-rose-500 focus:border-rose-500 focus:ring-rose-500/20'
+                            : 'border-border focus:border-forest focus:ring-forest/20'
+                        }`}
                         placeholder="tu@email.com"
                       />
+                      {errors.email && <p className="text-rose-500 text-sm mt-1">{errors.email}</p>}
                     </motion.div>
                   </div>
 
@@ -237,10 +286,13 @@ export default function ContactoPage() {
                       Asunto *
                     </label>
                     <select
-                      required
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                      className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:border-forest focus:ring-2 focus:ring-terracotta/20 transition-all outline-none"
+                      className={`w-full px-4 py-3 rounded-lg border bg-background focus:ring-2 transition-all outline-none ${
+                        errors.subject
+                          ? 'border-rose-500 focus:border-rose-500 focus:ring-rose-500/20'
+                          : 'border-border focus:border-forest focus:ring-terracotta/20'
+                      }`}
                     >
                       <option value="">Selecciona un asunto</option>
                       <option value="pedido">Información sobre pedidos</option>
@@ -248,6 +300,7 @@ export default function ContactoPage() {
                       <option value="wholesale">Ventas al por mayor</option>
                       <option value="otro">Otro</option>
                     </select>
+                    {errors.subject && <p className="text-rose-500 text-sm mt-1">{errors.subject}</p>}
                   </motion.div>
 
                   <motion.div
@@ -260,13 +313,17 @@ export default function ContactoPage() {
                       Mensaje *
                     </label>
                     <textarea
-                      required
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       rows={5}
-                      className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:border-forest focus:ring-2 focus:ring-terracotta/20 transition-all outline-none resize-none"
+                      className={`w-full px-4 py-3 rounded-lg border bg-background focus:ring-2 transition-all outline-none resize-none ${
+                        errors.message
+                          ? 'border-rose-500 focus:border-rose-500 focus:ring-rose-500/20'
+                          : 'border-border focus:border-forest focus:ring-terracotta/20'
+                      }`}
                       placeholder="¿En qué podemos ayudarte?"
                     />
+                    {errors.message && <p className="text-rose-500 text-sm mt-1">{errors.message}</p>}
                   </motion.div>
 
                   <motion.button

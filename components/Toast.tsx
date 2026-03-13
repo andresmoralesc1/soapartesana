@@ -21,26 +21,29 @@ const toastColors = {
 
 const toastIcons = {
   success: (
-    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth="2">
-      <path d="M5 13l4 1l-5 12 5c12" stroke="currentColor" strokeWidth="2" fill="none" />
+    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" strokeWidth="2">
+      <polyline points="20 6 9 17 4 12" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   ),
   error: (
-    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth="2">
-      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" fill="none" />
-      <path d="M12 8v4M8 12M12 16" stroke="currentColor" strokeWidth="2" fill="none" />
+    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" strokeWidth="2">
+      <circle cx="12" cy="12" r="10" stroke="currentColor" fill="none" />
+      <line x1="15" y1="9" x2="9" y2="15" stroke="currentColor" strokeLinecap="round" />
+      <line x1="9" y1="9" x2="15" y2="15" stroke="currentColor" strokeLinecap="round" />
     </svg>
   ),
   info: (
-    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth="2">
-      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" fill="none" />
-      <path d="M12 16v-6h-.01a1-1 1-1h.01" stroke="currentColor" strokeWidth="2" fill="none" />
+    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" strokeWidth="2">
+      <circle cx="12" cy="12" r="10" stroke="currentColor" fill="none" />
+      <line x1="12" y1="16" x2="12" y2="12" stroke="currentColor" strokeLinecap="round" />
+      <line x1="12" y1="8" x2="12.01" y2="8" stroke="currentColor" strokeLinecap="round" />
     </svg>
   ),
   warning: (
-    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth="2">
-      <path d="M10.29 3.29a6.7 6.7l2.93-2.93l4.65-2.65a2.66 5.41l5.41-1.41-5.41" stroke="currentColor" strokeWidth="2" fill="none" />
-      <path d="M14.21 11.79a2.84 2.84l2.68 5.32a3.01 3.01 3.69 3.69" stroke="currentColor" strokeWidth="2" fill="none" />
+    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" strokeWidth="2">
+      <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+      <line x1="12" y1="9" x2="12" y2="13" stroke="currentColor" strokeLinecap="round" />
+      <line x1="12" y1="17" x2="12.01" y2="17" stroke="currentColor" strokeLinecap="round" />
     </svg>
   ),
 };
@@ -84,7 +87,8 @@ export function Toast({ toast, onDismiss }: ToastProps) {
             aria-label="Cerrar notificación"
           >
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth="2">
-              <path d="M18 6l-18.01 1 1-1h.01" stroke="currentColor" strokeWidth="2" fill="none" />
+              <line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" strokeLinecap="round" />
+              <line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" strokeLinecap="round" />
             </svg>
           </button>
         </div>

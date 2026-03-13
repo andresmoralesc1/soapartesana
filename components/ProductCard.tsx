@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Product } from '@/lib/products';
+import { Product, getPriceNumber } from '@/lib/products';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ShoppingBag, Heart } from 'lucide-react';
 import { useState } from 'react';
@@ -136,7 +136,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
               initial={{ scale: 1 }}
               whileHover={{ scale: 1.05 }}
             >
-              {product.price.toFixed(2)}€
+              ${getPriceNumber(product.price).toFixed(2)}
               {product.weight && (
                 <span className="text-sm font-normal text-gray-500"> / {product.weight}</span>
               )}

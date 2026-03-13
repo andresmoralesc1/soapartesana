@@ -1,11 +1,11 @@
 export type ProductCategory = 'jabones' | 'pet-care' | 'facial' | 'terapeutico' | 'energetico';
 
 export interface Product {
-  id: string;
+  id: string | number;  // Compatible con DB (number) y archivo local (string)
   name: string;
   slug: string;
   category: ProductCategory;
-  price: number;
+  price: number | string;  // Compatible con DB (string) y archivo local (number)
   description: string;
   fullDescription?: string;
   image: string;
@@ -18,6 +18,13 @@ export interface Product {
   dimensions?: string;
   weight?: string;
   badge?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+// Helper to get price as number
+export function getPriceNumber(price: number | string): number {
+  return typeof price === 'string' ? parseFloat(price) : price;
 }
 
 export const products: Product[] = [

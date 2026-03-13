@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { getProductBySlug, products, categoryInfo } from '@/lib/products';
+import { getProductBySlug, products, categoryInfo, getPriceNumber } from '@/lib/products';
 import { ArrowLeft, Heart, Truck, RefreshCw } from 'lucide-react';
 import { ProductStructuredData, BreadcrumbStructuredData } from '@/components/StructuredData';
 
@@ -94,7 +94,7 @@ export default function ProductPage({ params }: ProductPageProps) {
                 {product.name}
               </h1>
               <p className="text-3xl font-bold text-forest">
-                {product.price.toFixed(2)}€
+                ${getPriceNumber(product.price).toFixed(2)}
               </p>
             </div>
 
@@ -212,7 +212,7 @@ export default function ProductPage({ params }: ProductPageProps) {
                         {p.name}
                       </h3>
                       <p className="text-forest font-bold mt-1">
-                        {p.price.toFixed(2)}€
+                        ${getPriceNumber(p.price).toFixed(2)}
                       </p>
                     </CardContent>
                   </Card>
