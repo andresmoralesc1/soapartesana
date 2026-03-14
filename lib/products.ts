@@ -42,7 +42,7 @@ export const products: Product[] = [
     featured: true,
     inStock: true,
     handmade: true,
-    badge: 'BESTSELLER',
+    badge: undefined,
     ingredients: ['Avena coloidal orgánica', 'Manzanilla silvestre', 'Aceite de oliva virgen', 'Aloe Vera'],
     benefits: ['Seguro si se lame', 'Alivia la dermatitis', 'pH balanceado 7.0', 'Eco-consciente'],
     usage: 'Mojar el pelaje del animal, aplicar el jabón con masajes suaves, enjuagar abundante.',

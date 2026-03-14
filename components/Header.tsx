@@ -26,6 +26,7 @@ export function Header() {
 
   const navLinks = [
     { href: '/', label: 'Inicio' },
+    { href: '/about', label: 'Nosotros' },
     { href: '/productos?categoria=pet-care', label: 'Pet Care' },
     { href: '/productos?categoria=facial', label: 'Línea Facial' },
     { href: '/productos', label: 'Todos los Productos' },
