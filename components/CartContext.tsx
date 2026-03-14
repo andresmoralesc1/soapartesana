@@ -2,7 +2,6 @@
 
 import * as React from 'react';
 import { Product, getPriceNumber } from '@/lib/products';
-import { useToasts } from '@/components/Toast';
 
 const CART_STORAGE_KEY = 'artes_ana_cart';
 
@@ -67,7 +66,6 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = React.useState<CartItem[]>(() => storage.get());
   const [isOpen, setIsOpen] = React.useState(false);
   const [isInitialized, setIsInitialized] = React.useState(false);
-  const toasts = useToasts();
 
   // Initialize on mount (client-side only)
   React.useEffect(() => {
@@ -86,17 +84,15 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     setItems((prev) => {
       const existing = prev.find((item) => item.id === product.id);
       if (existing) {
-        toasts.success(`${product.name} ahora tiene ${existing.quantity + 1} unidades`);
         return prev.map((item) =>
           item.id === product.id
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
       }
-      toasts.success(`${product.name} se agregó al carrito`);
       return [...prev, { ...product, quantity: 1 }];
     });
-  }, [toasts]);
+  }, []);
 
   const removeItem = React.useCallback((productId: string | number) => {
     setItems((prev) => prev.filter((item) => item.id !== productId));

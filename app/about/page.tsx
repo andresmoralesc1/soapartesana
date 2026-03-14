@@ -173,8 +173,7 @@ export default function AboutPage() {
                   Te invito a transformar tu rutina en un <strong>ritual de bienestar natural</strong>.
                 </p>
               </div>
-                </motion.div>
-              </div>
+            </motion.div>
             </div>
           </div>
         </div>
