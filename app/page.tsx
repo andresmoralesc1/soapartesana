@@ -68,9 +68,6 @@ export default function HomePage() {
                     <h3 className="font-serif text-2xl font-bold text-rose-900">Línea Facial</h3>
                     <p className="text-rose-700">Cuidado especial para tu rostro</p>
                   </div>
-                  <span className="bg-rose-200 text-rose-900 text-xs font-bold px-3 py-1 rounded-full">
-                    POPULAR
-                  </span>
                 </div>
                 <p className="text-rose-800 mb-4">Formuladas específicamente para las necesidades únicas de la piel del rostro.</p>
                 <div className="grid sm:grid-cols-3 gap-4 mt-6">
