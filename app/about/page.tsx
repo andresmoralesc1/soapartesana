@@ -113,17 +113,47 @@ export default function AboutPage() {
       {/* About Ana Section - Her Story */}
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="prose prose-lg max-w-none"
-            >
-              <div className="bg-gradient-to-br from-green-50 to-amber-50 rounded-3xl p-8 md:p-12 shadow-lg border border-green-100">
-                <p className="text-2xl md:text-3xl font-serif text-forest mb-6 leading-relaxed">
-                  ¡Hola! Soy Ana, y siempre he creído que <strong>las mejores cosas de la vida se hacen con las manos</strong>.
-                </p>
+          <div className="max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              {/* Photo of Ana Isabel */}
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="relative"
+              >
+                <div className="relative rounded-3xl overflow-hidden shadow-2xl border-8 border-white">
+                  <Image
+                    src="/products/natural-soap-stack.jpg"
+                    alt="Artesanía Natural - Jabones hechos a mano por Ana Isabel"
+                    width={600}
+                    height={800}
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                  <div className="absolute bottom-6 left-6 right-6">
+                    <p className="text-white font-serif text-xl font-bold drop-shadow-lg">
+                      Ana Isabel Morales
+                    </p>
+                    <p className="text-white/90 text-sm">Fundadora & Artesana</p>
+                  </div>
+                </div>
+                {/* Decorative elements */}
+                <div className="absolute -top-4 -right-4 w-24 h-24 bg-terracotta/20 rounded-full blur-2xl" />
+                <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-sage/20 rounded-full blur-2xl" />
+              </motion.div>
+
+              {/* Ana's Story */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="prose prose-lg max-w-none"
+              >
+                <div className="bg-gradient-to-br from-green-50 to-amber-50 rounded-3xl p-8 md:p-12 shadow-lg border border-green-100">
+                  <p className="text-2xl md:text-3xl font-serif text-forest mb-6 leading-relaxed">
+                    ¡Hola! Soy Ana, y siempre he creído que <strong>las mejores cosas de la vida se hacen con las manos</strong>.
+                  </p>
 
                 <p className="text-slate-700 mb-4 leading-relaxed">
                   Mi camino empezó entre aromas de cocina y el detalle de la pintura en madera, creando desde mermeladas caseras hasta piezas artesanales llenas de color. Esa pasión por lo auténtico me llevó, de forma natural, a descubrir el fascinante mundo de la cosmética botánica.
@@ -143,7 +173,9 @@ export default function AboutPage() {
                   Te invito a transformar tu rutina en un <strong>ritual de bienestar natural</strong>.
                 </p>
               </div>
-            </motion.div>
+                </motion.div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

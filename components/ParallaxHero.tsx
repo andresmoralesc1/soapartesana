@@ -163,17 +163,19 @@ export function ParallaxHero() {
             >
               <div className="aspect-square rounded-2xl bg-gradient-to-br from-green-100 via-amber-50 to-rose-100 flex items-center justify-center overflow-hidden relative">
                 {/* Layered product images */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <motion.div
-                    style={{ y: useTransform(scrollYProgress, [0, 1], [0, 30]) }}
-                    className="text-center p-8"
-                  >
-                    <div className="text-7xl mb-4">🧼</div>
-                    <div className="text-5xl mb-4">🌿</div>
-                    <div className="text-4xl">✨</div>
-                    <p className="mt-6 font-serif text-2xl text-forest">Artesanía Natural</p>
-                  </motion.div>
-                </div>
+                <Image
+                  src="/hero/artesania-natural.jpg"
+                  alt="Artesanía Natural - Jabones artesanales de Aloe Vera, Avena & Miel, Lavanda y Caléndula"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+                <motion.div
+                  style={{ y: useTransform(scrollYProgress, [0, 1], [0, 30]) }}
+                  className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent flex items-end justify-center pb-8"
+                >
+                  <p className="font-serif text-3xl md:text-4xl text-white font-bold drop-shadow-lg">Artesanía Natural</p>
+                </motion.div>
               </div>
 
               {/* Floating product cards with different parallax speeds */}

@@ -187,7 +187,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
 
             {/* Like button con micro interacción */}
             <motion.button
-              className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm p-3 rounded-full shadow-lg hover:bg-white transition-colors z-20 min-h-[44px] min-w-[44px]"
+              className="absolute top-3 right-3 bg-white/95 backdrop-blur-sm border border-black/10 p-3 rounded-full shadow-lg hover:bg-white hover:border-black/20 transition-all z-20 min-h-[44px] min-w-[44px]"
               initial={{ scale: 0, rotate: -180 }}
               animate={{ scale: 1, rotate: 0 }}
               transition={{ delay: 0.3 + index * 0.05, type: 'spring', stiffness: 200 }}
@@ -236,7 +236,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
 
             {/* Quick view button - appears on hover */}
             <motion.button
-              className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm p-3 rounded-full shadow-lg hover:bg-white transition-colors z-20 min-h-[44px] min-w-[44px]"
+              className="absolute bottom-3 left-3 bg-white/95 backdrop-blur-sm border border-black/10 p-3 rounded-full shadow-lg hover:bg-white hover:border-black/20 transition-all z-20 min-h-[44px] min-w-[44px]"
               initial={{ scale: 0, x: -20 }}
               whileHover={isTouch ? {} : { scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
