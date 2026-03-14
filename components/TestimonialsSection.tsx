@@ -2,6 +2,7 @@
 
 import { Star, Quote } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { StaggeredGrid } from '@/components/StaggeredGrid';
 
 export interface Testimonial {
   name: string;
@@ -82,14 +83,14 @@ export function TestimonialsSection() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <StaggeredGrid
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          staggerDelay={0.1}
+          animationType="fadeInUp"
+        >
           {testimonials.map((testimonial, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
               whileHover={{ y: -8 }}
               className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all border border-gray-100 group"
             >
@@ -135,7 +136,7 @@ export function TestimonialsSection() {
               </div>
             </motion.div>
           ))}
-        </div>
+        </StaggeredGrid>
 
         {/* Trust indicators */}
         <motion.div

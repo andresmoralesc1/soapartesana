@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
@@ -9,6 +9,10 @@ import { ScrollProgress } from "@/components/ScrollProgress";
 import { ToastProvider } from "@/components/Toast";
 import { CartProvider } from "@/components/CartContext";
 import { FavoritesProvider } from "@/components/FavoritesContext";
+import { ComparisonProvider } from "@/components/ComparisonContext";
+import { ComparisonSidebar } from "@/components/ComparisonSidebar";
+import { BottomNav } from "@/components/BottomNav";
+import { PWAInstallPrompt } from "@/components/PWAInstallPrompt";
 import { OrganizationStructuredData, WebSiteStructuredData } from "@/components/StructuredData";
 
 const geistSans = Geist({
@@ -38,21 +42,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/',
   },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    minimumScale: 1,
-    maximumScale: 5,
-  },
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "oklch(0.62 0.16 45)" },
-    { media: "(prefers-color-scheme: dark)", color: "oklch(0.145 0 0)" },
-  ],
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "default",
-    title: "Artes_Ana",
-  },
   openGraph: {
     title: "Artes_Ana | Jabones Medicinales Artesanales",
     description: "Jabones medicinales para humanos y mascotas. Cuidado botánico con ingredientes orgánicos.",
@@ -60,6 +49,33 @@ export const metadata: Metadata = {
     locale: "es_ES",
     siteName: "Artes_Ana",
   },
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Artes_Ana",
+  },
+  formatDetection: {
+    telephone: false,
+  },
+  other: {
+    'mobile-web-app-capable': 'yes',
+    'apple-mobile-web-app-capable': 'yes',
+    'apple-mobile-web-app-status-bar-style': 'default',
+    'apple-mobile-web-app-title': 'Artes_Ana',
+    'application-name': 'Artes_Ana',
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#FEFDF8" },
+    { media: "(prefers-color-scheme: dark)", color: "#1a1a1a" },
+  ],
 };
 
 export default function RootLayout({
@@ -69,6 +85,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" suppressHydrationWarning>
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="Artes_Ana" />
+        <meta name="theme-color" content="#C8765F" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} antialiased font-sans`}
       >
@@ -84,16 +108,21 @@ export default function RootLayout({
         </a>
         <FavoritesProvider>
           <CartProvider>
-            <ToastProvider>
-              <Header />
-              <PageTransition>
-                <main id="main-content" tabIndex={-1}>
-                  {children}
-                </main>
-              </PageTransition>
-              <WhatsAppButton />
-              <Footer />
-            </ToastProvider>
+            <ComparisonProvider>
+              <ToastProvider>
+                <Header />
+                <PageTransition>
+                  <main id="main-content" tabIndex={-1}>
+                    {children}
+                  </main>
+                </PageTransition>
+                <WhatsAppButton />
+                <Footer />
+                <ComparisonSidebar />
+                <BottomNav />
+                <PWAInstallPrompt />
+              </ToastProvider>
+            </ComparisonProvider>
           </CartProvider>
         </FavoritesProvider>
       </body>

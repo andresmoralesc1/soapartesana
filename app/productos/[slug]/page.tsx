@@ -3,6 +3,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { ProductGallery } from '@/components/ProductGallery';
+import { ProductDetailsAccordion } from '@/components/ProductDetailsAccordion';
+import { ProductBreadcrumb } from '@/components/Breadcrumb';
 import { getProductBySlug, products, categoryInfo, getPriceNumber } from '@/lib/products';
 import { ArrowLeft, Heart, Truck, RefreshCw } from 'lucide-react';
 import { ProductStructuredData, BreadcrumbStructuredData } from '@/components/StructuredData';
@@ -46,40 +49,21 @@ export default function ProductPage({ params }: ProductPageProps) {
       <div className="py-12 md:py-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb */}
-        <Link href="/productos" className="inline-flex items-center text-muted-foreground hover:text-foreground mb-8 transition-colors">
-          <ArrowLeft className="h-4 w-4 mr-2" />
-          Volver al catálogo
-        </Link>
+        <ProductBreadcrumb
+          category={product.category}
+          categoryName={categoryInfo[product.category].name}
+          productName={product.name}
+          productSlug={product.slug}
+          className="mb-8"
+        />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-          {/* Product Image */}
-          <div className="space-y-4">
-            <div className="relative aspect-square bg-cream rounded-2xl overflow-hidden">
-              <Image
-                src={product.image}
-                alt={`Fotografía del producto ${product.name}, jabón artesanal ${product.handmade ? 'hecho a mano' : ''} con ingredientes ${product.ingredients?.slice(0, 2).join(' y ') || 'naturales'}`}
-                fill
-                className="object-cover"
-                priority
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-            </div>
-            {product.images && product.images.length > 1 && (
-              <div className="grid grid-cols-4 gap-4">
-                {product.images.map((img, idx) => (
-                  <div key={idx} className="relative aspect-square bg-cream rounded-lg overflow-hidden">
-                    <Image
-                      src={img}
-                      alt={`${product.name} - Vista adicional ${idx + 1}, mostrando detalles del jabón artesanal`}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 1024px) 25vw, 12vw"
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+          {/* Product Image with Gallery */}
+          <ProductGallery
+            images={product.images ? [product.image, ...product.images] : [product.image]}
+            alt={`Fotografía del producto ${product.name}, jabón artesanal ${product.handmade ? 'hecho a mano' : ''} con ingredientes ${product.ingredients?.slice(0, 2).join(' y ') || 'naturales'}`}
+            productName={product.name}
+          />
 
           {/* Product Info */}
           <div className="space-y-6">
@@ -119,33 +103,20 @@ export default function ProductPage({ params }: ProductPageProps) {
               )}
             </div>
 
-            {/* Product Details */}
+            {/* Product Details Accordion */}
             <Card>
-              <CardContent className="p-6 space-y-4">
-                {product.ingredients && (
-                  <div>
-                    <h3 className="font-semibold mb-2">Ingredientes</h3>
-                    <p className="text-sm text-muted-foreground">
-                      {product.ingredients.join(', ')}
-                    </p>
-                  </div>
-                )}
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                  {product.dimensions && (
-                    <div>
-                      <span className="text-muted-foreground">Dimensiones:</span>
-                      <p className="font-medium">{product.dimensions}</p>
-                    </div>
-                  )}
-                  {product.weight && (
-                    <div>
-                      <span className="text-muted-foreground">Peso:</span>
-                      <p className="font-medium">{product.weight}</p>
-                    </div>
-                  )}
-                </div>
+              <CardContent className="p-0">
+                <ProductDetailsAccordion product={product} />
               </CardContent>
             </Card>
+
+            {/* Weight Badge */}
+            {product.weight && (
+              <div className="bg-cream border border-forest/20 rounded-lg p-4 flex items-center justify-between">
+                <span className="text-sm text-muted-foreground">Peso neto</span>
+                <span className="font-semibold text-forest">{product.weight}</span>
+              </div>
+            )}
 
             {/* WhatsApp CTA */}
             <a

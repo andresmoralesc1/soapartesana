@@ -6,10 +6,12 @@ import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Product, getPriceNumber } from '@/lib/products';
 import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion';
-import { ShoppingBag, Heart, Sparkles } from 'lucide-react';
+import { ShoppingBag, Heart, Sparkles, Eye } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useCart } from '@/components/CartContext';
 import { useFavorites } from '@/components/FavoritesContext';
+import { QuickViewModal } from '@/components/QuickViewModal';
+import { CompareCheckbox } from '@/components/ComparisonSidebar';
 
 export { ProductCardSkeleton } from './ProductCardSkeleton';
 
@@ -35,6 +37,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
   const [showCartSuccess, setShowCartSuccess] = useState(false);
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [isTouch, setIsTouch] = useState(false);
+  const [showQuickView, setShowQuickView] = useState(false);
   const { addItem } = useCart();
   const { isFavorite, toggleFavorite } = useFavorites();
 
@@ -230,6 +233,22 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
                 </span>
               </motion.div>
             )}
+
+            {/* Quick view button - appears on hover */}
+            <motion.button
+              className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm p-3 rounded-full shadow-lg hover:bg-white transition-colors z-20 min-h-[44px] min-w-[44px]"
+              initial={{ scale: 0, x: -20 }}
+              whileHover={isTouch ? {} : { scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setShowQuickView(true);
+              }}
+              aria-label="Vista rápida"
+            >
+              <Eye className="h-4 w-4 text-gray-700" />
+            </motion.button>
           </motion.div>
         </Link>
 
@@ -318,6 +337,11 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
           </motion.div>
         </CardFooter>
 
+        {/* Compare checkbox */}
+        <div className="absolute bottom-16 left-5">
+          <CompareCheckbox product={product} />
+        </div>
+
         {/* Bottom accent bar on hover */}
         <motion.div
           className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-terracotta to-amber-500"
@@ -327,6 +351,13 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
           style={{ originX: 0 }}
         />
       </Card>
+
+      {/* Quick View Modal */}
+      <QuickViewModal
+        product={product}
+        open={showQuickView}
+        onOpenChange={setShowQuickView}
+      />
     </motion.div>
   );
 }

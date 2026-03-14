@@ -7,6 +7,8 @@ const FAVORITES_KEY = 'artes_ana_favorites';
 export interface FavoritesContextValue {
   favorites: Set<string | number>;
   toggleFavorite: (productId: string | number) => void;
+  removeFavorite: (productId: string | number) => void;
+  clearFavorites: () => void;
   isFavorite: (productId: string | number) => boolean;
   getFavoriteCount: () => number;
 }
@@ -80,11 +82,25 @@ export function FavoritesProvider({ children }: { children: React.ReactNode }) {
     return favorites.size;
   }, [favorites]);
 
+  const removeFavorite = React.useCallback((productId: string | number) => {
+    setFavorites((prev) => {
+      const newFavorites = new Set(prev);
+      newFavorites.delete(productId);
+      return newFavorites;
+    });
+  }, []);
+
+  const clearFavorites = React.useCallback(() => {
+    setFavorites(new Set());
+  }, []);
+
   return (
     <FavoritesContext.Provider
       value={{
         favorites,
         toggleFavorite,
+        removeFavorite,
+        clearFavorites,
         isFavorite,
         getFavoriteCount,
       }}

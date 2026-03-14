@@ -7,6 +7,7 @@ import { X, Plus, Minus, ShoppingBag, MessageCircle, CreditCard, Loader2 } from 
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from './CartContext';
 import { Button } from '@/components/ui/button';
+import { CheckoutProgress, getDefaultCheckoutSteps } from '@/components/CheckoutProgress';
 import { getPriceNumber } from '@/lib/products';
 
 export function Cart() {
@@ -167,26 +168,39 @@ export function Cart() {
               aria-modal="true"
               aria-labelledby="cart-title"
             >
-              {/* Header */}
-              <div className="flex items-center justify-between p-6 border-b border-terracotta/20">
-                <div>
-                  <h2 id="cart-title" className="font-serif text-2xl font-bold text-foreground">
-                    Tu Carrito
-                  </h2>
-                  <p className="text-sm text-muted-foreground">
-                    {totalItems} {totalItems === 1 ? 'producto' : 'productos'}
-                  </p>
+              {/* Header with Progress */}
+              <div className="p-6 border-b border-terracotta/20">
+                <div className="flex items-center justify-between mb-4">
+                  <div>
+                    <h2 id="cart-title" className="font-serif text-2xl font-bold text-foreground">
+                      Tu Carrito
+                    </h2>
+                    <p className="text-sm text-muted-foreground">
+                      {totalItems} {totalItems === 1 ? 'producto' : 'productos'}
+                    </p>
+                  </div>
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={() => setIsOpen(false)}
+                    className="p-2 hover:bg-terracotta/10 rounded-lg transition-colors"
+                    aria-label="Cerrar carrito"
+                  >
+                    <span className="text-sm mr-1">Cerrar</span>
+                    <X className="h-5 w-5 inline" />
+                  </motion.button>
                 </div>
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  onClick={() => setIsOpen(false)}
-                  className="p-2 hover:bg-terracotta/10 rounded-lg transition-colors"
-                  aria-label="Cerrar carrito"
-                >
-                  <span className="text-sm mr-1">Cerrar</span>
-                  <X className="h-5 w-5 inline" />
-                </motion.button>
+
+                {/* Checkout Progress Indicator */}
+                {items.length > 0 && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                  >
+                    <CheckoutProgress steps={getDefaultCheckoutSteps()} />
+                  </motion.div>
+                )}
               </div>
 
               {/* Items */}
