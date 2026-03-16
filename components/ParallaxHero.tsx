@@ -22,12 +22,6 @@ export function ParallaxHero() {
 
   const products = [
     {
-      name: 'Facial',
-      emoji: '✨',
-      color: 'from-rose-500 to-pink-500',
-      y: useTransform(scrollYProgress, [0, 1], [0, -50]),
-    },
-    {
       name: 'Terapéutico',
       emoji: '🌿',
       color: 'from-green-500 to-emerald-500',

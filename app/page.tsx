@@ -54,44 +54,6 @@ export default function HomePage() {
 
           {/* Bento Grid for Human Products */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            {/* Facial - Larger card */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              className="md:col-span-3"
-            >
-              <div className="bg-gradient-to-br from-rose-50 to-pink-50 rounded-3xl p-8 h-full border border-rose-100">
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <h3 className="font-serif text-2xl font-bold text-rose-900">Línea Facial</h3>
-                    <p className="text-rose-700">Cuidado especial para tu rostro</p>
-                  </div>
-                </div>
-                <p className="text-rose-800 mb-4">Formuladas específicamente para las necesidades únicas de la piel del rostro.</p>
-                <div className="grid sm:grid-cols-3 gap-4 mt-6">
-                  <div className="bg-white/60 rounded-xl p-4">
-                    <p className="font-semibold text-rose-900 mb-1">Arroz y Leche</p>
-                    <p className="text-sm text-rose-700">Aclarante natural</p>
-                  </div>
-                  <div className="bg-white/60 rounded-xl p-4">
-                    <p className="font-semibold text-rose-900 mb-1">Carbón Activado</p>
-                    <p className="text-sm text-rose-700">Para acné y poros</p>
-                  </div>
-                  <div className="bg-white/60 rounded-xl p-4">
-                    <p className="font-semibold text-rose-900 mb-1">Pepino y Coco</p>
-                    <p className="text-sm text-rose-700">Refrescante diario</p>
-                  </div>
-                </div>
-                <Link href="/productos?categoria=facial">
-                  <Button variant="outline" className="mt-6 border-rose-300 text-rose-900 hover:bg-rose-100">
-                    Ver Facial
-                    <ChevronRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </Link>
-              </div>
-            </motion.div>
-
             {/* Terapéutico */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
