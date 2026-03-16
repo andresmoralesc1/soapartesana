@@ -42,12 +42,13 @@ export function Header() {
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-14 items-center justify-between">
+        <div className="flex h-14 items-center justify-center gap-8">
           {/* Logo con micro interacciones */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
+            className="flex-shrink-0"
           >
             <Link
               href="/"
@@ -92,8 +93,8 @@ export function Header() {
             </Link>
           </motion.div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-1">
+          {/* Desktop Navigation - Centrado */}
+          <nav className="hidden md:flex items-center space-x-1 flex-1 justify-center">
             {navLinks.map((link, index) => (
               <motion.div
                 key={link.href}
@@ -127,7 +128,7 @@ export function Header() {
           </nav>
 
           {/* Cart & Mobile Menu */}
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2 flex-shrink-0">
             <motion.div
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}

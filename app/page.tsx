@@ -53,13 +53,13 @@ export default function HomePage() {
           </motion.div>
 
           {/* Bento Grid for Human Products */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             {/* Facial - Larger card */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="md:col-span-2"
+              className="md:col-span-3"
             >
               <div className="bg-gradient-to-br from-rose-50 to-pink-50 rounded-3xl p-8 h-full border border-rose-100">
                 <div className="flex items-start justify-between mb-4">
@@ -167,7 +167,7 @@ export default function HomePage() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.25 }}
-              className="md:col-span-2"
+              className="md:col-span-3"
             >
               <div className="bg-gradient-to-br from-terracotta/10 to-amber-50 rounded-3xl p-8 h-full border border-terracotta/20">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
