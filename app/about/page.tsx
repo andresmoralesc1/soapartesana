@@ -71,7 +71,7 @@ export default function AboutPage() {
       className="min-h-screen"
     >
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-cream via-green-50/50 to-terracotta/10 py-20 md:py-32 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-cream via-green-50/50 to-terracotta/10 py-8 md:py-10 overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <motion.div
             className="absolute top-20 left-10 w-72 h-72 bg-sage/20 rounded-full blur-3xl"
@@ -111,7 +111,7 @@ export default function AboutPage() {
       </section>
 
       {/* About Ana Section - Her Story */}
-      <section className="py-16 md:py-24">
+      <section className="py-8 md:py-10">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
             <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -124,8 +124,8 @@ export default function AboutPage() {
               >
                 <div className="relative rounded-3xl overflow-hidden shadow-2xl border-8 border-white">
                   <Image
-                    src="/products/natural-soap-stack.jpg"
-                    alt="Artesanía Natural - Jabones hechos a mano por Ana Isabel"
+                    src="/ana-isabel.jpg"
+                    alt="Ana Isabel Morales - Fundadora de Artes_Ana"
                     width={600}
                     height={800}
                     className="object-cover"
@@ -180,7 +180,7 @@ export default function AboutPage() {
       </section>
 
       {/* Quotes Section */}
-      <section className="py-16 md:py-20 bg-muted/30">
+      <section className="py-8 md:py-10 bg-muted/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
@@ -225,7 +225,7 @@ export default function AboutPage() {
       </section>
 
       {/* Values Section */}
-      <section className="py-16 md:py-24">
+      <section className="py-8 md:py-10">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
@@ -269,7 +269,7 @@ export default function AboutPage() {
       </section>
 
       {/* Journey Section */}
-      <section className="py-16 md:py-24 bg-gradient-to-b from-muted/30 to-white">
+      <section className="py-8 md:py-10 bg-gradient-to-b from-muted/30 to-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
@@ -328,7 +328,7 @@ export default function AboutPage() {
       </section>
 
       {/* Social Section */}
-      <section className="py-16 md:py-20 bg-forest text-cream">
+      <section className="py-8 md:py-10 bg-forest text-cream">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
@@ -358,7 +358,7 @@ export default function AboutPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-terracotta/10 to-green-50">
+      <section className="py-8 md:py-10 bg-gradient-to-br from-terracotta/10 to-green-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}

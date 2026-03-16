@@ -9,8 +9,6 @@ import { ScrollProgress } from "@/components/ScrollProgress";
 import { ToastProvider } from "@/components/Toast";
 import { CartProvider } from "@/components/CartContext";
 import { FavoritesProvider } from "@/components/FavoritesContext";
-import { ComparisonProvider } from "@/components/ComparisonContext";
-import { ComparisonSidebar } from "@/components/ComparisonSidebar";
 import { BottomNav } from "@/components/BottomNav";
 import { PWAInstallPrompt } from "@/components/PWAInstallPrompt";
 import { OrganizationStructuredData, WebSiteStructuredData } from "@/components/StructuredData";
@@ -108,21 +106,18 @@ export default function RootLayout({
         </a>
         <FavoritesProvider>
           <CartProvider>
-            <ComparisonProvider>
-              <ToastProvider>
-                <Header />
-                <PageTransition>
-                  <main id="main-content" tabIndex={-1}>
-                    {children}
-                  </main>
-                </PageTransition>
-                <WhatsAppButton />
-                <Footer />
-                <ComparisonSidebar />
-                <BottomNav />
-                <PWAInstallPrompt />
-              </ToastProvider>
-            </ComparisonProvider>
+            <ToastProvider>
+              <Header />
+              <PageTransition>
+                <main id="main-content" tabIndex={-1}>
+                  {children}
+                </main>
+              </PageTransition>
+              <WhatsAppButton />
+              <Footer />
+              <BottomNav />
+              <PWAInstallPrompt />
+            </ToastProvider>
           </CartProvider>
         </FavoritesProvider>
       </body>

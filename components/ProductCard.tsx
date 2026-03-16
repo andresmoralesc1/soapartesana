@@ -11,7 +11,6 @@ import { useState, useEffect } from 'react';
 import { useCart } from '@/components/CartContext';
 import { useFavorites } from '@/components/FavoritesContext';
 import { QuickViewModal } from '@/components/QuickViewModal';
-import { CompareCheckbox } from '@/components/ComparisonSidebar';
 
 export { ProductCardSkeleton } from './ProductCardSkeleton';
 
@@ -336,11 +335,6 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
             </Button>
           </motion.div>
         </CardFooter>
-
-        {/* Compare checkbox */}
-        <div className="absolute bottom-16 left-5">
-          <CompareCheckbox product={product} />
-        </div>
 
         {/* Bottom accent bar on hover */}
         <motion.div
