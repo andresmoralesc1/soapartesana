@@ -164,7 +164,7 @@ export default function HomePage() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12"
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 items-stretch"
             variants={{
               hidden: {},
               visible: {
@@ -182,6 +182,7 @@ export default function HomePage() {
                   visible: { opacity: 1, y: 0 },
                 }}
                 transition={{ duration: 0.4 }}
+                className="h-full"
               >
                 <ProductCard product={product} index={index} />
               </motion.div>
@@ -194,6 +195,7 @@ export default function HomePage() {
                   visible: { opacity: 1, y: 0 },
                 }}
                 transition={{ duration: 0.4 }}
+                className="h-full"
               >
                 <ProductCard product={product} index={index + 1} />
               </motion.div>
@@ -206,6 +208,7 @@ export default function HomePage() {
                   visible: { opacity: 1, y: 0 },
                 }}
                 transition={{ duration: 0.4 }}
+                className="h-full"
               >
                 <ProductCard product={product} index={index + 2} />
               </motion.div>
