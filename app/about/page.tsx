@@ -120,7 +120,7 @@ export default function AboutPage() {
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="relative"
+                className="relative -mt-12"
               >
                 <div className="relative rounded-3xl overflow-hidden shadow-2xl border-8 border-white">
                   <Image
