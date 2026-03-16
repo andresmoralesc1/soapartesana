@@ -99,8 +99,9 @@ export default function HomePage() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
+              className="flex"
             >
-              <div className="bg-gradient-to-br from-lime-50 to-green-50 rounded-3xl p-6 h-full border border-lime-100">
+              <div className="bg-gradient-to-br from-lime-50 to-green-50 rounded-3xl p-6 h-full border border-lime-100 w-full flex flex-col">
                 <span className="text-3xl mb-2 block">🌿</span>
                 <h3 className="font-serif text-xl font-bold text-lime-900 mb-2">Terapéutico</h3>
                 <p className="text-lime-700 text-sm mb-4">Para pieles sensibles y problemáticas</p>
@@ -110,7 +111,7 @@ export default function HomePage() {
                   <p className="bg-white/60 rounded-lg p-2">• Romero y Salvia</p>
                   <p className="bg-white/60 rounded-lg p-2">• Lavanda Francesa</p>
                 </div>
-                <Link href="/productos?categoria=terapeutico" className="text-xs text-lime-700 hover:text-lime-900 mt-4 inline-block font-semibold">
+                <Link href="/productos?categoria=terapeutico" className="text-xs text-lime-700 hover:text-lime-900 mt-auto inline-block font-semibold">
                   Ver todos →
                 </Link>
               </div>
@@ -122,8 +123,9 @@ export default function HomePage() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.15 }}
+              className="flex"
             >
-              <div className="bg-gradient-to-br from-emerald-50 to-green-50 rounded-3xl p-6 h-full border border-emerald-100">
+              <div className="bg-gradient-to-br from-emerald-50 to-green-50 rounded-3xl p-6 h-full border border-emerald-100 w-full flex flex-col">
                 <span className="text-3xl mb-2 block">🧼</span>
                 <h3 className="font-serif text-xl font-bold text-emerald-900 mb-2">Jabones Especiales</h3>
                 <p className="text-emerald-700 text-sm mb-4">Tratamientos botánicos únicos</p>
@@ -133,7 +135,7 @@ export default function HomePage() {
                   <p className="bg-white/60 rounded-lg p-2">• Zanahoria</p>
                   <p className="bg-white/60 rounded-lg p-2">• Naranja y Estropajo ⭐</p>
                 </div>
-                <Link href="/productos?categoria=jabones" className="text-xs text-emerald-700 hover:text-emerald-900 mt-4 inline-block font-semibold">
+                <Link href="/productos?categoria=jabones" className="text-xs text-emerald-700 hover:text-emerald-900 mt-auto inline-block font-semibold">
                   Ver todos →
                 </Link>
               </div>
@@ -145,8 +147,9 @@ export default function HomePage() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
+              className="flex"
             >
-              <div className="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-3xl p-6 h-full border border-purple-100">
+              <div className="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-3xl p-6 h-full border border-purple-100 w-full flex flex-col">
                 <span className="text-3xl mb-2 block">🌙</span>
                 <h3 className="font-serif text-xl font-bold text-purple-900 mb-2">Energético</h3>
                 <p className="text-purple-700 text-sm mb-4">Limpieza de cuerpo y espíritu</p>
@@ -155,7 +158,7 @@ export default function HomePage() {
                   <p className="bg-white/60 rounded-lg p-2">• Café, Clavos y Canela</p>
                   <p className="bg-white/60 rounded-lg p-2">• Limpieza Energética</p>
                 </div>
-                <Link href="/productos?categoria=energetico" className="text-xs text-purple-700 hover:text-purple-900 mt-4 inline-block font-semibold">
+                <Link href="/productos?categoria=energetico" className="text-xs text-purple-700 hover:text-purple-900 mt-auto inline-block font-semibold">
                   Ver todos →
                 </Link>
               </div>
@@ -194,59 +197,6 @@ export default function HomePage() {
               </div>
             </motion.div>
           </div>
-
-          {/* Human Products Preview */}
-          <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            variants={{
-              hidden: {},
-              visible: {
-                transition: {
-                  staggerChildren: 0.1,
-                },
-              },
-            }}
-          >
-            {facialProducts.slice(0, 2).map((product, index) => (
-              <motion.div
-                key={product.id}
-                variants={{
-                  hidden: { opacity: 0, y: 30 },
-                  visible: { opacity: 1, y: 0 },
-                }}
-                transition={{ duration: 0.4 }}
-              >
-                <ProductCard product={product} index={index} />
-              </motion.div>
-            ))}
-            {terapeuticoProducts.slice(0, 1).map((product, index) => (
-              <motion.div
-                key={product.id}
-                variants={{
-                  hidden: { opacity: 0, y: 30 },
-                  visible: { opacity: 1, y: 0 },
-                }}
-                transition={{ duration: 0.4 }}
-              >
-                <ProductCard product={product} index={index + 2} />
-              </motion.div>
-            ))}
-            {jabonesProducts.slice(0, 1).map((product, index) => (
-              <motion.div
-                key={product.id}
-                variants={{
-                  hidden: { opacity: 0, y: 30 },
-                  visible: { opacity: 1, y: 0 },
-                }}
-                transition={{ duration: 0.4 }}
-              >
-                <ProductCard product={product} index={index + 3} />
-              </motion.div>
-            ))}
-          </motion.div>
 
           <div className="text-center mt-10">
             <Link href="/productos?categoria=facial">
