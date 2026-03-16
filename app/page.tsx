@@ -198,6 +198,59 @@ export default function HomePage() {
             </motion.div>
           </div>
 
+          {/* Featured Products */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12"
+            variants={{
+              hidden: {},
+              visible: {
+                transition: {
+                  staggerChildren: 0.1,
+                },
+              },
+            }}
+          >
+            {facialProducts.slice(0, 1).map((product, index) => (
+              <motion.div
+                key={product.id}
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+                transition={{ duration: 0.4 }}
+              >
+                <ProductCard product={product} index={index} />
+              </motion.div>
+            ))}
+            {petProducts.slice(0, 1).map((product, index) => (
+              <motion.div
+                key={product.id}
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+                transition={{ duration: 0.4 }}
+              >
+                <ProductCard product={product} index={index + 1} />
+              </motion.div>
+            ))}
+            {jabonesProducts.slice(0, 1).map((product, index) => (
+              <motion.div
+                key={product.id}
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+                transition={{ duration: 0.4 }}
+              >
+                <ProductCard product={product} index={index + 2} />
+              </motion.div>
+            ))}
+          </motion.div>
+
           <div className="text-center mt-10">
             <Link href="/productos?categoria=facial">
               <Button
