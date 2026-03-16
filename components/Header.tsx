@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Cart } from './Cart';
 import { useCart } from './CartContext';
+import { ThemeToggle } from './ThemeToggle';
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -129,6 +130,14 @@ export function Header() {
 
           {/* Cart & Mobile Menu */}
           <div className="flex items-center space-x-2 flex-shrink-0">
+            <motion.div
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.3, type: 'spring', stiffness: 200 }}
+            >
+              <ThemeToggle />
+            </motion.div>
+
             <motion.div
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
