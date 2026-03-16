@@ -257,9 +257,9 @@ export default function HomePage() {
               </div>
 
               {/* Stats overlay */}
-              <div className="absolute -bottom-6 -right-6 bg-terracotta text-white rounded-2xl p-6 shadow-xl">
-                <p className="text-4xl font-bold">pH 7.0</p>
-                <p className="text-sm opacity-90">Balanceado</p>
+              <div className="absolute -bottom-4 -right-4 bg-slate-800 text-white rounded-2xl p-4 shadow-xl border-2 border-white">
+                <p className="text-3xl font-bold text-white">pH 7.0</p>
+                <p className="text-xs text-white/90">Balanceado</p>
               </div>
             </div>
 
