@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Menu, X, Sparkles, PawPrint, ShoppingCart } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -54,21 +55,27 @@ export function Header() {
               href="/"
               className="flex items-center space-x-2 group"
             >
-              <motion.span
-                className="text-2xl font-serif font-bold text-terracotta relative"
+              <motion.div
                 whileHover={{ scale: 1.02 }}
                 transition={{ type: 'spring', stiffness: 400 }}
+                className="relative"
               >
-                Artes_Ana
+                <Image
+                  src="/logo.png"
+                  alt="Artes_Ana - Jabones Artesanales"
+                  width={120}
+                  height={40}
+                  className="h-10 w-auto"
+                />
                 {/* Underline animation */}
                 <motion.div
-                  className="absolute -bottom-1 left-0 h-0.5 bg-terracotta"
+                  className="absolute -bottom-1 left-0 right-0 h-0.5 bg-terracotta"
                   initial={{ scaleX: 0 }}
                   whileHover={{ scaleX: 1 }}
                   transition={{ duration: 0.3 }}
-                  style={{ originX: 0 }}
+                  style={{ originX: 0.5 }}
                 />
-              </motion.span>
+              </motion.div>
               <motion.div
                 className="relative"
                 animate={{ rotate: [0, 10, -10, 0] }}
