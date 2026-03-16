@@ -64,7 +64,6 @@ export default function HomePage() {
               <div className="bg-gradient-to-br from-rose-50 to-pink-50 rounded-3xl p-8 h-full border border-rose-100">
                 <div className="flex items-start justify-between mb-4">
                   <div>
-                    <span className="text-4xl mb-2 block">✨</span>
                     <h3 className="font-serif text-2xl font-bold text-rose-900">Línea Facial</h3>
                     <p className="text-rose-700">Cuidado especial para tu rostro</p>
                   </div>
