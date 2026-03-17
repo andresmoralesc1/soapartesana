@@ -58,7 +58,7 @@ export function Header() {
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 transition={{ type: 'spring', stiffness: 400 }}
-                className="relative"
+                className="relative flex flex-col items-center"
               >
                 <Image
                   src="/logo.png"
@@ -67,6 +67,7 @@ export function Header() {
                   height={40}
                   className="h-10 w-auto"
                 />
+                <span className="font-sacramento text-3xl text-terracotta mt-1 leading-tight tracking-wide">Artes_Ana</span>
                 {/* Underline animation */}
                 <motion.div
                   className="absolute -bottom-1 left-0 right-0 h-0.5 bg-terracotta"

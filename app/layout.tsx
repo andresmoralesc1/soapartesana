@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
+import { Geist, Geist_Mono, Playfair_Display, Pacifico, Sacramento } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -29,6 +29,20 @@ const playfair = Playfair_Display({
   variable: "--font-playfair",
   subsets: ["latin"],
   display: "swap",
+});
+
+const pacifico = Pacifico({
+  variable: "--font-pacifico",
+  subsets: ["latin"],
+  display: "swap",
+  weight: "400",
+});
+
+const sacramento = Sacramento({
+  variable: "--font-sacramento",
+  subsets: ["latin"],
+  display: "swap",
+  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -92,7 +106,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#C8765F" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} antialiased font-sans`}
+        className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${pacifico.variable} ${sacramento.variable} antialiased font-sans`}
       >
         <OrganizationStructuredData />
         <WebSiteStructuredData />
