@@ -67,7 +67,7 @@ export function Header() {
                   height={40}
                   className="h-10 w-auto"
                 />
-                <span className="font-sacramento text-2xl text-terracotta leading-tight tracking-wide">ArtesAna</span>
+                <span className="font-sacramento text-3xl text-terracotta leading-tight tracking-wide">ArtesAna</span>
               </motion.div>
               <motion.div
                 className="relative"
