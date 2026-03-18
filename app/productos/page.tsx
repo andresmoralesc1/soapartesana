@@ -3,6 +3,7 @@
 import { useState, useEffect, useMemo, Suspense } from 'react';
 import { ProductCard } from '@/components/ProductCard';
 import { EmptyState } from '@/components/EmptyState';
+import { Button } from '@/components/ui/button';
 import { products, categoryInfo, type Product, type ProductCategory } from '@/lib/products';
 import { Search, X } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
