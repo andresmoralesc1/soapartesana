@@ -83,12 +83,11 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: index * 0.05 }}
-      style={{ rotateX, rotateY }}
+      className="h-full"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      whileHover={{ y: -8 }}
     >
-      <Card className={`group overflow-hidden border-gray-200 ${isTouch ? '' : 'hover:shadow-2xl'} transition-all duration-300 bg-white relative`}>
+      <Card className={`group overflow-hidden border-gray-200 ${isTouch ? '' : 'hover:shadow-2xl'} transition-all duration-300 bg-white relative h-full`}>
         {/* Sparkle effect on hover */}
         <motion.div
           className="absolute inset-0 pointer-events-none z-10"

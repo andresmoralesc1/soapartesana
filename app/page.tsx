@@ -32,7 +32,7 @@ export default function HomePage() {
       <ParallaxHero />
 
       {/* ==================== HUMAN CARE RITUAL SECTION (FEATURED) ==================== */}
-      <section className="py-20 md:py-28 bg-gradient-to-b from-green-50 to-white">
+      <section className="-mt-12 py-12 md:py-16 bg-gradient-to-b from-green-50 to-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -231,7 +231,7 @@ export default function HomePage() {
       </section>
 
       {/* ==================== PET CARE SECTION ==================== */}
-      <section className="py-20 md:py-28 bg-gradient-to-b from-white to-amber-50">
+      <section className="py-12 md:py-16 bg-gradient-to-b from-white to-amber-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -307,7 +307,7 @@ export default function HomePage() {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="border-amber-500 text-amber-700 hover:bg-amber-50 font-semibold"
+                  className="border-amber-600 text-amber-700 hover:bg-amber-600 hover:text-white hover:border-amber-600 font-semibold"
                 >
                   Ver Línea Pet Care
                   <ChevronRight className="ml-2 h-5 w-5" />
@@ -325,7 +325,7 @@ export default function HomePage() {
       <TestimonialsSection />
 
       {/* ==================== HONEST INGREDIENTS SECTION ==================== */}
-      <section className="py-20 md:py-28 bg-white">
+      <section className="py-12 md:py-16 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -374,7 +374,7 @@ export default function HomePage() {
       <FAQSection />
 
       {/* ==================== CTA SECTION ==================== */}
-      <section className="py-20 md:py-28 bg-gradient-to-br from-forest to-sage text-white relative overflow-hidden">
+      <section className="py-12 md:py-16 bg-gradient-to-br from-forest to-sage text-white relative overflow-hidden">
         {/* Decorative pattern */}
         <div className="absolute inset-0 opacity-10">
           <div

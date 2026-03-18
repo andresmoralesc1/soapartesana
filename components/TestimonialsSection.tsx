@@ -35,7 +35,7 @@ const testimonials: Testimonial[] = [
     petType: 'gato',
     avatar: '👨',
     rating: 5,
-    text: 'Mi gatita es muy sensible a los químicos. Probamos muchos jabones "hipoalergénicos" pero solo el de Artes_Ana no le causó irritación. Ahora usa solo este.',
+    text: 'Mi gatita es muy sensible a los químicos. Probamos muchos jabones "hipoalergénicos" pero solo el de ArtesAna no le causó irritación. Ahora usa solo este.',
     date: 'Hace 1 mes',
     product: 'Jabón Mascotas Avena & Manzanilla',
   },
@@ -64,7 +64,7 @@ const testimonials: Testimonial[] = [
 
 export function TestimonialsSection() {
   return (
-    <section className="py-20 md:py-28 bg-gradient-to-b from-white to-green-50">
+    <section className="py-12 md:py-16 bg-gradient-to-b from-white to-green-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -79,7 +79,7 @@ export function TestimonialsSection() {
             Lo que dicen los dueños
           </h2>
           <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-            Más de 1,000+ familias confían en Artes_Ana para el cuidado de sus mascotas
+            Más de 1,000+ familias confían en ArtesAna para el cuidado de sus mascotas
           </p>
         </motion.div>
 

@@ -80,7 +80,7 @@ export function FAQSection() {
     : faqs.filter(faq => faq.category === selectedCategory);
 
   return (
-    <section className="py-20 md:py-28 bg-white">
+    <section className="py-12 md:py-16 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

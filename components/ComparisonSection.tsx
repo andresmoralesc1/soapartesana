@@ -38,7 +38,7 @@ const comparisons = [
 
 export function ComparisonSection() {
   return (
-    <section className="py-20 md:py-28 bg-gradient-to-b from-slate-50 to-white">
+    <section className="py-12 md:py-16 bg-gradient-to-b from-slate-50 to-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -67,7 +67,7 @@ export function ComparisonSection() {
                 <span className="w-8 h-8 bg-[oklch(0.62_0.16_45)] rounded-lg flex items-center justify-center text-white">
                   🌿
                 </span>
-                Artes_Ana
+                ArtesAna
               </div>
               <div className="p-4 font-semibold text-slate-600 flex items-center justify-center gap-2">
                 Jabones comerciales
@@ -89,7 +89,7 @@ export function ComparisonSection() {
                   {item.feature}
                 </div>
 
-                {/* Artes_Ana */}
+                {/* ArtesAna */}
                 <div className="p-4 flex items-center justify-center bg-[oklch(0.98_0.01_120)]">
                   {item.artesAna.status === 'yes' && (
                     <div className="flex items-center gap-2 text-green-700">
