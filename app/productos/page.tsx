@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, Suspense } from 'react';
+import { useState, useEffect, useMemo, Suspense } from 'react';
 import Link from 'next/link';
 import { ProductCard } from '@/components/ProductCard';
 import { Button } from '@/components/ui/button';
@@ -22,11 +22,11 @@ function ProductsContent() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   // Apply URL params on mount
-  useState(() => {
+  useEffect(() => {
     if (categoryParam) {
       setSelectedCategory(categoryParam);
     }
-  });
+  }, [categoryParam]);
 
   // Base filtered products from category and search
   const baseFilteredProducts = useMemo(() => {
@@ -48,6 +48,11 @@ function ProductsContent() {
     return results;
   }, [selectedCategory, searchQuery]);
 
+  // Sync filtered products with base filtered products
+  useEffect(() => {
+    setFilteredProducts(baseFilteredProducts);
+  }, [baseFilteredProducts]);
+
   // Update when filters change
   const handleFilterChange = (filtered: Product[]) => {
     setFilteredProducts(filtered);
@@ -57,46 +62,52 @@ function ProductsContent() {
 
   return (
     <div className="py-12 md:py-16">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4">
-            Catálogo de Productos
-          </h1>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Explora nuestra colección completa de productos artesanales,
-            cada pieza hecha con amor y dedicación.
-          </p>
-        </div>
-
-        {/* Search Bar and Filter Toggle */}
-        <div className="max-w-2xl mx-auto mb-8">
-          <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Buscar por nombre, ingrediente o beneficio..."
-              className="w-full pl-12 pr-12 py-3 rounded-full border border-border bg-card focus:ring-2 focus:ring-terracotta/20 focus:border-terracotta outline-none transition-all"
-              aria-label="Buscar productos"
-            />
-            {searchQuery && (
-              <button
-                onClick={clearSearch}
-                className="absolute right-4 top-1/2 -translate-y-1/2 p-1 rounded-full hover:bg-muted transition-colors"
-                aria-label="Limpiar búsqueda"
-              >
-                <X className="h-4 w-4 text-muted-foreground" />
-              </button>
-            )}
-          </div>
-          {searchQuery && baseFilteredProducts.length > 0 && (
-            <p className="text-sm text-muted-foreground mt-2 text-center">
-              {baseFilteredProducts.length} {baseFilteredProducts.length === 1 ? 'producto encontrado' : 'productos encontrados'}
+      {/* Hero Section */}
+      <div className="relative bg-gradient-to-br from-terracotta via-terracotta/90 to-forest/80 py-16 md:py-24 mb-12">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%20200%20200%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cfilter%20id%3D%22noiseFilter%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%220.85%22%20numOctaves%3D%224%22%20stitchTiles%3D%22stitch%22%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20filter%3D%22url(%23noiseFilter)%22%2F%3E%3C%2Fsvg%3E')] opacity-10"></div>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="text-center max-w-3xl mx-auto">
+            <h1 className="font-serif text-4xl md:text-6xl font-bold mb-4 text-cream drop-shadow-sm">
+              Catálogo de Productos
+            </h1>
+            <p className="text-cream/90 text-lg md:text-xl mb-8 max-w-2xl mx-auto">
+              Explora nuestra colección completa de productos artesanales,
+              cada pieza hecha con amor y dedicación.
             </p>
-          )}
+
+            {/* Search Bar */}
+            <div className="max-w-xl mx-auto">
+              <div className="relative">
+                <Search className="absolute left-5 top-1/2 -translate-y-1/2 h-5 w-5 text-terracotta/70" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Buscar por nombre, ingrediente o beneficio..."
+                  className="w-full pl-14 pr-12 py-4 rounded-full border-0 bg-white/95 backdrop-blur-sm shadow-lg focus:ring-2 focus:ring-white/50 focus:bg-white outline-none transition-all text-foreground placeholder:text-muted-foreground"
+                  aria-label="Buscar productos"
+                />
+                {searchQuery && (
+                  <button
+                    onClick={clearSearch}
+                    className="absolute right-5 top-1/2 -translate-y-1/2 p-1 rounded-full hover:bg-cream/80 transition-colors"
+                    aria-label="Limpiar búsqueda"
+                  >
+                    <X className="h-4 w-4 text-muted-foreground" />
+                  </button>
+                )}
+              </div>
+              {searchQuery && baseFilteredProducts.length > 0 && (
+                <p className="text-sm text-cream/80 mt-3 text-center font-medium">
+                  {baseFilteredProducts.length} {baseFilteredProducts.length === 1 ? 'producto encontrado' : 'productos encontrados'}
+                </p>
+              )}
+            </div>
+          </div>
         </div>
+      </div>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Mobile Filter Toggle */}
         <div className="flex items-center justify-between mb-6 md:hidden">
@@ -134,8 +145,8 @@ function ProductsContent() {
                 onClick={() => setSelectedCategory('todos')}
                 className={`px-6 py-2.5 rounded-full font-medium transition-all ${
                   selectedCategory === 'todos'
-                    ? 'bg-terracotta text-cream'
-                    : 'bg-card border border-border hover:border-terracotta'
+                    ? 'bg-terracotta text-cream shadow-md hover:shadow-lg hover:bg-terracotta/90'
+                    : 'bg-card border border-border hover:border-terracotta hover:bg-terracotta/5'
                 }`}
                 aria-label="Ver todos los productos"
               >
@@ -147,8 +158,8 @@ function ProductsContent() {
                   onClick={() => setSelectedCategory(key as ProductCategory)}
                   className={`px-6 py-2.5 rounded-full font-medium transition-all ${
                     selectedCategory === key
-                      ? 'bg-terracotta text-cream'
-                      : 'bg-card border border-border hover:border-terracotta'
+                      ? 'bg-terracotta text-cream shadow-md hover:shadow-lg hover:bg-terracotta/90'
+                      : 'bg-card border border-border hover:border-terracotta hover:bg-terracotta/5'
                   }`}
                   aria-label={`Filtrar por ${category.name}`}
                 >
@@ -213,15 +224,15 @@ function ProductsContent() {
             )}
           </div>
         </div>
-      </div>
 
-      {/* Mobile Filter Sidebar */}
-      <FilterSidebar
-        products={baseFilteredProducts}
-        onFilter={handleFilterChange}
-        isOpen={isFilterOpen}
-        onClose={() => setIsFilterOpen(false)}
-      />
+        {/* Mobile Filter Sidebar */}
+        <FilterSidebar
+          products={baseFilteredProducts}
+          onFilter={handleFilterChange}
+          isOpen={isFilterOpen}
+          onClose={() => setIsFilterOpen(false)}
+        />
+      </div>
     </div>
   );
 }
