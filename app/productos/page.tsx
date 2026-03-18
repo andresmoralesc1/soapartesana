@@ -63,14 +63,14 @@ function ProductsContent() {
   return (
     <div className="py-12 md:py-16">
       {/* Hero Section */}
-      <div className="relative bg-gradient-to-br from-terracotta via-terracotta/90 to-forest/80 py-16 md:py-24 mb-12">
+      <div className="relative bg-gradient-to-br from-terracotta via-terracotta/90 to-forest/80 py-8 md:py-12 mb-6">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%20200%20200%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cfilter%20id%3D%22noiseFilter%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%220.85%22%20numOctaves%3D%224%22%20stitchTiles%3D%22stitch%22%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20filter%3D%22url(%23noiseFilter)%22%2F%3E%3C%2Fsvg%3E')] opacity-10"></div>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center max-w-3xl mx-auto">
-            <h1 className="font-serif text-4xl md:text-6xl font-bold mb-4 text-cream drop-shadow-sm">
+            <h1 className="font-serif text-3xl md:text-4xl font-bold mb-3 text-cream drop-shadow-sm">
               Catálogo de Productos
             </h1>
-            <p className="text-cream/90 text-lg md:text-xl mb-8 max-w-2xl mx-auto">
+            <p className="text-cream/90 text-base md:text-lg mb-6 max-w-2xl mx-auto">
               Explora nuestra colección completa de productos artesanales,
               cada pieza hecha con amor y dedicación.
             </p>
