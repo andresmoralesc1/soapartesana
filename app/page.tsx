@@ -67,10 +67,10 @@ export default function HomePage() {
                 <h3 className="font-serif text-xl font-bold text-lime-900 mb-2">Terapéutico</h3>
                 <p className="text-lime-700 text-sm mb-4">Para pieles sensibles y problemáticas</p>
                 <div className="space-y-2 text-sm">
-                  <p className="bg-white/60 rounded-lg p-2">• Caléndula y Miel</p>
-                  <p className="bg-white/60 rounded-lg p-2">• Aloe Vera y Menta</p>
-                  <p className="bg-white/60 rounded-lg p-2">• Romero y Salvia</p>
-                  <p className="bg-white/60 rounded-lg p-2">• Lavanda Francesa</p>
+                  <p className="rounded-lg p-2">• Caléndula y Miel</p>
+                  <p className="rounded-lg p-2">• Aloe Vera y Menta</p>
+                  <p className="rounded-lg p-2">• Romero y Salvia</p>
+                  <p className="rounded-lg p-2">• Lavanda Francesa</p>
                 </div>
                 <Link href="/productos?categoria=terapeutico" className="text-xs text-lime-700 hover:text-lime-900 mt-auto inline-block font-semibold">
                   Ver todos →
@@ -91,10 +91,10 @@ export default function HomePage() {
                 <h3 className="font-serif text-xl font-bold text-emerald-900 mb-2">Jabones Especiales</h3>
                 <p className="text-emerald-700 text-sm mb-4">Tratamientos botánicos únicos</p>
                 <div className="space-y-2 text-sm">
-                  <p className="bg-white/60 rounded-lg p-2">• Chocolate y Cacao</p>
-                  <p className="bg-white/60 rounded-lg p-2">• Vino Tinto</p>
-                  <p className="bg-white/60 rounded-lg p-2">• Zanahoria</p>
-                  <p className="bg-white/60 rounded-lg p-2">• Naranja y Estropajo ⭐</p>
+                  <p className="rounded-lg p-2">• Chocolate y Cacao</p>
+                  <p className="rounded-lg p-2">• Vino Tinto</p>
+                  <p className="rounded-lg p-2">• Zanahoria</p>
+                  <p className="rounded-lg p-2">• Naranja y Estropajo ⭐</p>
                 </div>
                 <Link href="/productos?categoria=jabones" className="text-xs text-emerald-700 hover:text-emerald-900 mt-auto inline-block font-semibold">
                   Ver todos →
@@ -115,9 +115,9 @@ export default function HomePage() {
                 <h3 className="font-serif text-xl font-bold text-purple-900 mb-2">Energético</h3>
                 <p className="text-purple-700 text-sm mb-4">Limpieza de cuerpo y espíritu</p>
                 <div className="space-y-2 text-sm">
-                  <p className="bg-white/60 rounded-lg p-2">• Sal Rosada y Ruda</p>
-                  <p className="bg-white/60 rounded-lg p-2">• Café, Clavos y Canela</p>
-                  <p className="bg-white/60 rounded-lg p-2">• Limpieza Energética</p>
+                  <p className="rounded-lg p-2">• Sal Rosada y Ruda</p>
+                  <p className="rounded-lg p-2">• Café, Clavos y Canela</p>
+                  <p className="rounded-lg p-2">• Limpieza Energética</p>
                 </div>
                 <Link href="/productos?categoria=energetico" className="text-xs text-purple-700 hover:text-purple-900 mt-auto inline-block font-semibold">
                   Ver todos →
