@@ -58,16 +58,16 @@ export function Header() {
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: 'spring', stiffness: 400 }}
-                className="flex flex-col items-center gap-1"
+                className="flex items-center gap-2"
               >
                 <Image
                   src="/logo.png"
-                  alt="Artes_Ana - Jabones Artesanales"
+                  alt="ArtesAna - Jabones Artesanales"
                   width={120}
                   height={40}
                   className="h-10 w-auto"
                 />
-                <span className="font-sacramento text-2xl text-terracotta leading-tight tracking-wide">Artes_Ana</span>
+                <span className="font-sacramento text-2xl text-terracotta leading-tight tracking-wide">ArtesAna</span>
               </motion.div>
               <motion.div
                 className="relative"
