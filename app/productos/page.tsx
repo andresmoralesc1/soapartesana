@@ -101,10 +101,8 @@ function ProductsContent() {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* Products Section */}
-        <div>
-            {/* Category Filter Pills */}
-            <div className="flex flex-wrap justify-center gap-3 mb-12">
+        {/* Category Filter Pills */}
+        <div className="flex flex-wrap justify-center gap-3 mb-12">
               <button
                 onClick={() => setSelectedCategory('todos')}
                 className={`px-6 py-2.5 rounded-full font-medium transition-all ${
@@ -179,7 +177,6 @@ function ProductsContent() {
                 </p>
               </div>
             )}
-          </div>
         </div>
 
       </div>
