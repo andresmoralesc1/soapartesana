@@ -1,14 +1,11 @@
 'use client';
 
 import { useState, useEffect, useMemo, Suspense } from 'react';
-import Link from 'next/link';
 import { ProductCard } from '@/components/ProductCard';
-import { Button } from '@/components/ui/button';
 import { EmptyState } from '@/components/EmptyState';
-import { FilterSidebar } from '@/components/FilterSidebar';
 import { products, categoryInfo, type Product, type ProductCategory } from '@/lib/products';
-import { Search, X, SlidersHorizontal } from 'lucide-react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { Search, X } from 'lucide-react';
+import { useSearchParams } from 'next/navigation';
 
 function ProductsContent() {
   const searchParams = useSearchParams();
@@ -19,7 +16,6 @@ function ProductsContent() {
   );
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredProducts, setFilteredProducts] = useState(products);
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   // Apply URL params on mount
   useEffect(() => {
@@ -52,11 +48,6 @@ function ProductsContent() {
   useEffect(() => {
     setFilteredProducts(baseFilteredProducts);
   }, [baseFilteredProducts]);
-
-  // Update when filters change
-  const handleFilterChange = (filtered: Product[]) => {
-    setFilteredProducts(filtered);
-  };
 
   const clearSearch = () => setSearchQuery('');
 
@@ -109,36 +100,8 @@ function ProductsContent() {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* Mobile Filter Toggle */}
-        <div className="flex items-center justify-between mb-6 md:hidden">
-          <span className="text-sm text-muted-foreground">
-            {filteredProducts.length} productos
-          </span>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => setIsFilterOpen(true)}
-            className="gap-2"
-          >
-            <SlidersHorizontal className="h-4 w-4" />
-            Filtros
-          </Button>
-        </div>
-
-        {/* Main Content with Sidebar */}
-        <div className="flex gap-8">
-          {/* Filter Sidebar */}
-          <div className="hidden md:block">
-            <FilterSidebar
-              products={baseFilteredProducts}
-              onFilter={handleFilterChange}
-              isOpen={true}
-              onClose={() => {}}
-            />
-          </div>
-
-          {/* Products Section */}
-          <div className="flex-1">
+        {/* Products Section */}
+        <div>
             {/* Category Filter Pills */}
             <div className="flex flex-wrap justify-center gap-3 mb-12">
               <button
@@ -166,13 +129,6 @@ function ProductsContent() {
                   {category.icon} {category.name.split(' ')[0]}
                 </button>
               ))}
-            </div>
-
-            {/* Results Count */}
-            <div className="hidden md:flex items-center justify-between mb-6">
-              <p className="text-sm text-muted-foreground">
-                Mostrando {filteredProducts.length} de {baseFilteredProducts.length} productos
-              </p>
             </div>
 
             {/* Products Grid */}
@@ -225,13 +181,6 @@ function ProductsContent() {
           </div>
         </div>
 
-        {/* Mobile Filter Sidebar */}
-        <FilterSidebar
-          products={baseFilteredProducts}
-          onFilter={handleFilterChange}
-          isOpen={isFilterOpen}
-          onClose={() => setIsFilterOpen(false)}
-        />
       </div>
     </div>
   );
