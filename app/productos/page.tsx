@@ -145,7 +145,7 @@ function ProductsContent() {
                 onClick={() => setSelectedCategory('todos')}
                 className={`px-6 py-2.5 rounded-full font-medium transition-all ${
                   selectedCategory === 'todos'
-                    ? 'bg-terracotta text-white shadow-md hover:shadow-lg hover:bg-terracotta/90'
+                    ? 'bg-terracotta text-white border-2 border-white shadow-md hover:shadow-lg hover:scale-105'
                     : 'bg-card border border-border hover:border-terracotta hover:bg-terracotta/5'
                 }`}
                 aria-label="Ver todos los productos"
@@ -158,7 +158,7 @@ function ProductsContent() {
                   onClick={() => setSelectedCategory(key as ProductCategory)}
                   className={`px-6 py-2.5 rounded-full font-medium transition-all ${
                     selectedCategory === key
-                      ? 'bg-terracotta text-white shadow-md hover:shadow-lg hover:bg-terracotta/90'
+                      ? 'bg-terracotta text-white border-2 border-white shadow-md hover:shadow-lg hover:scale-105'
                       : 'bg-card border border-border hover:border-terracotta hover:bg-terracotta/5'
                   }`}
                   aria-label={`Filtrar por ${category.name}`}
