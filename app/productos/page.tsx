@@ -4,8 +4,9 @@ import { useState, useEffect, useMemo, Suspense } from 'react';
 import { ProductCard } from '@/components/ProductCard';
 import { EmptyState } from '@/components/EmptyState';
 import { Button } from '@/components/ui/button';
+import { FilterSidebar } from '@/components/FilterSidebar';
 import { products, categoryInfo, type Product, type ProductCategory } from '@/lib/products';
-import { Search, X } from 'lucide-react';
+import { Search, X, SlidersHorizontal } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
 
 function ProductsContent() {
@@ -17,6 +18,7 @@ function ProductsContent() {
   );
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredProducts, setFilteredProducts] = useState(products);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   // Apply URL params on mount
   useEffect(() => {
@@ -51,6 +53,10 @@ function ProductsContent() {
   }, [baseFilteredProducts]);
 
   const clearSearch = () => setSearchQuery('');
+
+  const handleFilterChange = (filtered: Product[]) => {
+    setFilteredProducts(filtered);
+  };
 
   return (
     <div className="py-4 md:py-6">
@@ -102,67 +108,101 @@ function ProductsContent() {
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Category Filter Pills */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
-          <button
-            onClick={() => setSelectedCategory('todos')}
-            className={`px-6 py-2.5 rounded-full font-medium transition-all ${
-              selectedCategory === 'todos'
-                ? 'bg-terracotta text-black border-2 border-black shadow-md hover:shadow-lg hover:scale-105'
-                : 'bg-card border border-border hover:border-terracotta hover:bg-terracotta/5'
-            }`}
-            aria-label="Ver todos los productos"
+        {/* Mobile Filter Button */}
+        <div className="lg:hidden flex items-center justify-between mb-4">
+          <span className="text-sm text-muted-foreground">
+            {filteredProducts.length} {filteredProducts.length === 1 ? 'producto' : 'productos'}
+          </span>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setIsFilterOpen(true)}
+            className="gap-2"
           >
-            Todos
-          </button>
-          {Object.entries(categoryInfo).map(([key, category]) => (
-            <button
-              key={key}
-              onClick={() => setSelectedCategory(key as ProductCategory)}
-              className={`px-6 py-2.5 rounded-full font-medium transition-all ${
-                selectedCategory === key
-                  ? 'bg-terracotta text-black border-2 border-black shadow-md hover:shadow-lg hover:scale-105'
-                  : 'bg-card border border-border hover:border-terracotta hover:bg-terracotta/5'
-              }`}
-              aria-label={`Filtrar por ${category.name}`}
-            >
-              {category.icon} {category.name.split(' ')[0]}
-            </button>
-          ))}
+            <SlidersHorizontal className="h-4 w-4" />
+            Filtros
+          </Button>
         </div>
 
-        {/* Products Grid */}
-        {filteredProducts.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
-            {filteredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        ) : (
-          <EmptyState
-            type="products"
-            title={searchQuery ? "No hay resultados de búsqueda" : "No hay productos en esta categoría"}
-            description={searchQuery
-              ? `No encontramos productos que coincidan con "${searchQuery}". Intenta con otros términos o explora todas las categorías.`
-              : "No encontramos productos con los filtros seleccionados. Por intenta con otros filtros."
-            }
-            action={
-              <div className="flex gap-3 justify-center flex-wrap">
-                {searchQuery && (
-                  <Button onClick={clearSearch} variant="outline">
-                    Limpiar búsqueda
-                  </Button>
-                )}
-                <Button onClick={() => {
-                  setSelectedCategory('todos');
-                  setSearchQuery('');
-                }}>
-                  Ver todos los productos
-                </Button>
+        {/* Main Layout: Sidebar + Content */}
+        <div className="flex gap-8">
+          {/* Sidebar - Desktop sticky */}
+          <aside className="hidden lg:block w-72 shrink-0">
+            <div className="sticky top-24">
+              <FilterSidebar
+                products={baseFilteredProducts}
+                onFilter={handleFilterChange}
+                isOpen={true}
+                onClose={() => {}}
+              />
+            </div>
+          </aside>
+
+          {/* Products Content */}
+          <div className="flex-1 min-w-0">
+            {/* Category Filter Pills */}
+            <div className="flex flex-wrap justify-center gap-3 mb-12">
+              <button
+                onClick={() => setSelectedCategory('todos')}
+                className={`px-6 py-2.5 rounded-full font-medium transition-all ${
+                  selectedCategory === 'todos'
+                    ? 'bg-terracotta text-black border-2 border-black shadow-md hover:shadow-lg hover:scale-105'
+                    : 'bg-card border border-border hover:border-terracotta hover:bg-terracotta/5'
+                }`}
+                aria-label="Ver todos los productos"
+              >
+                Todos
+              </button>
+              {Object.entries(categoryInfo).map(([key, category]) => (
+                <button
+                  key={key}
+                  onClick={() => setSelectedCategory(key as ProductCategory)}
+                  className={`px-6 py-2.5 rounded-full font-medium transition-all ${
+                    selectedCategory === key
+                      ? 'bg-terracotta text-black border-2 border-black shadow-md hover:shadow-lg hover:scale-105'
+                      : 'bg-card border border-border hover:border-terracotta hover:bg-terracotta/5'
+                  }`}
+                  aria-label={`Filtrar por ${category.name}`}
+                >
+                  {category.icon} {category.name.split(' ')[0]}
+                </button>
+              ))}
+            </div>
+
+            {/* Products Grid */}
+            {filteredProducts.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
+                {filteredProducts.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
               </div>
-            }
-          />
-        )}
+            ) : (
+              <EmptyState
+                type="products"
+                title={searchQuery ? "No hay resultados de búsqueda" : "No hay productos en esta categoría"}
+                description={searchQuery
+                  ? `No encontramos productos que coincidan con "${searchQuery}". Intenta con otros términos o explora todas las categorías.`
+                  : "No encontramos productos con los filtros seleccionados. Por intenta con otros filtros."
+                }
+                action={
+                  <div className="flex gap-3 justify-center flex-wrap">
+                    {searchQuery && (
+                      <Button onClick={clearSearch} variant="outline">
+                        Limpiar búsqueda
+                      </Button>
+                    )}
+                    <Button onClick={() => {
+                      setSelectedCategory('todos');
+                      setSearchQuery('');
+                    }}>
+                      Ver todos los productos
+                    </Button>
+                  </div>
+                }
+              />
+            )}
+          </div>
+        </div>
 
         {/* Category Info */}
         {selectedCategory !== 'todos' && categoryInfo[selectedCategory] && (
@@ -179,6 +219,14 @@ function ProductsContent() {
           </div>
         )}
       </div>
+
+      {/* Mobile Filter Sidebar */}
+      <FilterSidebar
+        products={baseFilteredProducts}
+        onFilter={handleFilterChange}
+        isOpen={isFilterOpen}
+        onClose={() => setIsFilterOpen(false)}
+      />
     </div>
   );
 }

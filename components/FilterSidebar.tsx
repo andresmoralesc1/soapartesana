@@ -164,13 +164,14 @@ export function FilterSidebar({ products, onFilter, isOpen, onClose }: FilterSid
         exit={{ x: '-100%' }}
         transition={{ type: 'spring', damping: 25, stiffness: 200 }}
         className={cn(
-          'fixed md:sticky top-20 left-0 h-[calc(100vh-5rem)] w-80 bg-white border-r border-gray-200 overflow-y-auto z-50 md:z-10',
-          !isOpen && '-translate-x-full md:translate-x-0'
+          'fixed left-0 top-0 h-screen w-80 max-w-[85vw] bg-white border-r border-gray-200 overflow-y-auto z-50',
+          'md:static md:w-auto md:max-w-none md:h-auto md:border-0 md:overflow-visible md:z-auto',
+          !isOpen && '-translate-x-full'
         )}
       >
-        <div className="p-6">
+        <div className="p-6 md:p-0">
           {/* Header */}
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center justify-between mb-6 md:hidden">
             <div className="flex items-center gap-2">
               <SlidersHorizontal className="h-5 w-5 text-terracotta" />
               <h2 className="font-semibold text-lg">Filtros</h2>
@@ -193,12 +194,35 @@ export function FilterSidebar({ products, onFilter, isOpen, onClose }: FilterSid
               )}
               <button
                 onClick={onClose}
-                className="md:hidden p-1 hover:bg-gray-100 rounded"
+                className="p-1 hover:bg-gray-100 rounded"
                 aria-label="Cerrar filtros"
               >
                 <X className="h-5 w-5" />
               </button>
             </div>
+          </div>
+
+          {/* Desktop Header */}
+          <div className="hidden md:flex items-center justify-between mb-6">
+            <div className="flex items-center gap-2">
+              <SlidersHorizontal className="h-5 w-5 text-terracotta" />
+              <h2 className="font-semibold text-lg">Filtros</h2>
+              {activeFiltersCount > 0 && (
+                <span className="bg-terracotta text-white text-xs px-2 py-0.5 rounded-full">
+                  {activeFiltersCount}
+                </span>
+              )}
+            </div>
+            {activeFiltersCount > 0 && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={resetFilters}
+                className="text-xs"
+              >
+                Limpiar
+              </Button>
+            )}
           </div>
 
           {/* Filter Sections */}
@@ -331,16 +355,16 @@ interface FilterSectionProps {
 
 function FilterSection({ title, expanded, onToggle, children }: FilterSectionProps) {
   return (
-    <div className="border-b border-gray-100 pb-4 last:border-0">
+    <div className="border-b border-gray-100 pb-4 last:border-0 md:border-0 md:pb-0 md:mb-6">
       <button
         onClick={onToggle}
-        className="flex items-center justify-between w-full text-left mb-3 group"
+        className="flex items-center justify-between w-full text-left mb-3 group md:cursor-default"
       >
         <span className="font-medium text-sm">{title}</span>
         {expanded ? (
-          <ChevronUp className="h-4 w-4 text-gray-400" />
+          <ChevronUp className="h-4 w-4 text-gray-400 md:hidden" />
         ) : (
-          <ChevronDown className="h-4 w-4 text-gray-400" />
+          <ChevronDown className="h-4 w-4 text-gray-400 md:hidden" />
         )}
       </button>
       <AnimatePresence>
