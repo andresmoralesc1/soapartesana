@@ -67,15 +67,13 @@ function ProductsContent() {
         }}></div>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center max-w-3xl mx-auto">
-            <div className="border-2 border-black inline-block px-6 py-4 bg-white">
-              <h1 className="font-serif text-3xl md:text-4xl font-bold mb-3 text-black drop-shadow-sm">
-                Catálogo de Productos
-              </h1>
-              <p className="text-black/80 text-base md:text-lg max-w-2xl mx-auto">
-                Explora nuestra colección completa de productos artesanales,
-                cada pieza hecha con amor y dedicación.
-              </p>
-            </div>
+            <h1 className="font-serif text-3xl md:text-4xl font-bold mb-3 text-cream drop-shadow-sm">
+              Catálogo de Productos
+            </h1>
+            <p className="text-cream/90 text-base md:text-lg max-w-2xl mx-auto">
+              Explora nuestra colección completa de productos artesanales,
+              cada pieza hecha con amor y dedicación.
+            </p>
 
             {/* Search Bar */}
             <div className="max-w-xl mx-auto">
