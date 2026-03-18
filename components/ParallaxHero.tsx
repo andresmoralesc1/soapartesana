@@ -78,7 +78,7 @@ export function ParallaxHero() {
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, ease: 'easeOut' }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-white/60 backdrop-blur-sm text-forest text-sm font-medium rounded-full mb-6 border border-forest/20"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-white/60 backdrop-blur-sm text-forest text-sm font-medium rounded-full mb-8 border border-forest/20"
             >
               <Leaf className="h-4 w-4" />
               Botánica + Ciencia
