@@ -56,9 +56,9 @@ export function Header() {
               className="flex items-center space-x-2 group"
             >
               <motion.div
-                whileHover={{ scale: 1.02 }}
+                whileHover={{ scale: 1.05 }}
                 transition={{ type: 'spring', stiffness: 400 }}
-                className="relative flex flex-col items-center"
+                className="flex flex-col items-center gap-1"
               >
                 <Image
                   src="/logo.png"
@@ -67,35 +67,78 @@ export function Header() {
                   height={40}
                   className="h-10 w-auto"
                 />
-                <span className="font-sacramento text-3xl text-terracotta mt-1 leading-tight tracking-wide">Artes_Ana</span>
-                {/* Underline animation */}
-                <motion.div
-                  className="absolute -bottom-1 left-0 right-0 h-0.5 bg-terracotta"
-                  initial={{ scaleX: 0 }}
-                  whileHover={{ scaleX: 1 }}
-                  transition={{ duration: 0.3 }}
-                  style={{ originX: 0.5 }}
-                />
+                <span className="font-sacramento text-2xl text-terracotta leading-tight tracking-wide">Artes_Ana</span>
               </motion.div>
               <motion.div
                 className="relative"
-                animate={{ rotate: [0, 10, -10, 0] }}
-                transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+                animate={{
+                  rotate: [0, 10, -10, 0],
+                  scale: [1, 1.1, 1]
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  repeatDelay: 3,
+                  times: [0, 0.5, 1]
+                }}
               >
                 <motion.div
-                  whileHover={{ rotate: [0, -15, 15, -15, 0], scale: 1.2 }}
-                  transition={{ duration: 0.5 }}
+                  whileHover={{
+                    rotate: [0, -20, 20, -20, 0],
+                    scale: 1.3,
+                    filter: 'brightness(1.3) drop-shadow(0 0 8px rgba(245, 158, 11, 0.6))'
+                  }}
+                  transition={{ duration: 0.6, type: 'spring', stiffness: 300 }}
+                  whileTap={{ scale: 0.9 }}
                 >
                   <PawPrint className="h-4 w-4 text-amber-500" />
                 </motion.div>
-                {/* Sparkle effect on logo hover */}
+                {/* Sparkle effect on paw hover */}
                 <motion.div
-                  className="absolute -top-1 -right-1"
-                  initial={{ scale: 0, opacity: 0 }}
-                  whileHover={{ scale: 1, opacity: 1 }}
-                  transition={{ delay: 0.1, type: 'spring', stiffness: 300 }}
+                  className="absolute -top-2 -right-2"
+                  initial={{ scale: 0, opacity: 0, rotate: 0 }}
+                  whileHover={{
+                    scale: 1,
+                    opacity: 1,
+                    rotate: 180
+                  }}
+                  transition={{
+                    delay: 0.05,
+                    type: 'spring',
+                    stiffness: 400,
+                    damping: 10
+                  }}
                 >
-                  <Sparkles className="h-3 w-3 text-amber-400" />
+                  <motion.div
+                    animate={{
+                      scale: [1, 1.2, 1],
+                      rotate: [0, 90, 180]
+                    }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
+                      ease: 'easeInOut'
+                    }}
+                  >
+                    <Sparkles className="h-3 w-3 text-amber-400" />
+                  </motion.div>
+                </motion.div>
+                {/* Extra sparkle particles */}
+                <motion.div
+                  className="absolute -top-1 left-0"
+                  initial={{ scale: 0, opacity: 0 }}
+                  whileHover={{
+                    scale: [0, 1, 0],
+                    opacity: [0, 1, 0],
+                    x: [0, -5, -10]
+                  }}
+                  transition={{
+                    delay: 0.1,
+                    duration: 0.8,
+                    times: [0, 0.5, 1]
+                  }}
+                >
+                  <Sparkles className="h-2 w-2 text-amber-300" />
                 </motion.div>
               </motion.div>
             </Link>
