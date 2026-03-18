@@ -67,10 +67,10 @@ function ProductsContent() {
         }}></div>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center max-w-3xl mx-auto">
-            <h1 className="font-serif text-3xl md:text-4xl font-bold mb-3 text-cream drop-shadow-sm border-2 border-black inline-block px-4 py-1">
+            <h1 className="font-serif text-3xl md:text-4xl font-bold mb-3 text-cream drop-shadow-sm">
               Catálogo de Productos
             </h1>
-            <p className="text-cream/90 text-base md:text-lg max-w-2xl mx-auto border border-black inline-block px-4 py-2">
+            <p className="text-cream/90 text-base md:text-lg max-w-2xl mx-auto">
               Explora nuestra colección completa de productos artesanales,
               cada pieza hecha con amor y dedicación.
             </p>
