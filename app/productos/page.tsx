@@ -56,7 +56,9 @@ function ProductsContent() {
     <div className="py-4 md:py-6">
       {/* Hero Section */}
       <div className="relative bg-gradient-to-br from-terracotta via-terracotta/90 to-forest/80 py-8 md:py-12 mb-6">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%20200%20200%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cfilter%20id%3D%22noiseFilter%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%220.85%22%20numOctaves%3D%224%22%20stitchTiles%3D%22stitch%22%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20filter%3D%22url(%23noiseFilter)%22%2F%3E%3C%2Fsvg%3E')] opacity-10"></div>
+        <div className="absolute inset-0 opacity-10" style={{
+          backgroundImage: "url('data:image/svg+xml,%3Csvg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cfilter id=\"noiseFilter\"%3E%3CfeTurbulence type=\"fractalNoise\" baseFrequency=\"0.85\" numOctaves=\"4\" stitchTiles=\"stitch\"/%3E%3C/filter%3E%3Crect width=\"100%25\" height=\"100%25\" filter=\"url(%23noiseFilter)\"/%3E%3C/svg%3E')"
+        }}></div>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center max-w-3xl mx-auto">
             <h1 className="font-serif text-3xl md:text-4xl font-bold mb-3 text-cream drop-shadow-sm">
@@ -100,85 +102,82 @@ function ProductsContent() {
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-
         {/* Category Filter Pills */}
         <div className="flex flex-wrap justify-center gap-3 mb-12">
-              <button
-                onClick={() => setSelectedCategory('todos')}
-                className={`px-6 py-2.5 rounded-full font-medium transition-all ${
-                  selectedCategory === 'todos'
-                    ? 'bg-terracotta text-black border-2 border-black shadow-md hover:shadow-lg hover:scale-105'
-                    : 'bg-card border border-border hover:border-terracotta hover:bg-terracotta/5'
-                }`}
-                aria-label="Ver todos los productos"
-              >
-                Todos
-              </button>
-              {Object.entries(categoryInfo).map(([key, category]) => (
-                <button
-                  key={key}
-                  onClick={() => setSelectedCategory(key as ProductCategory)}
-                  className={`px-6 py-2.5 rounded-full font-medium transition-all ${
-                    selectedCategory === key
-                      ? 'bg-terracotta text-black border-2 border-black shadow-md hover:shadow-lg hover:scale-105'
-                      : 'bg-card border border-border hover:border-terracotta hover:bg-terracotta/5'
-                  }`}
-                  aria-label={`Filtrar por ${category.name}`}
-                >
-                  {category.icon} {category.name.split(' ')[0]}
-                </button>
-              ))}
-            </div>
-
-            {/* Products Grid */}
-            {filteredProducts.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
-                {filteredProducts.map((product) => (
-                  <ProductCard key={product.id} product={product} />
-                ))}
-              </div>
-            ) : (
-              <EmptyState
-                type="products"
-                title={searchQuery ? "No hay resultados de búsqueda" : "No hay productos en esta categoría"}
-                description={searchQuery
-                  ? `No encontramos productos que coincidan con "${searchQuery}". Intenta con otros términos o explora todas las categorías.`
-                  : "No encontramos productos con los filtros seleccionados. Por intenta con otros filtros."
-                }
-                action={
-                  <div className="flex gap-3 justify-center flex-wrap">
-                    {searchQuery && (
-                      <Button onClick={clearSearch} variant="outline">
-                        Limpiar búsqueda
-                      </Button>
-                    )}
-                    <Button onClick={() => {
-                      setSelectedCategory('todos');
-                      setSearchQuery('');
-                    }}>
-                      Ver todos los productos
-                    </Button>
-                  </div>
-                }
-              />
-            )}
-
-            {/* Category Info */}
-            {selectedCategory !== 'todos' && categoryInfo[selectedCategory] && (
-              <div className="mt-16 bg-muted/30 rounded-xl p-8 text-center">
-                <span className="text-6xl mb-4 block">
-                  {categoryInfo[selectedCategory].icon}
-                </span>
-                <h2 className="font-serif text-2xl font-bold mb-2">
-                  {categoryInfo[selectedCategory].name}
-                </h2>
-                <p className="text-muted-foreground max-w-xl mx-auto">
-                  {categoryInfo[selectedCategory].description}
-                </p>
-              </div>
-            )}
+          <button
+            onClick={() => setSelectedCategory('todos')}
+            className={`px-6 py-2.5 rounded-full font-medium transition-all ${
+              selectedCategory === 'todos'
+                ? 'bg-terracotta text-black border-2 border-black shadow-md hover:shadow-lg hover:scale-105'
+                : 'bg-card border border-border hover:border-terracotta hover:bg-terracotta/5'
+            }`}
+            aria-label="Ver todos los productos"
+          >
+            Todos
+          </button>
+          {Object.entries(categoryInfo).map(([key, category]) => (
+            <button
+              key={key}
+              onClick={() => setSelectedCategory(key as ProductCategory)}
+              className={`px-6 py-2.5 rounded-full font-medium transition-all ${
+                selectedCategory === key
+                  ? 'bg-terracotta text-black border-2 border-black shadow-md hover:shadow-lg hover:scale-105'
+                  : 'bg-card border border-border hover:border-terracotta hover:bg-terracotta/5'
+              }`}
+              aria-label={`Filtrar por ${category.name}`}
+            >
+              {category.icon} {category.name.split(' ')[0]}
+            </button>
+          ))}
         </div>
 
+        {/* Products Grid */}
+        {filteredProducts.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
+            {filteredProducts.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        ) : (
+          <EmptyState
+            type="products"
+            title={searchQuery ? "No hay resultados de búsqueda" : "No hay productos en esta categoría"}
+            description={searchQuery
+              ? `No encontramos productos que coincidan con "${searchQuery}". Intenta con otros términos o explora todas las categorías.`
+              : "No encontramos productos con los filtros seleccionados. Por intenta con otros filtros."
+            }
+            action={
+              <div className="flex gap-3 justify-center flex-wrap">
+                {searchQuery && (
+                  <Button onClick={clearSearch} variant="outline">
+                    Limpiar búsqueda
+                  </Button>
+                )}
+                <Button onClick={() => {
+                  setSelectedCategory('todos');
+                  setSearchQuery('');
+                }}>
+                  Ver todos los productos
+                </Button>
+              </div>
+            }
+          />
+        )}
+
+        {/* Category Info */}
+        {selectedCategory !== 'todos' && categoryInfo[selectedCategory] && (
+          <div className="mt-16 bg-muted/30 rounded-xl p-8 text-center">
+            <span className="text-6xl mb-4 block">
+              {categoryInfo[selectedCategory].icon}
+            </span>
+            <h2 className="font-serif text-2xl font-bold mb-2">
+              {categoryInfo[selectedCategory].name}
+            </h2>
+            <p className="text-muted-foreground max-w-xl mx-auto">
+              {categoryInfo[selectedCategory].description}
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );
