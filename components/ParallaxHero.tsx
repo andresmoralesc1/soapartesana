@@ -73,52 +73,37 @@ export function ParallaxHero() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left side - Text content with parallax */}
-          <motion.div style={{ y: yText }}>
-            <motion.span
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: 'easeOut' }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-white/60 backdrop-blur-sm text-forest text-sm font-medium rounded-full mb-8 border border-forest/20"
-            >
-              <Leaf className="h-4 w-4" />
-              Botánica + Ciencia
-            </motion.span>
+          <div>
+            <motion.div style={{ y: yText }}>
+              <motion.span
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, ease: 'easeOut' }}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-white/60 backdrop-blur-sm text-forest text-sm font-medium rounded-full mb-8 border border-forest/20"
+              >
+                <Leaf className="h-4 w-4" />
+                Botánica + Ciencia
+              </motion.span>
 
-            <motion.h1
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.1 }}
-              className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold text-slate-800 mb-6 leading-tight"
-            >
-              Jabones artesanales para{' '}
-              <span className="text-gradient-forest">tu bienestar diario</span>
-            </motion.h1>
+              <motion.h1
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.1 }}
+                className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold text-slate-800 mb-6 leading-tight"
+              >
+                Jabones artesanales para{' '}
+                <span className="text-gradient-forest">tu bienestar diario</span>
+              </motion.h1>
 
-            <motion.p
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl text-slate-600 mb-10 max-w-xl leading-relaxed"
-            >
-              Descubre el poder de las plantas orgánicas en cada barra. Cuidado natural para tu piel,
-              tratamientos terapéuticos, y productos seguros para toda tu familia incluyendo tus mascotas.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="flex flex-wrap gap-4"
-            >
-              <Link href="/productos">
-                <Button
-                  size="lg"
-                  className="bg-terracotta text-white hover:bg-terracotta/90 shadow-lg hover:shadow-xl text-lg px-8 font-semibold"
-                >
-                  <Sparkles className="mr-2 h-5 w-5" />
-                  Ver Catálogo
-                </Button>
-              </Link>
+              <motion.p
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="text-xl text-slate-600 mb-10 max-w-xl leading-relaxed"
+              >
+                Descubre el poder de las plantas orgánicas en cada barra. Cuidado natural para tu piel,
+                tratamientos terapéuticos, y productos seguros para toda tu familia incluyendo tus mascotas.
+              </motion.p>
             </motion.div>
 
             {/* Quick trust badges */}
@@ -126,7 +111,7 @@ export function ParallaxHero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.5 }}
-              className="flex flex-wrap gap-6 mt-10 text-sm text-slate-500"
+              className="flex flex-wrap gap-6 mb-8 text-sm text-slate-500"
             >
               <div className="flex items-center gap-2">
                 <Shield className="h-5 w-5 text-green-600" />
@@ -141,7 +126,25 @@ export function ParallaxHero() {
                 <span>Cruelty Free</span>
               </div>
             </motion.div>
-          </motion.div>
+
+            {/* CTA Button - Outside parallax for fixed positioning */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="flex flex-wrap gap-4"
+            >
+              <Link href="/productos">
+                <Button
+                  size="lg"
+                  className="bg-amber-600 text-white hover:bg-amber-700 shadow-lg hover:shadow-xl text-lg px-8 font-semibold"
+                >
+                  <Sparkles className="mr-2 h-5 w-5" />
+                  Ver Catálogo
+                </Button>
+              </Link>
+            </motion.div>
+          </div>
 
           {/* Right side - Product showcase with parallax layers */}
           <motion.div
